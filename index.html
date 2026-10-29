@@ -61,16 +61,7 @@ html[lang="kn"] .lede{font-size:clamp(1.1rem,2vw,1.35rem);line-height:1.6;max-wi
 @keyframes breathe{0%,100%{transform:scale(.92);opacity:.2}50%{transform:scale(1.07);opacity:1}}
 .cap{margin:22px 0 0;font-size:.92rem;color:var(--mute)}
 .resume{display:block;margin:10px auto 0;font-size:.88rem;color:var(--mute);background:none;border:0;padding:4px;text-decoration:underline;text-underline-offset:3px;font-weight:500}
-/* load sequence */
-.first .shot img{opacity:0;filter:brightness(1.7) saturate(.6) blur(6px);transform:scale(1.06)}
-.first.lit .shot img{opacity:1;filter:none;transform:scale(1);transition:opacity 1.2s ease,filter 2.6s var(--ease),transform 6s var(--ease)}
-.first.lit .glow{animation:sunup 3.2s 0.6s ease-out forwards}
-@keyframes sunup{0%{opacity:0}60%{opacity:1}100%{opacity:.7}}
-.site:not(.first) .glow{opacity:.7}
-.first .threshold>*,.first .snav{opacity:0;transform:translateY(10px)}
-.first.lit .threshold>*,.first.lit .snav{opacity:1;transform:none;transition:opacity .9s ease,transform .9s var(--ease)}
-.first.lit .lede{transition-delay:1.3s}.first.lit .cta{transition-delay:1.6s}.first.lit .cap,.first.lit .resume{transition-delay:1.85s}.first.lit .snav{transition-delay:1.9s}
-
+.glow{opacity:.7}
 .sec{max-width:1080px;margin:0 auto;padding:88px 24px}
 .sec h2{font-size:clamp(1.9rem,3.6vw,2.7rem);margin-bottom:.35em}
 .sec .lead{color:var(--ink2);max-width:58ch;font-size:1.06rem}
@@ -118,8 +109,7 @@ html[lang="kn"] .lede{font-size:clamp(1.1rem,2vw,1.35rem);line-height:1.6;max-wi
 .track i{position:absolute;left:0;top:0;bottom:0;background:var(--pine);border-radius:2px;transition:width .7s var(--ease)}
 .track b{position:absolute;top:50%;width:12px;height:12px;margin:-6px 0 0 -6px;border-radius:50%;background:var(--sun);box-shadow:0 0 0 4px rgba(224,178,92,.25),0 0 14px 3px rgba(224,178,92,.45);transition:left .7s var(--ease)}
 .wrap{max-width:780px;margin:0 auto;padding:28px 16px 64px}
-.pg{animation:enter .45s var(--ease) both}
-@keyframes enter{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.pg{outline:none}
 .part{font-size:.92rem;color:var(--mute);margin:0 0 6px}
 .qhead h2{font-size:clamp(1.7rem,3.6vw,2.2rem);margin-bottom:.3em}
 .qhead p{color:var(--ink2)}
@@ -227,7 +217,6 @@ html[lang="kn"] .lk .opt{font-size:.76rem}
 }
 @media (prefers-reduced-motion:reduce){
  *,*::before,*::after{animation:none!important;transition:none!important}
- .first .shot img,.first .threshold>*,.first .snav{opacity:1!important;filter:none!important;transform:none!important}
  .glow{opacity:.7}
 }
 @media print{.abar,.btns,.noprint,.snav{display:none!important}.in-app::before,.in-app::after{display:none}body{background:#fff}.card{break-inside:avoid;background:#fff;backdrop-filter:none}details{display:block}}
@@ -888,12 +877,12 @@ function compute(){
   confWhy:attFail?"att":rushed?"rushed":(sameA||sameB)?"same":sdHits>=2?"sd":neutral>=Math.ceil(NBS/2)?"neutral":conf==="Good"?"good":"flat"};
 }
 /* ================= LANDING SITE ================= */
-var VKEY="aviral_view",FIRST=true;
+var VKEY="aviral_view";
 var VIEW=(st.page>0||ss(VKEY)==="app")?"app":"site";
 function ctaLabel(){var k=PAGES[st.page].k;return k==="result"&&complete()?L("See your results","ನಿಮ್ಮ ಫಲಿತಾಂಶ ನೋಡಿ"):(st.page>0||answered())?L("Continue the assessment","ಮೌಲ್ಯಮಾಪನ ಮುಂದುವರಿಸಿ"):L("Start the assessment","ಮೌಲ್ಯಮಾಪನ ಆರಂಭಿಸಿ")}
 function cta(){return '<div class="cta"><span class="halo" aria-hidden="true"></span><span class="halo h2" aria-hidden="true"></span><button class="pri" data-act="begin">'+ctaLabel()+'</button></div>'}
 function site(){
- var h='<div class="site'+(FIRST?' first':'')+'" id="site"><div class="snav">'+langBar()+'</div>';
+ var h='<div class="site" id="site"><div class="snav">'+langBar()+'</div>';
  h+='<section class="hero"><div class="shot"><img id="heroimg" src="img/hero-1672.jpg" srcset="img/hero-1100.jpg 1100w, img/hero-1672.jpg 1672w" sizes="100vw" width="1672" height="941" fetchpriority="high" alt="'+
   esc(L("AVIRAL. A person meditating on a terrace above a lake at sunrise.","AVIRAL. ಸೂರ್ಯೋದಯದ ವೇಳೆ ಸರೋವರದ ಮೇಲಿನ ತಾರಸಿಯಲ್ಲಿ ಧ್ಯಾನ ಮಾಡುತ್ತಿರುವ ವ್ಯಕ್ತಿ."))+'"><div class="glow"></div></div>'+
   '<div class="threshold"><h1 class="lede">'+L("A quiet look at how you think, speak and carry yourself.","ನೀವು ಹೇಗೆ ಯೋಚಿಸುತ್ತೀರಿ, ಮಾತನಾಡುತ್ತೀರಿ ಮತ್ತು ನಡೆದುಕೊಳ್ಳುತ್ತೀರಿ ಎಂಬುದರತ್ತ ಒಂದು ಶಾಂತ ನೋಟ.")+'</h1>'+cta()+
@@ -916,16 +905,9 @@ function site(){
  h+='<footer class="foot">'+L("AVIRAL™ is a self-reflection tool, not a clinical or diagnostic test.","AVIRAL™ ಸ್ವ-ಅವಲೋಕನದ ಸಾಧನ, ಕ್ಲಿನಿಕಲ್ ಅಥವಾ ರೋಗನಿರ್ಣಯ ಪರೀಕ್ಷೆಯಲ್ಲ.")+'</footer></div>';
  return h;
 }
-function lightUp(){
- var s=document.getElementById("site"),img=document.getElementById("heroimg");if(!s||!s.classList.contains("first"))return;
- var done=false,go=function(){if(done)return;done=true;requestAnimationFrame(function(){requestAnimationFrame(function(){s.classList.add("lit")})})};
- if(img&&img.complete&&img.naturalWidth)go();else{if(img){img.addEventListener("load",go);img.addEventListener("error",go)}setTimeout(go,2500)}
-}
 function goView(v){
  VIEW=v;ss(VKEY,v);
- var f=function(){render()};
- var still=window.matchMedia&&matchMedia("(prefers-reduced-motion: reduce)").matches;
- if(document.startViewTransition&&!still)document.startViewTransition(f);else f();
+ render();
 }
 function partLine(p){var a=p.s+1,b=p.e,r=a===b?a:a+"–"+b;
  return p.k==="A"?L("Part A: situation"+(a===b?" ":"s ")+r+" of "+NA,"ಭಾಗ A: ಸನ್ನಿವೇಶ "+r+" / "+NA):L("Part B: statement"+(a===b?" ":"s ")+r+" of "+NB,"ಭಾಗ B: ಹೇಳಿಕೆ "+r+" / "+NB)}
@@ -1129,9 +1111,9 @@ function result(){
 function render(scroll){
  var p=PAGES[st.page];
  applyLang();
- if(VIEW==="site"){app.innerHTML=site();lightUp();FIRST=false}
+ if(VIEW==="site"){app.innerHTML=site()}
  else{
-  app.innerHTML='<div class="in-app">'+appBar()+'<div class="wrap"><div class="pg'+(scroll===false?'" style="animation:none':'')+'" id="pg" tabindex="-1">'+(p.k==="intro"?intro():p.k==="result"?result():qpage(p))+'</div></div></div>';
+  app.innerHTML='<div class="in-app">'+appBar()+'<div class="wrap"><div class="pg" id="pg" tabindex="-1">'+(p.k==="intro"?intro():p.k==="result"?result():qpage(p))+'</div></div></div>';
   if(scroll!==false){var pg=document.getElementById("pg");try{pg.focus({preventScroll:true})}catch(e){}}
  }
  if(scroll!==false)window.scrollTo(0,0);
