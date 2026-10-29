@@ -1,0 +1,1001 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AVIRAL™ Assessment</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Kannada:wght@400;600;700&family=Noto+Serif+Kannada:wght@700&family=Noto+Serif+Devanagari:wght@600;700&family=Cinzel:wght@700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#faf7f1;--card:#fff;--ink:#1f2933;--mute:#5f6b76;--line:#dde2ea;--acc:#1c2f66;--acc-ink:#fff;--warn:#b42318;--sel:#eaf0f9;
+--b1:#c2410c;--b2:#b7791f;--b3:#0f766e;--b4:#6d28d9;--lv1:#0f766e;--lv2:#4d7c0f;--lv3:#b7791f;--lv4:#c2410c;
+--s1:#3f5fd0;--s2:#11a7c9;--s3:#79a822;--s4:#d93a70;--s5:#ea9420;--s6:#8a54c9;--gold:#b07d1f;--grid:#e1e0d9}
+@media (prefers-color-scheme:dark){:root{--bg:#14181c;--card:#1d2328;--ink:#e8ecef;--mute:#9aa6b0;--line:#2e373e;--acc:#a3b5ee;--acc-ink:#0b1730;--warn:#f87171;--sel:#1a2a44;
+--b1:#fb923c;--b2:#fbbf24;--b3:#2dd4bf;--b4:#a78bfa;--lv1:#2dd4bf;--lv2:#a3e635;--lv3:#fbbf24;--lv4:#fb923c;
+--s1:#4d63dc;--s2:#0e9fa8;--s3:#6f9c1f;--s4:#e05080;--s5:#c87c14;--s6:#9a6ce0;--gold:#e3b04b;--grid:#2c2c2a}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+main{max-width:760px;margin:0 auto;padding:20px 16px 56px}
+h1,h2,h3{font-family:Georgia,"Times New Roman",serif;line-height:1.2;margin:0 0 .5em}
+h1{font-size:2rem}h2{font-size:1.4rem}h3{font-size:1.1rem}
+p{margin:0 0 .9em}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px;margin-bottom:16px}
+.mute{color:var(--mute)}.small{font-size:.88rem}
+.prog{position:sticky;top:0;background:var(--bg);padding:10px 0 8px;z-index:5}
+.prog .row{display:flex;justify-content:space-between;font-size:.85rem;color:var(--mute);margin-bottom:6px}
+.bar{height:8px;background:var(--line);border-radius:99px;overflow:hidden}
+.bar>i{display:block;height:100%;background:var(--acc);width:0;transition:width .25s}
+.part{display:inline-block;font-size:.78rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--acc);margin-bottom:4px}
+fieldset{border:1px solid var(--line);border-radius:14px;padding:18px;margin:0 0 16px;background:var(--card)}
+fieldset.missing{border-color:var(--warn);box-shadow:0 0 0 2px color-mix(in srgb,var(--warn) 25%,transparent)}
+legend{padding:0;float:left;width:100%;font-weight:600;margin-bottom:12px}
+legend+*{clear:both}
+.qn{color:var(--acc);font-weight:700;margin-right:6px}
+.opt{display:flex;gap:12px;align-items:flex-start;padding:11px 12px;margin-top:8px;border:1px solid var(--line);border-radius:10px;cursor:pointer}
+.opt:hover{border-color:var(--acc)}
+.opt input{position:absolute;opacity:0;pointer-events:none}
+.opt .k{flex:none;width:26px;height:26px;border-radius:50%;border:1.5px solid var(--mute);display:grid;place-items:center;font-size:.8rem;font-weight:600;color:var(--mute)}
+.opt:has(input:checked){background:var(--sel);border-color:var(--acc)}
+.opt:has(input:checked) .k{background:var(--acc);border-color:var(--acc);color:var(--acc-ink)}
+.opt:has(input:focus-visible){outline:2px solid var(--acc);outline-offset:2px}
+.lk{display:grid;grid-template-columns:repeat(5,1fr);gap:6px}
+.lk .opt{margin:0;padding:9px 4px;justify-content:center;text-align:center;font-size:.8rem;line-height:1.25;min-height:52px;align-items:center}
+.btns{display:flex;gap:10px;justify-content:space-between;margin-top:8px;flex-wrap:wrap}
+button{font:inherit;font-weight:600;border-radius:10px;padding:11px 20px;cursor:pointer;border:1px solid var(--line);background:var(--card);color:var(--ink)}
+button.pri{background:var(--acc);border-color:var(--acc);color:var(--acc-ink)}
+button:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+.msg{color:var(--warn);font-weight:600;min-height:1.4em;margin:4px 0}
+input[type=text]{font:inherit;width:100%;padding:10px 12px;border-radius:10px;border:1px solid var(--line);background:var(--bg);color:var(--ink)}
+ul{margin:.2em 0 .9em;padding-left:1.2em}li{margin-bottom:.3em}
+.score{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.score b{font:700 3.2rem/1 Georgia,serif}
+.chip{display:inline-block;padding:3px 12px;border-radius:99px;font-weight:700;font-size:.9rem;border:1.5px solid currentColor}
+.gauge{position:relative;display:flex;gap:2px;height:16px;border-radius:99px;overflow:hidden;margin:26px 0 4px}
+.gauge i{display:block;height:100%}
+.mk{position:absolute;top:-6px;width:4px;height:28px;background:var(--ink);border-radius:2px;transform:translateX(-2px)}
+.ticks{position:relative;height:34px;font-size:.73rem;color:var(--mute)}
+.ticks span{position:absolute;transform:translateX(-50%);white-space:nowrap}
+.split{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media(max-width:600px){.split{grid-template-columns:1fr}h1{font-size:1.65rem}}
+.th{margin-bottom:16px}
+.th .row{display:flex;justify-content:space-between;align-items:baseline;gap:8px;font-size:.95rem;margin-bottom:4px}
+.th .nm{font-weight:600}
+.th .wt{font-size:.78rem;color:var(--mute);font-weight:400;white-space:nowrap}
+.th .rt{font-size:.82rem;font-weight:700;white-space:nowrap;flex:none}
+.th .meaning{font-size:.84rem;color:var(--mute);margin-top:3px}
+.legend{display:flex;gap:16px;flex-wrap:wrap;font-size:.84rem;margin:4px 0 2px}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.sw{display:inline-block;width:12px;height:12px;border-radius:3px}
+.note{border-left:4px solid var(--acc);padding:9px 14px;background:var(--sel);border-radius:0 10px 10px 0;margin:0 0 12px;font-size:.94rem}
+.note.flag{border-left-color:var(--warn)}
+table.t{width:100%;border-collapse:collapse;font-size:.88rem}
+table.t td,table.t th{padding:6px 4px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+table.t th{font-weight:600;color:var(--mute);font-size:.8rem}
+table.t .n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+details summary{cursor:pointer;font-weight:600}
+.brand{display:flex;align-items:center;gap:12px;margin-bottom:4px}
+.brand h1{margin:0;letter-spacing:.06em;color:var(--acc);font-family:Cinzel,Georgia,serif;font-weight:700;font-size:2.3rem}
+.dvn{font-family:"Noto Serif Devanagari","Kohinoor Devanagari","Nirmala UI",serif;font-weight:600;color:var(--gold)}
+.acr b{color:var(--gold)}
+.rr{display:flex;gap:12px;align-items:flex-start;padding:12px 0;border-bottom:1px solid var(--line)}
+.rr:last-of-type{border-bottom:0}
+.rk{flex:none;width:30px;height:30px;border-radius:50%;display:grid;place-items:center;font-weight:700;font-size:.9rem;color:#fff}
+.rb{flex:1;min-width:0}
+.rb .row{display:flex;justify-content:space-between;gap:8px;align-items:baseline;flex-wrap:wrap;margin-bottom:5px}
+.rb .nm{font-weight:700}
+.rb .meaning{font-size:.86rem;color:var(--mute);margin-top:5px}
+.sumgrid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:16px}
+@media(max-width:600px){.sumgrid{grid-template-columns:1fr}}
+.sumbox{border:1px solid var(--line);border-radius:12px;padding:14px}
+.sumbox h3{margin-bottom:8px}
+.sumbox p{font-size:.92rem;margin-bottom:8px}
+.brand .sub{margin:2px 0 0;font-weight:600}
+.tagline{font-size:.76rem;letter-spacing:.14em;text-transform:uppercase;color:var(--mute);text-align:center;border-top:1px solid var(--line);padding-top:12px;margin:16px 0 0}
+html[lang="kn"] .tagline{letter-spacing:.02em;text-transform:none;font-size:.85rem}
+.lang{display:flex;justify-content:flex-end;gap:6px;margin:0 0 10px}
+.lang button{padding:6px 14px;font-size:.88rem;border-radius:99px}
+.lang button[aria-pressed="true"]{background:var(--acc);border-color:var(--acc);color:var(--acc-ink)}
+.lang button[lang="kn"],html[lang="kn"] body{font-family:"Noto Sans Kannada","Kannada Sangam MN","Nirmala UI","Tunga",ui-sans-serif,system-ui,sans-serif}
+html[lang="kn"] body{line-height:1.7}
+html[lang="kn"] h1,html[lang="kn"] h2,html[lang="kn"] h3{font-family:"Noto Serif Kannada","Noto Sans Kannada","Kannada Sangam MN","Nirmala UI",Georgia,serif;line-height:1.4}
+html[lang="kn"] h1{font-size:1.7rem}
+html[lang="kn"] .part{letter-spacing:0;text-transform:none;font-size:.85rem}
+html[lang="kn"] .lk .opt{font-size:.78rem}
+@media(max-width:520px){html[lang="kn"] .lk{grid-template-columns:1fr}html[lang="kn"] .lk .opt{min-height:0;justify-content:flex-start;text-align:left;font-size:.92rem;padding:9px 12px}}
+@media print{.prog,.btns,.noprint{display:none!important}body{background:#fff}.card{break-inside:avoid}details{display:block}}
+</style>
+</head>
+<body>
+<main id="app" aria-live="polite"></main>
+<script>
+(function(){
+"use strict";
+/* ================= AVIRAL DIMENSIONS =================
+   A-V-I-R-A-L, six equally weighted dimensions. Internally every answer scores
+   growth need; the report shows strength = 100 - growth need (higher is stronger). */
+var DIMS=[
+ {id:"avabodha",n:"Avabodha",dv:"अवबोध",sub:"Insight & Clear Thinking",w:100/6,c:"var(--s1)",
+  hi:"Alarming news, big decisions and other people's opinions cloud your judgement, and you can lose sight of what you actually think.",
+  lo:"You see situations clearly, weigh evidence calmly and decide from your own judgement.",
+  tips:["Before any big decision, write down the two strongest arguments against your first instinct.","When a worrying headline lands, wait a day and check one reliable source before acting."]},
+ {id:"vachana",n:"Vachana",dv:"वचन",sub:"Voice & Communication",w:100/6,c:"var(--s2)",
+  hi:"Speaking up, disagreeing and taking criticism are hard, so your real view often goes unsaid.",
+  lo:"You say what you think clearly and take feedback without losing your footing.",
+  tips:["In your next meeting, state one view plainly, with one reason, before anyone asks.","When criticised, say \u201Clet me think about that\u201D instead of defending or going silent."]},
+ {id:"indriyajaya",n:"Indriyajaya",dv:"इन्द्रियजय",sub:"Self-Mastery & Integrity",w:100/6,c:"var(--s3)",
+  hi:"Under pressure your boundaries slip or your reactions run hot, and owning a mistake can feel too costly.",
+  lo:"You stay composed, keep your word, own your mistakes and treat people with respect.",
+  tips:["Practise one honest \u201CI can't take that on\u201D a week, without inventing an excuse.","When you feel the urge to snap back, pause one breath and name what bothered you instead."]},
+ {id:"ranjana",n:"Ranjana",dv:"रंजन",sub:"Influence & Trust",w:100/6,c:"var(--s4)",
+  hi:"Pressure and louder voices sway you, and winning people's trust and support for your ideas does not come easily yet.",
+  lo:"You hold your ground, earn people's trust and bring them with you.",
+  tips:["Before asking for someone's support, find out what matters to them and show how your idea helps.","When your idea is passed over, restate it once, calmly, with the reason it matters."]},
+ {id:"abha",n:"Abha",dv:"आभा",sub:"Presence & Bearing",w:100/6,c:"var(--s5)",
+  hi:"How you look and carry yourself takes up a lot of attention, and bends to other people's remarks.",
+  lo:"You present yourself appropriately, then stop thinking about it once you are in the room.",
+  tips:["Decide your outfit the night before, against the occasion, then stop checking.","Practise holding eye contact for a full sentence in everyday conversations."]},
+ {id:"lakshya",n:"Lakshya",dv:"लक्ष्य",sub:"Purposeful Growth",w:100/6,c:"var(--s6)",
+  hi:"Setbacks and change knock you off course for a while, and learning new ways can feel like a threat rather than a step up.",
+  lo:"You recover from setbacks, adapt to change and keep learning towards your goals.",
+  tips:["After a setback, write down three things within your control before deciding anything.","Learn one small new skill each month, and tell someone what you learnt."]}
+];
+/* ================= PART A: SCENARIOS =================
+   d = dimension, w = question weight (1 supporting, 1.5 core, 2 most diagnostic),
+   src = origin, v = [variant 0, variant 1].
+   Options: [text, growth points 0-10, 1 if blunt/combative].
+   0 = balanced response. The blunt end scores 5 (not ideal conduct either),
+   the yielding/avoidant end rises to 10. Blunt picks also feed the Rigidity check. */
+var PA=[
+{d:"avabodha",w:1,src:"Original A2",v:[
+ {q:"You read in the media that a new disease is spreading in your area. You:",o:[
+  ["Think, thank God I haven't caught it, and carry on.",2.25],
+  ["Feel you may already have some of its symptoms.",9.25],
+  ["Start recalling that a friend of yours has had symptoms.",4.25],
+  ["Decide to visit a doctor and get examined, though you feel fine.",4.25],
+  ["Check a reliable source, and take sensible precautions if needed.",0]]},
+ {q:"A report says a product you use every day may carry a health risk. You:",o:[
+  ["Look at the evidence, and change the habit only if it holds up.",0],
+  ["Note it and carry on as usual.",2.5],
+  ["Keep searching for more about it, and feel uneasy.",6.25],
+  ["Become convinced it has already harmed you.",9.25]]}]},
+{d:"lakshya",w:1,src:"New (locus of control)",v:[
+ {q:"Something you worked hard on fails. You:",o:[
+  ["Look at what you would do differently next time.",0],
+  ["Review it, accepting part of it was outside your hands.",1.25],
+  ["Conclude the circumstances were stacked against you.",6.25],
+  ["Feel it proves things rarely go your way, whatever you do.",9.25]]},
+ {q:"An opportunity you wanted goes to someone else. You:",o:[
+  ["Ask what you could strengthen for the next one.",0],
+  ["Accept that some of it was yours to control and some was not.",1.25],
+  ["Assume it was decided by connections, not merit.",5.5],
+  ["Take it as proof that outcomes are not yours to influence.",9.5]]}]},
+{d:"vachana",w:1,src:"Original A6",v:[
+ {q:"A person you know keeps holding forth on politics, the economy and cinema, with opinions you don't agree with. You:",o:[
+  ["Feel it may hurt them, so you just say “oh, ha” and nod.",7.75],
+  ["Pretend you're not interested in the topics, and stay quiet.",6],
+  ["Diplomatically convey that you don't agree with their opinions.",0],
+  ["Tell them to their face that their opinions are wrong.",6.25,1]]},
+ {q:"A relative repeats claims at a family gathering that you believe are plainly wrong. You:",o:[
+  ["Set out calmly where you see it differently.",0],
+  ["Tell them flatly, in front of everyone, that they are mistaken.",6.5,1],
+  ["Let it go and change the subject.",4.25],
+  ["Agree outwardly to keep the peace.",7.75]]}]},
+{d:"vachana",w:1,src:"New (from original B13)",v:[
+ {q:"You are asked for your honest view in a group that clearly thinks otherwise. You:",o:[
+  ["Give it plainly, with your reasons.",0],
+  ["Give it, but wrap it very carefully.",2],
+  ["Give a vague, neutral answer instead.",6],
+  ["Agree with the room; your real view would not go down well.",9.5]]},
+ {q:"You hold an opinion you know the people around you would disagree with. When it becomes relevant, you:",o:[
+  ["Say it clearly and calmly.",0],
+  ["Say it, but soften it until it barely registers.",4],
+  ["Keep it to yourself; it isn't worth the reaction.",5.25],
+  ["Hide it; if they knew, they would think less of you.",9.25]]}]},
+{d:"indriyajaya",w:1,src:"Original A3",v:[
+ {q:"A colleague in your office asks you to help with their task. You:",o:[
+  ["Accept it, because you can't bring yourself to reject their request.",8.5],
+  ["Agree, on the condition that they help you in future.",2.75],
+  ["Refuse, giving some lame excuse.",6.5],
+  ["Explain honestly why you can't help this time.",0.25]]},
+ {q:"A neighbour asks for help that will take most of your Sunday. You had plans. You:",o:[
+  ["Tell them honestly you're not free, and offer another time.",0],
+  ["Tell them it's not your problem.",6.75,1],
+  ["Say you'll try, then find a reason not to turn up.",7],
+  ["Cancel your plans rather than let them down.",7.25]]}]},
+{d:"indriyajaya",w:1,src:"Original A4",v:[
+ {q:"Your parents tell you they are attending a relative's function the day after tomorrow, and that you have no choice but to come along. You:",o:[
+  ["Go along with it without checking your own plans.",4],
+  ["Reply curtly that you have very important work and can't go.",6,1],
+  ["Say casually you'll try your best, and join if possible.",5],
+  ["Say yes, then give some reason later and escape.",7.75],
+  ["Check your own plans, and tell them honestly whether you can come.",0.25]]},
+ {q:"Your manager announces you'll be staying late for a client event, without asking whether you're free. You:",o:[
+  ["Say plainly whether you can, and what you'd need to make it work.",0],
+  ["Refuse curtly in front of the team.",6.5,1],
+  ["Agree, then quietly slip away early.",7.75],
+  ["Cancel your own commitments without a word.",7.75]]}]},
+{d:"abha",w:1,src:"Original A1",v:[
+ {q:"You buy something trending: a shirt, a hat, a watch. A friend says it's nice, but it doesn't suit you. You:",o:[
+  ["Reply sarcastically that they just can't stand seeing you comfortable.",5.5,1],
+  ["Check with others whether it suits you.",4.75],
+  ["Don't take it too seriously; you chose it for yourself.",0],
+  ["Go back to the shop and exchange it for another colour or design.",7.75]]},
+ {q:"A colleague remarks that your outfit is too casual for an important meeting. You:",o:[
+  ["Consider whether they have a point, and decide for next time yourself.",0],
+  ["Tell them your clothes are none of their business.",6,1],
+  ["Feel self-conscious through the rest of the meeting.",6.25],
+  ["Rush to borrow or buy something else before the meeting.",6.75]]}]},
+{d:"abha",w:1,src:"Original A7",v:[
+ {q:"At the salon for a trim, the owner looks at your hair and says it looks bad, and that you must come more often or your face will look ugly. You:",o:[
+  ["Recognise it as a sales pitch to grow their business.",0],
+  ["Get worried about your looks, and take their advice seriously.",9],
+  ["Gently tell them that it's not so.",1],
+  ["Tell them directly they shouldn't insult customers to grow their business.",4.25,1]]},
+ {q:"A stylist tells you your look is outdated, and that you'd be taken more seriously after a complete makeover. You:",o:[
+  ["Weigh it as one opinion, and change only what you agree with.",0],
+  ["Tell them sharply they have no idea what they're talking about.",6,1],
+  ["Start doubting how people at work see you.",6.75],
+  ["Book the full makeover on the spot.",8.75]]}]},
+{d:"ranjana",w:1,src:"Original A5",v:[
+ {q:"At a brand showroom, the salesperson brings you a shirt, praises its quality and design, says it suits you well, and keeps pressing you to buy. You:",o:[
+  ["See it as the usual tactic, and ask to see a different shirt.",0],
+  ["Tell them you know exactly what you want, and feel irritated.",3.25,1],
+  ["Trust that they know quality and design, and buy that shirt.",9],
+  ["Appreciate their communication skills with a smile, but don't buy it.",0]]},
+ {q:"A friend who is very confident about money urges you into an investment you hadn't planned. You:",o:[
+  ["Say you'll look into it yourself before deciding.",0],
+  ["Tell them to stop pushing their schemes on you.",5.25,1],
+  ["Put in a small amount so you don't seem doubtful.",6.75],
+  ["Invest on their say-so.",9.75]]}]},
+{d:"ranjana",w:1,src:"New (impact)",v:[
+ {q:"You make a suggestion in a meeting and it is passed over. Later someone else makes the same point, and it is welcomed. You:",o:[
+  ["Point out calmly that it builds on what you raised, and add to it.",0],
+  ["Call it out sharply as your idea.",5.5,1],
+  ["Let it go; at least it's being done.",5.75],
+  ["Conclude that your ideas don't carry weight here.",8.75]]},
+ {q:"Your team must choose between your plan and a colleague's. Theirs is pushed louder; you believe yours is better. You:",o:[
+  ["Set out clearly why yours works, then let the team decide.",0],
+  ["Dismiss their plan as obviously weaker.",6,1],
+  ["Mention yours briefly, then go along with theirs.",6],
+  ["Withdraw yours before it is even discussed.",9.5]]}]},
+{d:"avabodha",w:1,src:"New (decision-making)",v:[
+ {q:"You face a decision that matters, with no obvious right answer. You:",o:[
+  ["Weigh it against what matters most to you, and decide.",0],
+  ["Take one or two trusted views, then decide yourself.",0.75],
+  ["Keep asking more people; each view shifts you.",6],
+  ["Put it off until someone decides for you.",9]]},
+ {q:"Two good options, and no clear winner between them. You:",o:[
+  ["Decide by which one fits what you care about.",0],
+  ["Sound out one person, then choose.",0.75],
+  ["Collect many opinions, and swing with each.",6],
+  ["Delay until the choice is made for you.",9]]}]},
+{d:"lakshya",w:1,src:"New (adaptability)",v:[
+ {q:"Your workplace switches to a new system you have never used. You:",o:[
+  ["Dive in and learn it properly.",0],
+  ["Learn what you need, and ask for help where you're stuck.",0.5],
+  ["Stick to the old way for as long as you can.",6],
+  ["Feel it's beyond you, and avoid it.",8.5]]},
+ {q:"You learn that a skill you are proud of is becoming outdated. You:",o:[
+  ["Plan how to update it, and start.",0],
+  ["Pick up the essentials of the newer approach.",1],
+  ["Insist your way still works better.",5.75,1],
+  ["Feel you've fallen behind for good.",8.75]]}]},
+{d:"indriyajaya",w:1,src:"New (integrity)",v:[
+ {q:"You discover a mistake in your work that nobody else has noticed yet. You:",o:[
+  ["Tell the people affected, and fix it.",0],
+  ["Fix it quietly without mentioning it.",2.75],
+  ["Wait to see whether anyone notices.",6.75],
+  ["If it comes up, put it down to someone else's input.",9.75]]},
+ {q:"Your manager praises work that a teammate mostly did. You:",o:[
+  ["Say on the spot that it was mainly your teammate's work.",0],
+  ["Mention your teammate's part to the manager later.",1.75],
+  ["Accept the praise and say nothing.",6.75],
+  ["Present it as your own work.",10]]}]},
+{d:"ranjana",w:1,src:"New (earning trust)",v:[
+ {q:"You need support for your project from a senior colleague who barely knows you. You:",o:[
+  ["Learn what matters to them, and show how the project helps.",0],
+  ["Send a detailed proposal by email, and wait.",3.25],
+  ["Ask your own boss to pressure them into it.",5.75],
+  ["Drop the idea of their support, and manage without.",8]]},
+ {q:"Two people in your team are in a conflict that is slowing everyone down. You:",o:[
+  ["Talk to both, and help them find common ground.",0],
+  ["Raise it with your manager straight away.",3.75],
+  ["Side with the person you agree with.",6,1],
+  ["Stay out of it, and hope it settles.",6.75]]}]}
+];
+/* ================= PART B: STATEMENTS =================
+   Five-point agreement scale. k = 1: agreeing signals growth need
+   (Strongly agree = 10). k = -1: agreeing signals steadiness (Strongly agree = 0).
+   rig = feeds the Rigidity check. */
+var PB=[
+ {d:"avabodha",w:1,k:1,src:"Original B13",t:"If others knew my real thoughts, I feel they would be disgusted."},
+ {d:"lakshya",w:1,k:1,src:"Original B15",t:"When I am emotionally upset, I feel hopeless."},
+ {d:"vachana",w:1,k:1,src:"Original B5",t:"I get really worked up when someone comments critically on me."},
+ {d:"vachana",w:1,k:1,src:"Original B11",t:"I feel miserable saying “no” or “not possible” to someone."},
+ {d:"indriyajaya",w:1,k:1,rig:1,src:"Original B7",t:"I feel disgusted when I meet people I find eccentric, odd or foolish."},
+ {d:"indriyajaya",w:1,k:1,rig:1,src:"Original B8",t:"If someone hurts me, I immediately hurt them back."},
+ {d:"abha",w:1,k:-1,src:"New",t:"I feel at ease with how I come across in professional settings."},
+ {d:"abha",w:1,k:-1,src:"New",t:"I hold eye contact comfortably when speaking with someone."},
+ {d:"ranjana",w:1,k:-1,src:"Original B4",t:"I shop based on my own needs, not because someone recommended something."},
+ {d:"ranjana",w:1,k:-1,src:"New",t:"People often come to me for advice or a second opinion."},
+ {d:"avabodha",w:1,k:-1,src:"New",t:"Before a big decision, I look at it from several angles, including ones I don't like."},
+ {d:"lakshya",w:1,k:-1,src:"New",t:"I regularly learn something new, even when no one requires it."},
+ {d:"indriyajaya",w:1,k:-1,src:"New",t:"I admit my mistakes openly, even when it costs me."}
+];
+/* Unscored check items, shuffled into Part B. att: must pick option `want`.
+   sd: "too good to be true" statements; agreeing with 2+ flags idealised answering. */
+var CHECKS=[
+ {chk:"att",want:1,t:"To show you're reading carefully, please choose \u201CDisagree\u201D for this statement."},
+ {chk:"att",want:4,t:"This is a check question: please select \u201CStrongly agree\u201D."},
+ {chk:"sd",t:"I have never been annoyed with anyone."},
+ {chk:"sd",t:"I always keep every promise I make, without exception."},
+ {chk:"sd",t:"I have never said something I later regretted."}
+];
+var DIM_SEM=11,IDX_SEM=7,RUSH_MS=120000;
+var LIKERT=["Strongly disagree","Disagree","Neutral","Agree","Strongly agree"];
+var A_PER_PAGE=2,B_PER_PAGE=5,NA=PA.length,NBS=PB.length,NB=PB.length+CHECKS.length,TOTAL_Q=NA+NB;
+/* ================= BANDS (on the 0-100 Index) ================= */
+var BANDS=[
+ {min:0,name:"Emerging",tag:"Heavily influenced: other people's voices lead",c:"var(--b1)",
+  p:["Your answers suggest you tend to accept what others say with little questioning, and that your self-confidence may be low at the moment. Holding your own view when someone else holds a different one is hard right now.",
+     "Your biggest positive is that you respect other people's opinions, which is why people find you easy to talk to. The cost is that your own needs and choices can get lost.",
+     "This is a pattern, not a verdict. Start by backing your own judgement in small, low-stakes things, and build from there."],
+  s:["Respectful of others' opinions","Approachable, and easy to talk to","Open to feedback and new ideas"],
+  w:["Accepting views without checking them","Saying yes when you mean no","Letting praise or criticism set how you see yourself"]},
+ {min:45,name:"Established",tag:"Moderately influenceable: firm, but yields to strong personalities",c:"var(--b2)",
+  p:["Others may find it fairly easy to persuade you, though you do have a real strength: you can stand firm, and you don't yield to everything.",
+     "Where you tend to give way is with a strong, commanding personality. That is a specific, workable gap rather than a general lack of confidence."],
+  s:["Able to stand firm on things that matter","Considerate and cooperative"],
+  w:["Giving in to forceful or very confident people","Agreeing in the moment, regretting it later"]},
+ {min:70,name:"Exemplary",tag:"Self-assured: confident and balanced",c:"var(--b3)",
+  p:["Your answers suggest good self-confidence along with emotional maturity. You are usually a step ahead of people who try to influence you for their own advantage.",
+     "You take responsibility for your own direction, you can keep pressure at arm's length, and you can still be a good friend to those who like and trust you."],
+  s:["Healthy self-confidence","Weighs advice without being swayed","Cordial and trustworthy with others"],
+  w:["Staying genuinely open: confidence works best alongside listening","Under stress, firmness can slide towards rigidity"]}
+];
+var RIGID_BAND={name:"Guarded",tag:"Rigid and self-protective: ego may be standing in for confidence",c:"var(--b4)",
+  p:["Your answers lean towards fixed positions and pushing back hard, rather than balanced individuality. You may come across as very rational, or as ruthless, and even people close to you may keep some distance.",
+     "You may feel you are never influenced by others. The pattern is usually subtler: when you do give way, it tends to be to negative views rather than constructive ones. Mistaking ego for self-confidence is the real weakness here.",
+     "This is a habit of responding rather than a fixed trait, and habits can be rebuilt."],
+  s:["Clear opinions, and the courage to state them","Not easily pressured"],
+  w:["Reacting instantly to hurt or criticism","Dismissing people who seem different","Confrontation as the default setting"]};
+var LEVELS=[{min:80,n:"Strong",c:"var(--lv1)"},{min:60,n:"Steady",c:"var(--lv2)"},{min:40,n:"Developing",c:"var(--lv3)"},{min:0,n:"Priority",c:"var(--lv4)"}];
+/* ================= KANNADA TRANSLATIONS =================
+   Keyed by the exact English text. Anything missing falls back to English. */
+var KN={
+"Avabodha":"ಅವಬೋಧ","Vachana":"ವಚನ","Indriyajaya":"ಇಂದ್ರಿಯಜಯ","Ranjana":"ರಂಜನ","Abha":"ಆಭಾ","Lakshya":"ಲಕ್ಷ್ಯ",
+"Insight & Clear Thinking":"ಒಳನೋಟ ಮತ್ತು ಸ್ಪಷ್ಟ ಚಿಂತನೆ","Self-Mastery & Integrity":"ಸ್ವ-ನಿಯಂತ್ರಣ ಮತ್ತು ಪ್ರಾಮಾಣಿಕತೆ","Influence & Trust":"ಪ್ರಭಾವ ಮತ್ತು ವಿಶ್ವಾಸ",
+"Presence & Bearing":"ಉಪಸ್ಥಿತಿ ಮತ್ತು ನಿಲುವು","Purposeful Growth":"ಉದ್ದೇಶಪೂರ್ಣ ಬೆಳವಣಿಗೆ",
+"Under pressure your boundaries slip or your reactions run hot, and owning a mistake can feel too costly.":"ಒತ್ತಡದಲ್ಲಿ ನಿಮ್ಮ ಮಿತಿಗಳು ಸಡಿಲಗೊಳ್ಳುತ್ತವೆ ಅಥವಾ ಪ್ರತಿಕ್ರಿಯೆಗಳು ಬಿಸಿಯಾಗುತ್ತವೆ; ತಪ್ಪನ್ನು ಒಪ್ಪಿಕೊಳ್ಳುವುದು ತುಂಬಾ ದುಬಾರಿ ಎನಿಸಬಹುದು.",
+"You stay composed, keep your word, own your mistakes and treat people with respect.":"ನೀವು ಸಮಚಿತ್ತದಿಂದಿರುತ್ತೀರಿ, ಕೊಟ್ಟ ಮಾತು ಉಳಿಸಿಕೊಳ್ಳುತ್ತೀರಿ, ತಪ್ಪುಗಳನ್ನು ಒಪ್ಪಿಕೊಳ್ಳುತ್ತೀರಿ ಮತ್ತು ಜನರನ್ನು ಗೌರವದಿಂದ ಕಾಣುತ್ತೀರಿ.",
+"Pressure and louder voices sway you, and winning people's trust and support for your ideas does not come easily yet.":"ಒತ್ತಡ ಮತ್ತು ಜೋರಾದ ಧ್ವನಿಗಳು ನಿಮ್ಮನ್ನು ಅಲುಗಾಡಿಸುತ್ತವೆ; ನಿಮ್ಮ ಆಲೋಚನೆಗಳಿಗೆ ಜನರ ವಿಶ್ವಾಸ ಮತ್ತು ಬೆಂಬಲ ಗಳಿಸುವುದು ಇನ್ನೂ ಸುಲಭವಾಗಿಲ್ಲ.",
+"You hold your ground, earn people's trust and bring them with you.":"ನೀವು ನಿಮ್ಮ ನಿಲುವಿನಲ್ಲಿ ದೃಢವಾಗಿರುತ್ತೀರಿ, ಜನರ ವಿಶ್ವಾಸ ಗಳಿಸುತ್ತೀರಿ ಮತ್ತು ಅವರನ್ನು ಜೊತೆಗೆ ಕರೆದೊಯ್ಯುತ್ತೀರಿ.",
+"Before asking for someone's support, find out what matters to them and show how your idea helps.":"ಯಾರದಾದರೂ ಬೆಂಬಲ ಕೇಳುವ ಮೊದಲು, ಅವರಿಗೆ ಯಾವುದು ಮುಖ್ಯ ಎಂದು ತಿಳಿದು, ನಿಮ್ಮ ಆಲೋಚನೆ ಅದಕ್ಕೆ ಹೇಗೆ ನೆರವಾಗುತ್ತದೆ ಎಂದು ತೋರಿಸಿ.",
+"You recover from setbacks, adapt to change and keep learning towards your goals.":"ನೀವು ಹಿನ್ನಡೆಗಳಿಂದ ಚೇತರಿಸಿಕೊಳ್ಳುತ್ತೀರಿ, ಬದಲಾವಣೆಗೆ ಹೊಂದಿಕೊಳ್ಳುತ್ತೀರಿ ಮತ್ತು ನಿಮ್ಮ ಗುರಿಗಳತ್ತ ಕಲಿಯುತ್ತಲೇ ಇರುತ್ತೀರಿ.",
+"You discover a mistake in your work that nobody else has noticed yet. You:":"ನಿಮ್ಮ ಕೆಲಸದಲ್ಲಿ ಇನ್ನೂ ಯಾರೂ ಗಮನಿಸದ ತಪ್ಪೊಂದನ್ನು ನೀವು ಕಂಡುಕೊಳ್ಳುತ್ತೀರಿ. ನೀವು:",
+"Tell the people affected, and fix it.":"ಸಂಬಂಧಪಟ್ಟವರಿಗೆ ತಿಳಿಸಿ, ಅದನ್ನು ಸರಿಪಡಿಸುತ್ತೀರಿ.",
+"Fix it quietly without mentioning it.":"ಯಾರಿಗೂ ಹೇಳದೆ ಸದ್ದಿಲ್ಲದೆ ಸರಿಪಡಿಸುತ್ತೀರಿ.",
+"Wait to see whether anyone notices.":"ಯಾರಾದರೂ ಗಮನಿಸುತ್ತಾರೆಯೇ ಎಂದು ಕಾಯುತ್ತೀರಿ.",
+"If it comes up, put it down to someone else's input.":"ವಿಷಯ ಹೊರಬಂದರೆ, ಬೇರೆಯವರ ಕೊಡುಗೆಯೇ ಕಾರಣ ಎನ್ನುತ್ತೀರಿ.",
+"Your manager praises work that a teammate mostly did. You:":"ಸಹೋದ್ಯೋಗಿಯೊಬ್ಬರು ಹೆಚ್ಚಾಗಿ ಮಾಡಿದ ಕೆಲಸಕ್ಕಾಗಿ ನಿಮ್ಮ ಮ್ಯಾನೇಜರ್ ನಿಮ್ಮನ್ನು ಹೊಗಳುತ್ತಾರೆ. ನೀವು:",
+"Say on the spot that it was mainly your teammate's work.":"ಅದು ಮುಖ್ಯವಾಗಿ ಸಹೋದ್ಯೋಗಿಯ ಕೆಲಸ ಎಂದು ಅಲ್ಲೇ ಹೇಳುತ್ತೀರಿ.",
+"Mention your teammate's part to the manager later.":"ನಂತರ ಮ್ಯಾನೇಜರ್‌ಗೆ ಸಹೋದ್ಯೋಗಿಯ ಪಾತ್ರವನ್ನು ತಿಳಿಸುತ್ತೀರಿ.",
+"Accept the praise and say nothing.":"ಹೊಗಳಿಕೆಯನ್ನು ಸ್ವೀಕರಿಸಿ ಸುಮ್ಮನಿರುತ್ತೀರಿ.",
+"Present it as your own work.":"ಅದನ್ನು ನಿಮ್ಮದೇ ಕೆಲಸ ಎಂದು ತೋರಿಸಿಕೊಳ್ಳುತ್ತೀರಿ.",
+"You need support for your project from a senior colleague who barely knows you. You:":"ನಿಮ್ಮನ್ನು ಅಷ್ಟಾಗಿ ತಿಳಿಯದ ಹಿರಿಯ ಸಹೋದ್ಯೋಗಿಯೊಬ್ಬರ ಬೆಂಬಲ ನಿಮ್ಮ ಯೋಜನೆಗೆ ಬೇಕಿದೆ. ನೀವು:",
+"Learn what matters to them, and show how the project helps.":"ಅವರಿಗೆ ಯಾವುದು ಮುಖ್ಯ ಎಂದು ತಿಳಿದು, ಯೋಜನೆ ಅದಕ್ಕೆ ಹೇಗೆ ನೆರವಾಗುತ್ತದೆ ಎಂದು ತೋರಿಸುತ್ತೀರಿ.",
+"Send a detailed proposal by email, and wait.":"ವಿವರವಾದ ಪ್ರಸ್ತಾವನೆಯನ್ನು ಇಮೇಲ್ ಮಾಡಿ, ಕಾಯುತ್ತೀರಿ.",
+"Ask your own boss to pressure them into it.":"ಅವರ ಮೇಲೆ ಒತ್ತಡ ಹೇರುವಂತೆ ನಿಮ್ಮ ಬಾಸ್‌ಗೆ ಕೇಳುತ್ತೀರಿ.",
+"Drop the idea of their support, and manage without.":"ಅವರ ಬೆಂಬಲದ ಆಸೆ ಬಿಟ್ಟು, ಅದಿಲ್ಲದೆಯೇ ನಿಭಾಯಿಸುತ್ತೀರಿ.",
+"Two people in your team are in a conflict that is slowing everyone down. You:":"ನಿಮ್ಮ ತಂಡದ ಇಬ್ಬರ ನಡುವಿನ ಸಂಘರ್ಷ ಎಲ್ಲರ ಕೆಲಸವನ್ನೂ ನಿಧಾನಗೊಳಿಸುತ್ತಿದೆ. ನೀವು:",
+"Talk to both, and help them find common ground.":"ಇಬ್ಬರೊಂದಿಗೂ ಮಾತನಾಡಿ, ಸಮಾನ ನೆಲೆ ಕಂಡುಕೊಳ್ಳಲು ನೆರವಾಗುತ್ತೀರಿ.",
+"Raise it with your manager straight away.":"ತಕ್ಷಣ ಮ್ಯಾನೇಜರ್ ಗಮನಕ್ಕೆ ತರುತ್ತೀರಿ.",
+"Side with the person you agree with.":"ನೀವು ಒಪ್ಪುವವರ ಪರವಾಗಿ ನಿಲ್ಲುತ್ತೀರಿ.",
+"Stay out of it, and hope it settles.":"ಅದರಿಂದ ದೂರವಿದ್ದು, ತಾನಾಗಿಯೇ ಸರಿಹೋಗಲಿ ಎಂದು ಆಶಿಸುತ್ತೀರಿ.",
+"People often come to me for advice or a second opinion.":"ಸಲಹೆ ಅಥವಾ ಎರಡನೇ ಅಭಿಪ್ರಾಯಕ್ಕಾಗಿ ಜನರು ಆಗಾಗ ನನ್ನ ಬಳಿ ಬರುತ್ತಾರೆ.",
+"I admit my mistakes openly, even when it costs me.":"ನಷ್ಟವಾದರೂ, ನಾನು ನನ್ನ ತಪ್ಪುಗಳನ್ನು ಬಹಿರಂಗವಾಗಿ ಒಪ್ಪಿಕೊಳ್ಳುತ್ತೇನೆ.",
+"Emerging":"ಉದಯೋನ್ಮುಖ","Established":"ಸುಸ್ಥಾಪಿತ","Exemplary":"ಆದರ್ಶಪ್ರಾಯ",
+"New (integrity)":"ಹೊಸ (ಪ್ರಾಮಾಣಿಕತೆ)","New (earning trust)":"ಹೊಸ (ವಿಶ್ವಾಸ ಗಳಿಕೆ)",
+"Prajna":"ಪ್ರಜ್ಞಾ","Vakshakti":"ವಾಕ್‌ಶಕ್ತಿ","Sadachara":"ಸದಾಚಾರ","Vyaktitva":"ವ್ಯಕ್ತಿತ್ವ","Utkarsh":"ಉತ್ಕರ್ಷ",
+"Wisdom & Strategic Thinking":"ವಿವೇಕ ಮತ್ತು ಕಾರ್ಯತಂತ್ರದ ಚಿಂತನೆ","Expression & Communication":"ಅಭಿವ್ಯಕ್ತಿ ಮತ್ತು ಸಂವಹನ","Character & Integrity":"ಚಾರಿತ್ರ್ಯ ಮತ್ತು ಪ್ರಾಮಾಣಿಕತೆ",
+"Presence & Executive Image":"ಉಪಸ್ಥಿತಿ ಮತ್ತು ವೃತ್ತಿಪರ ಚಿತ್ರಣ","Influence & Leadership":"ಪ್ರಭಾವ ಮತ್ತು ನಾಯಕತ್ವ","Growth & Transformation":"ಬೆಳವಣಿಗೆ ಮತ್ತು ಪರಿವರ್ತನೆ",
+"Alarming news, big decisions and other people's opinions cloud your judgement, and you can lose sight of what you actually think.":"ಆತಂಕಕಾರಿ ಸುದ್ದಿಗಳು, ದೊಡ್ಡ ನಿರ್ಧಾರಗಳು ಮತ್ತು ಇತರರ ಅಭಿಪ್ರಾಯಗಳು ನಿಮ್ಮ ವಿವೇಚನೆಯನ್ನು ಮಸುಕಾಗಿಸುತ್ತವೆ; ನೀವು ನಿಜವಾಗಿ ಏನು ಯೋಚಿಸುತ್ತೀರಿ ಎಂಬುದೇ ಮರೆಯಾಗಬಹುದು.",
+"You see situations clearly, weigh evidence calmly and decide from your own judgement.":"ನೀವು ಸಂದರ್ಭಗಳನ್ನು ಸ್ಪಷ್ಟವಾಗಿ ನೋಡುತ್ತೀರಿ, ಪುರಾವೆಗಳನ್ನು ಶಾಂತವಾಗಿ ತೂಗುತ್ತೀರಿ ಮತ್ತು ನಿಮ್ಮದೇ ವಿವೇಚನೆಯಿಂದ ನಿರ್ಧರಿಸುತ್ತೀರಿ.",
+"Before any big decision, write down the two strongest arguments against your first instinct.":"ಯಾವುದೇ ದೊಡ್ಡ ನಿರ್ಧಾರಕ್ಕೆ ಮುನ್ನ, ನಿಮ್ಮ ಮೊದಲ ಅನಿಸಿಕೆಯ ವಿರುದ್ಧದ ಎರಡು ಪ್ರಬಲ ವಾದಗಳನ್ನು ಬರೆದಿಡಿ.",
+"Setbacks and change knock you off course for a while, and learning new ways can feel like a threat rather than a step up.":"ಹಿನ್ನಡೆಗಳು ಮತ್ತು ಬದಲಾವಣೆಗಳು ನಿಮ್ಮನ್ನು ಸ್ವಲ್ಪ ಕಾಲ ದಾರಿ ತಪ್ಪಿಸುತ್ತವೆ; ಹೊಸ ವಿಧಾನಗಳನ್ನು ಕಲಿಯುವುದು ಮುನ್ನಡೆಯ ಬದಲು ಬೆದರಿಕೆಯಂತೆ ಅನಿಸಬಹುದು.",
+"You recover from setbacks, adapt to change and keep learning without being told to.":"ನೀವು ಹಿನ್ನಡೆಗಳಿಂದ ಚೇತರಿಸಿಕೊಳ್ಳುತ್ತೀರಿ, ಬದಲಾವಣೆಗೆ ಹೊಂದಿಕೊಳ್ಳುತ್ತೀರಿ ಮತ್ತು ಯಾರೂ ಹೇಳದಿದ್ದರೂ ಕಲಿಯುತ್ತಲೇ ಇರುತ್ತೀರಿ.",
+"Learn one small new skill each month, and tell someone what you learnt.":"ಪ್ರತಿ ತಿಂಗಳು ಒಂದು ಸಣ್ಣ ಹೊಸ ಕೌಶಲ್ಯ ಕಲಿಯಿರಿ, ಮತ್ತು ಕಲಿತದ್ದನ್ನು ಯಾರಿಗಾದರೂ ತಿಳಿಸಿ.",
+"You face a decision that matters, with no obvious right answer. You:":"ಸ್ಪಷ್ಟ ಸರಿಯುತ್ತರವಿಲ್ಲದ, ಮಹತ್ವದ ನಿರ್ಧಾರವೊಂದನ್ನು ನೀವು ತೆಗೆದುಕೊಳ್ಳಬೇಕಿದೆ. ನೀವು:",
+"Weigh it against what matters most to you, and decide.":"ನಿಮಗೆ ಯಾವುದು ಹೆಚ್ಚು ಮುಖ್ಯವೋ ಅದರ ಆಧಾರದಲ್ಲಿ ತೂಗಿ ನಿರ್ಧರಿಸುತ್ತೀರಿ.",
+"Take one or two trusted views, then decide yourself.":"ನಂಬಿಕಸ್ಥ ಒಬ್ಬಿಬ್ಬರ ಅಭಿಪ್ರಾಯ ಪಡೆದು, ನಂತರ ನೀವೇ ನಿರ್ಧರಿಸುತ್ತೀರಿ.",
+"Keep asking more people; each view shifts you.":"ಇನ್ನಷ್ಟು ಜನರನ್ನು ಕೇಳುತ್ತಲೇ ಇರುತ್ತೀರಿ; ಪ್ರತಿ ಅಭಿಪ್ರಾಯವೂ ನಿಮ್ಮನ್ನು ಅಲುಗಾಡಿಸುತ್ತದೆ.",
+"Put it off until someone decides for you.":"ಬೇರೆ ಯಾರಾದರೂ ನಿರ್ಧರಿಸುವವರೆಗೆ ಮುಂದೂಡುತ್ತೀರಿ.",
+"Two good options, and no clear winner between them. You:":"ಎರಡು ಉತ್ತಮ ಆಯ್ಕೆಗಳಿವೆ, ಅವುಗಳಲ್ಲಿ ಸ್ಪಷ್ಟವಾಗಿ ಯಾವುದೂ ಮೇಲಲ್ಲ. ನೀವು:",
+"Decide by which one fits what you care about.":"ನೀವು ಮಹತ್ವ ನೀಡುವ ವಿಷಯಗಳಿಗೆ ಯಾವುದು ಹೊಂದುತ್ತದೆಯೋ ಅದನ್ನು ಆರಿಸುತ್ತೀರಿ.",
+"Sound out one person, then choose.":"ಒಬ್ಬರ ಅಭಿಪ್ರಾಯ ಕೇಳಿ, ನಂತರ ಆರಿಸುತ್ತೀರಿ.",
+"Collect many opinions, and swing with each.":"ಹಲವು ಅಭಿಪ್ರಾಯಗಳನ್ನು ಸಂಗ್ರಹಿಸಿ, ಪ್ರತಿಯೊಂದರ ಜೊತೆಗೂ ವಾಲುತ್ತೀರಿ.",
+"Delay until the choice is made for you.":"ಆಯ್ಕೆ ಬೇರೆಯವರಿಂದಲೇ ಆಗುವವರೆಗೆ ತಡಮಾಡುತ್ತೀರಿ.",
+"Your workplace switches to a new system you have never used. You:":"ನಿಮ್ಮ ಕೆಲಸದ ಸ್ಥಳದಲ್ಲಿ ನೀವು ಎಂದೂ ಬಳಸದ ಹೊಸ ವ್ಯವಸ್ಥೆಯನ್ನು ಜಾರಿಗೆ ತರಲಾಗುತ್ತದೆ. ನೀವು:",
+"Dive in and learn it properly.":"ಆಸಕ್ತಿಯಿಂದ ತೊಡಗಿಸಿಕೊಂಡು ಅದನ್ನು ಸರಿಯಾಗಿ ಕಲಿಯುತ್ತೀರಿ.",
+"Learn what you need, and ask for help where you're stuck.":"ನಿಮಗೆ ಬೇಕಾದಷ್ಟು ಕಲಿಯುತ್ತೀರಿ, ಸಿಲುಕಿದಲ್ಲಿ ಸಹಾಯ ಕೇಳುತ್ತೀರಿ.",
+"Stick to the old way for as long as you can.":"ಸಾಧ್ಯವಾದಷ್ಟು ದಿನ ಹಳೆಯ ವಿಧಾನಕ್ಕೇ ಅಂಟಿಕೊಳ್ಳುತ್ತೀರಿ.",
+"Feel it's beyond you, and avoid it.":"ಅದು ನಿಮ್ಮಿಂದಾಗದು ಎಂದು ಭಾವಿಸಿ, ಅದನ್ನು ತಪ್ಪಿಸುತ್ತೀರಿ.",
+"You learn that a skill you are proud of is becoming outdated. You:":"ನೀವು ಹೆಮ್ಮೆಪಡುವ ಕೌಶಲ್ಯವೊಂದು ಹಳತಾಗುತ್ತಿದೆ ಎಂದು ತಿಳಿಯುತ್ತೀರಿ. ನೀವು:",
+"Plan how to update it, and start.":"ಅದನ್ನು ಹೇಗೆ ನವೀಕರಿಸುವುದು ಎಂದು ಯೋಜಿಸಿ, ಆರಂಭಿಸುತ್ತೀರಿ.",
+"Pick up the essentials of the newer approach.":"ಹೊಸ ವಿಧಾನದ ಮೂಲಭೂತ ಅಂಶಗಳನ್ನು ಕಲಿಯುತ್ತೀರಿ.",
+"Insist your way still works better.":"ನಿಮ್ಮ ವಿಧಾನವೇ ಇನ್ನೂ ಉತ್ತಮ ಎಂದು ಪಟ್ಟು ಹಿಡಿಯುತ್ತೀರಿ.",
+"Feel you've fallen behind for good.":"ನೀವು ಶಾಶ್ವತವಾಗಿ ಹಿಂದುಳಿದಿದ್ದೀರಿ ಎನಿಸುತ್ತದೆ.",
+"Before a big decision, I look at it from several angles, including ones I don't like.":"ದೊಡ್ಡ ನಿರ್ಧಾರಕ್ಕೆ ಮುನ್ನ, ನನಗೆ ಇಷ್ಟವಾಗದ ದೃಷ್ಟಿಕೋನಗಳನ್ನೂ ಸೇರಿಸಿ, ಹಲವು ಕೋನಗಳಿಂದ ಅದನ್ನು ನೋಡುತ್ತೇನೆ.",
+"I regularly learn something new, even when no one requires it.":"ಯಾರೂ ಬಯಸದಿದ್ದರೂ, ನಾನು ನಿಯಮಿತವಾಗಿ ಹೊಸದನ್ನು ಕಲಿಯುತ್ತೇನೆ.",
+"Awaken":"ಜಾಗೃತಿ","Align":"ಸಮನ್ವಯ","Elevate":"ಉನ್ನತಿ","Guarded":"ರಕ್ಷಣಾತ್ಮಕ",
+"Heavily influenced: other people's voices lead":"ಹೆಚ್ಚು ಪ್ರಭಾವಿತ: ಇತರರ ಧ್ವನಿಯೇ ಮುನ್ನಡೆಸುತ್ತದೆ",
+"Moderately influenceable: firm, but yields to strong personalities":"ಮಧ್ಯಮ ಪ್ರಭಾವಿತ: ದೃಢ, ಆದರೆ ಪ್ರಬಲ ವ್ಯಕ್ತಿತ್ವಗಳಿಗೆ ಮಣಿಯುವಿರಿ",
+"Self-assured: confident and balanced":"ಆತ್ಮವಿಶ್ವಾಸಿ: ಆತ್ಮವಿಶ್ವಾಸ ಮತ್ತು ಸಮತೋಲನ",
+"Rigid and self-protective: ego may be standing in for confidence":"ಹಠಮಾರಿ ಮತ್ತು ಸ್ವ-ರಕ್ಷಣಾತ್ಮಕ: ಆತ್ಮವಿಶ್ವಾಸದ ಜಾಗದಲ್ಲಿ ಅಹಂ ಇರಬಹುದು",
+"New (decision-making)":"ಹೊಸ (ನಿರ್ಧಾರ ಸಾಮರ್ಥ್ಯ)","New (adaptability)":"ಹೊಸ (ಹೊಂದಾಣಿಕೆ)",
+"Check a reliable source, and take sensible precautions if needed.":"ವಿಶ್ವಾಸಾರ್ಹ ಮೂಲವನ್ನು ಪರಿಶೀಲಿಸಿ, ಅಗತ್ಯವಿದ್ದರೆ ಸೂಕ್ತ ಮುನ್ನೆಚ್ಚರಿಕೆ ವಹಿಸುತ್ತೀರಿ.",
+"I feel at ease with how I come across in professional settings.":"ವೃತ್ತಿಪರ ಸಂದರ್ಭಗಳಲ್ಲಿ ನಾನು ಇತರರಿಗೆ ಕಾಣುವ ರೀತಿಯ ಬಗ್ಗೆ ನನಗೆ ನಿರಾಳ ಭಾವವಿದೆ.",
+"I keep my view even when the most confident person in the room disagrees.":"ಗುಂಪಿನಲ್ಲಿ ಅತ್ಯಂತ ಆತ್ಮವಿಶ್ವಾಸದಿಂದ ಮಾತನಾಡುವವರು ಒಪ್ಪದಿದ್ದರೂ, ನಾನು ನನ್ನ ಅಭಿಪ್ರಾಯವನ್ನು ಬಿಟ್ಟುಕೊಡುವುದಿಲ್ಲ.",
+"To show you're reading carefully, please choose \u201CDisagree\u201D for this statement.":"ನೀವು ಗಮನವಿಟ್ಟು ಓದುತ್ತಿದ್ದೀರಿ ಎಂದು ತೋರಿಸಲು, ಈ ಹೇಳಿಕೆಗೆ \u201Cಒಪ್ಪುವುದಿಲ್ಲ\u201D ಆರಿಸಿ.",
+"This is a check question: please select \u201CStrongly agree\u201D.":"ಇದು ಪರಿಶೀಲನಾ ಪ್ರಶ್ನೆ: ದಯವಿಟ್ಟು \u201Cಸಂಪೂರ್ಣ ಒಪ್ಪುತ್ತೇನೆ\u201D ಆರಿಸಿ.",
+"I have never been annoyed with anyone.":"ನಾನು ಯಾರ ಮೇಲೂ ಎಂದಿಗೂ ಕಿರಿಕಿರಿಗೊಂಡಿಲ್ಲ.",
+"I always keep every promise I make, without exception.":"ನಾನು ಕೊಟ್ಟ ಪ್ರತಿಯೊಂದು ಮಾತನ್ನೂ, ಯಾವುದೇ ಅಪವಾದವಿಲ್ಲದೆ, ಯಾವಾಗಲೂ ಉಳಿಸಿಕೊಳ್ಳುತ್ತೇನೆ.",
+"I have never said something I later regretted.":"ನಂತರ ವಿಷಾದಿಸುವಂತಹ ಮಾತನ್ನು ನಾನು ಎಂದಿಗೂ ಆಡಿಲ್ಲ.",
+/* dimensions */
+"Chintan":"ಚಿಂತನ","Vaani":"ವಾಣಿ","Aachaar":"ಆಚಾರ","Darshan":"ದರ್ಶನ","Prabhav":"ಪ್ರಭಾವ",
+"Mindset & Thinking":"ಮನೋಭಾವ ಮತ್ತು ಆಲೋಚನೆ",
+"Voice & Communication":"ಧ್ವನಿ ಮತ್ತು ಸಂವಹನ",
+"Behaviour & Conduct":"ವರ್ತನೆ ಮತ್ತು ನಡತೆ",
+"Visual Presence":"ದೃಶ್ಯ ಉಪಸ್ಥಿತಿ",
+"Influence & Impact":"ಪ್ರಭಾವ ಮತ್ತು ಪರಿಣಾಮ",
+"Setbacks, uncertainty and alarming news shake your thinking, and outcomes feel less in your hands.":"ಹಿನ್ನಡೆಗಳು, ಅನಿಶ್ಚಿತತೆ ಮತ್ತು ಆತಂಕಕಾರಿ ಸುದ್ದಿಗಳು ನಿಮ್ಮ ಆಲೋಚನೆಯನ್ನು ಅಲುಗಾಡಿಸುತ್ತವೆ; ಫಲಿತಾಂಶಗಳು ನಿಮ್ಮ ಕೈಯಲ್ಲಿಲ್ಲ ಎನಿಸುತ್ತದೆ.",
+"You think clearly under uncertainty and see your own choices as shaping your results.":"ಅನಿಶ್ಚಿತ ಸಂದರ್ಭದಲ್ಲೂ ನೀವು ಸ್ಪಷ್ಟವಾಗಿ ಯೋಚಿಸುತ್ತೀರಿ; ನಿಮ್ಮ ಆಯ್ಕೆಗಳೇ ಫಲಿತಾಂಶವನ್ನು ರೂಪಿಸುತ್ತವೆ ಎಂದು ನಂಬುತ್ತೀರಿ.",
+"After a setback, write down three things within your control before deciding anything.":"ಹಿನ್ನಡೆಯಾದಾಗ, ಯಾವುದೇ ನಿರ್ಧಾರ ತೆಗೆದುಕೊಳ್ಳುವ ಮೊದಲು ನಿಮ್ಮ ನಿಯಂತ್ರಣದಲ್ಲಿರುವ ಮೂರು ವಿಷಯಗಳನ್ನು ಬರೆದಿಡಿ.",
+"When a worrying headline lands, wait a day and check one reliable source before acting.":"ಆತಂಕ ಹುಟ್ಟಿಸುವ ಸುದ್ದಿ ಬಂದಾಗ, ಏನಾದರೂ ಮಾಡುವ ಮೊದಲು ಒಂದು ದಿನ ಕಾಯಿರಿ ಮತ್ತು ಒಂದು ವಿಶ್ವಾಸಾರ್ಹ ಮೂಲವನ್ನು ಪರಿಶೀಲಿಸಿ.",
+"Speaking up, disagreeing and taking criticism are hard, so your real view often goes unsaid.":"ಧೈರ್ಯವಾಗಿ ಮಾತನಾಡುವುದು, ಭಿನ್ನಾಭಿಪ್ರಾಯ ವ್ಯಕ್ತಪಡಿಸುವುದು ಮತ್ತು ಟೀಕೆಯನ್ನು ಸ್ವೀಕರಿಸುವುದು ಕಷ್ಟವಾಗುತ್ತದೆ; ಹಾಗಾಗಿ ನಿಮ್ಮ ನಿಜವಾದ ಅಭಿಪ್ರಾಯ ಹೆಚ್ಚಾಗಿ ಹೇಳದೇ ಉಳಿಯುತ್ತದೆ.",
+"You say what you think clearly and take feedback without losing your footing.":"ನಿಮಗೆ ಅನಿಸಿದ್ದನ್ನು ಸ್ಪಷ್ಟವಾಗಿ ಹೇಳುತ್ತೀರಿ ಮತ್ತು ಪ್ರತಿಕ್ರಿಯೆಯನ್ನು ಸಮಚಿತ್ತದಿಂದ ಸ್ವೀಕರಿಸುತ್ತೀರಿ.",
+"In your next meeting, state one view plainly, with one reason, before anyone asks.":"ಮುಂದಿನ ಸಭೆಯಲ್ಲಿ, ಯಾರೂ ಕೇಳುವ ಮುನ್ನವೇ ಒಂದು ಅಭಿಪ್ರಾಯವನ್ನು ಒಂದು ಕಾರಣದೊಂದಿಗೆ ನೇರವಾಗಿ ಹೇಳಿ.",
+"When criticised, say “let me think about that” instead of defending or going silent.":"ಟೀಕೆ ಬಂದಾಗ, ಸಮರ್ಥಿಸಿಕೊಳ್ಳುವ ಅಥವಾ ಮೌನವಾಗುವ ಬದಲು “ಅದರ ಬಗ್ಗೆ ಯೋಚಿಸುತ್ತೇನೆ” ಎಂದು ಹೇಳಿ.",
+"Boundaries slip, and your conduct swings between giving in and pushing back too hard.":"ನಿಮ್ಮ ಮಿತಿಗಳು ಸಡಿಲಗೊಳ್ಳುತ್ತವೆ; ನಿಮ್ಮ ನಡವಳಿಕೆ ಸೋತು ಒಪ್ಪಿಕೊಳ್ಳುವುದು ಮತ್ತು ಅತಿಯಾಗಿ ಪ್ರತಿರೋಧಿಸುವುದರ ನಡುವೆ ತೂಗಾಡುತ್ತದೆ.",
+"You hold boundaries calmly and treat people consistently.":"ನೀವು ಶಾಂತವಾಗಿ ಮಿತಿಗಳನ್ನು ಕಾಯ್ದುಕೊಳ್ಳುತ್ತೀರಿ ಮತ್ತು ಎಲ್ಲರೊಂದಿಗೂ ಒಂದೇ ರೀತಿ ನಡೆದುಕೊಳ್ಳುತ್ತೀರಿ.",
+"Practise one honest “I can't take that on” a week, without inventing an excuse.":"ವಾರಕ್ಕೊಮ್ಮೆ, ನೆಪ ಹೇಳದೆ, ಪ್ರಾಮಾಣಿಕವಾಗಿ “ಅದನ್ನು ನಾನು ವಹಿಸಿಕೊಳ್ಳಲಾರೆ” ಎಂದು ಹೇಳುವುದನ್ನು ಅಭ್ಯಾಸ ಮಾಡಿ.",
+"When you feel the urge to snap back, pause one breath and name what bothered you instead.":"ತಕ್ಷಣ ತಿರುಗೇಟು ನೀಡಬೇಕೆನಿಸಿದಾಗ, ಒಂದು ಉಸಿರು ನಿಲ್ಲಿಸಿ, ನಿಮಗೆ ಏನು ಬೇಸರ ತಂದಿತು ಎಂಬುದನ್ನು ಹೇಳಿ.",
+"How you look and carry yourself takes up a lot of attention, and bends to other people's remarks.":"ನೀವು ಹೇಗೆ ಕಾಣುತ್ತೀರಿ ಮತ್ತು ಹೇಗೆ ನಡೆದುಕೊಳ್ಳುತ್ತೀರಿ ಎಂಬುದು ನಿಮ್ಮ ಗಮನವನ್ನು ಹೆಚ್ಚು ಸೆಳೆಯುತ್ತದೆ ಮತ್ತು ಇತರರ ಮಾತಿಗೆ ತಕ್ಕಂತೆ ಬದಲಾಗುತ್ತದೆ.",
+"You present yourself appropriately, then stop thinking about it once you are in the room.":"ನೀವು ಸಂದರ್ಭಕ್ಕೆ ತಕ್ಕಂತೆ ಸಿದ್ಧರಾಗುತ್ತೀರಿ; ಕೊಠಡಿಗೆ ಕಾಲಿಟ್ಟ ಮೇಲೆ ಅದರ ಬಗ್ಗೆ ಯೋಚಿಸುವುದಿಲ್ಲ.",
+"Decide your outfit the night before, against the occasion, then stop checking.":"ಸಂದರ್ಭಕ್ಕೆ ತಕ್ಕ ಉಡುಪನ್ನು ಹಿಂದಿನ ರಾತ್ರಿಯೇ ನಿರ್ಧರಿಸಿ; ನಂತರ ಮತ್ತೆ ಮತ್ತೆ ಪರಿಶೀಲಿಸಬೇಡಿ.",
+"Practise holding eye contact for a full sentence in everyday conversations.":"ದಿನನಿತ್ಯದ ಮಾತುಕತೆಯಲ್ಲಿ, ಒಂದು ಪೂರ್ಣ ವಾಕ್ಯ ಮುಗಿಯುವವರೆಗೆ ಕಣ್ಣಿನ ಸಂಪರ್ಕ ಕಾಯ್ದುಕೊಳ್ಳುವುದನ್ನು ಅಭ್ಯಾಸ ಮಾಡಿ.",
+"Pressure, flattery and louder voices sway your decisions, and your own ideas carry less weight than they could.":"ಒತ್ತಡ, ಹೊಗಳಿಕೆ ಮತ್ತು ಜೋರಾದ ಧ್ವನಿಗಳು ನಿಮ್ಮ ನಿರ್ಧಾರಗಳನ್ನು ಬದಲಿಸುತ್ತವೆ; ನಿಮ್ಮ ಆಲೋಚನೆಗಳಿಗೆ ಸಿಗಬೇಕಾದ ಮಹತ್ವ ಸಿಗುವುದಿಲ್ಲ.",
+"You weigh pressure on its merits, and your ideas land with the people around you.":"ನೀವು ಒತ್ತಡವನ್ನು ಅದರ ಅರ್ಹತೆಯ ಆಧಾರದ ಮೇಲೆ ತೂಗುತ್ತೀರಿ; ನಿಮ್ಮ ಆಲೋಚನೆಗಳು ಸುತ್ತಲಿನವರ ಮೇಲೆ ಪರಿಣಾಮ ಬೀರುತ್ತವೆ.",
+"Before any purchase or commitment someone pushes on you, sleep on it once.":"ಯಾರಾದರೂ ಒತ್ತಾಯಿಸುವ ಖರೀದಿ ಅಥವಾ ಬದ್ಧತೆಗೆ ಮುನ್ನ, ಒಂದು ರಾತ್ರಿ ಯೋಚಿಸಿ ನಂತರ ನಿರ್ಧರಿಸಿ.",
+"When your idea is passed over, restate it once, calmly, with the reason it matters.":"ನಿಮ್ಮ ಆಲೋಚನೆಯನ್ನು ಕಡೆಗಣಿಸಿದಾಗ, ಅದು ಏಕೆ ಮುಖ್ಯ ಎಂಬ ಕಾರಣದೊಂದಿಗೆ ಶಾಂತವಾಗಿ ಇನ್ನೊಮ್ಮೆ ಹೇಳಿ.",
+/* Part A: Chintan */
+"You read in the media that a new disease is spreading in your area. You:":"ನಿಮ್ಮ ಪ್ರದೇಶದಲ್ಲಿ ಹೊಸ ರೋಗವೊಂದು ಹರಡುತ್ತಿದೆ ಎಂದು ಮಾಧ್ಯಮದಲ್ಲಿ ಓದುತ್ತೀರಿ. ನೀವು:",
+"Think, thank God I haven't caught it, and carry on.":"“ದೇವರ ದಯೆ, ನನಗೆ ಬಂದಿಲ್ಲ” ಎಂದುಕೊಂಡು ಮುಂದುವರಿಯುತ್ತೀರಿ.",
+"Feel you may already have some of its symptoms.":"ನಿಮಗೆ ಈಗಾಗಲೇ ಅದರ ಕೆಲವು ಲಕ್ಷಣಗಳಿರಬಹುದು ಎನಿಸುತ್ತದೆ.",
+"Start recalling that a friend of yours has had symptoms.":"ನಿಮ್ಮ ಸ್ನೇಹಿತರೊಬ್ಬರಿಗೆ ಲಕ್ಷಣಗಳಿದ್ದವು ಎಂದು ನೆನಪಿಸಿಕೊಳ್ಳಲು ಶುರು ಮಾಡುತ್ತೀರಿ.",
+"Decide to visit a doctor and get examined, though you feel fine.":"ಆರೋಗ್ಯವಾಗಿದ್ದರೂ, ವೈದ್ಯರ ಬಳಿ ಹೋಗಿ ಪರೀಕ್ಷೆ ಮಾಡಿಸಿಕೊಳ್ಳಲು ನಿರ್ಧರಿಸುತ್ತೀರಿ.",
+"A report says a product you use every day may carry a health risk. You:":"ನೀವು ಪ್ರತಿದಿನ ಬಳಸುವ ಉತ್ಪನ್ನವೊಂದು ಆರೋಗ್ಯಕ್ಕೆ ಅಪಾಯಕಾರಿಯಾಗಿರಬಹುದು ಎಂದು ವರದಿಯೊಂದು ಹೇಳುತ್ತದೆ. ನೀವು:",
+"Look at the evidence, and change the habit only if it holds up.":"ಪುರಾವೆಗಳನ್ನು ಪರಿಶೀಲಿಸುತ್ತೀರಿ; ಅವು ನಿಜವಾದರೆ ಮಾತ್ರ ಅಭ್ಯಾಸ ಬದಲಿಸುತ್ತೀರಿ.",
+"Note it and carry on as usual.":"ಗಮನಿಸಿ, ಎಂದಿನಂತೆ ಮುಂದುವರಿಯುತ್ತೀರಿ.",
+"Keep searching for more about it, and feel uneasy.":"ಅದರ ಬಗ್ಗೆ ಹುಡುಕುತ್ತಲೇ ಇರುತ್ತೀರಿ, ಮತ್ತು ಕಳವಳಗೊಳ್ಳುತ್ತೀರಿ.",
+"Become convinced it has already harmed you.":"ಅದು ಈಗಾಗಲೇ ನಿಮಗೆ ಹಾನಿ ಮಾಡಿದೆ ಎಂದು ನಂಬಿಬಿಡುತ್ತೀರಿ.",
+"Something you worked hard on fails. You:":"ನೀವು ಕಷ್ಟಪಟ್ಟು ಮಾಡಿದ ಕೆಲಸವೊಂದು ವಿಫಲವಾಗುತ್ತದೆ. ನೀವು:",
+"Look at what you would do differently next time.":"ಮುಂದಿನ ಬಾರಿ ಏನನ್ನು ಬೇರೆ ರೀತಿ ಮಾಡಬಹುದು ಎಂದು ನೋಡುತ್ತೀರಿ.",
+"Review it, accepting part of it was outside your hands.":"ಅದನ್ನು ಪರಿಶೀಲಿಸುತ್ತೀರಿ; ಕೆಲವು ಭಾಗ ನಿಮ್ಮ ಕೈಯಲ್ಲಿರಲಿಲ್ಲ ಎಂದು ಒಪ್ಪಿಕೊಳ್ಳುತ್ತೀರಿ.",
+"Conclude the circumstances were stacked against you.":"ಸಂದರ್ಭಗಳೆಲ್ಲಾ ನಿಮ್ಮ ವಿರುದ್ಧವಾಗಿದ್ದವು ಎಂದು ತೀರ್ಮಾನಿಸುತ್ತೀರಿ.",
+"Feel it proves things rarely go your way, whatever you do.":"ಏನು ಮಾಡಿದರೂ ನಿಮ್ಮ ಪರವಾಗಿ ಏನೂ ಆಗುವುದಿಲ್ಲ ಎಂಬುದಕ್ಕೆ ಇದೇ ಸಾಕ್ಷಿ ಎನಿಸುತ್ತದೆ.",
+"An opportunity you wanted goes to someone else. You:":"ನೀವು ಬಯಸಿದ ಅವಕಾಶ ಬೇರೊಬ್ಬರಿಗೆ ಸಿಗುತ್ತದೆ. ನೀವು:",
+"Ask what you could strengthen for the next one.":"ಮುಂದಿನ ಅವಕಾಶಕ್ಕಾಗಿ ಏನನ್ನು ಬಲಪಡಿಸಬಹುದು ಎಂದು ಕೇಳುತ್ತೀರಿ.",
+"Accept that some of it was yours to control and some was not.":"ಕೆಲವು ನಿಮ್ಮ ನಿಯಂತ್ರಣದಲ್ಲಿತ್ತು, ಕೆಲವು ಇರಲಿಲ್ಲ ಎಂದು ಒಪ್ಪಿಕೊಳ್ಳುತ್ತೀರಿ.",
+"Assume it was decided by connections, not merit.":"ಅರ್ಹತೆಯಿಂದಲ್ಲ, ಪರಿಚಯದ ಬಲದಿಂದ ನಿರ್ಧಾರವಾಯಿತು ಎಂದು ಭಾವಿಸುತ್ತೀರಿ.",
+"Take it as proof that outcomes are not yours to influence.":"ಫಲಿತಾಂಶಗಳ ಮೇಲೆ ನಿಮಗೆ ಯಾವ ಹಿಡಿತವೂ ಇಲ್ಲ ಎಂಬುದಕ್ಕೆ ಇದನ್ನು ಸಾಕ್ಷಿಯಾಗಿ ಪರಿಗಣಿಸುತ್ತೀರಿ.",
+/* Part A: Vaani */
+"A person you know keeps holding forth on politics, the economy and cinema, with opinions you don't agree with. You:":"ನಿಮಗೆ ಪರಿಚಯವಿರುವ ವ್ಯಕ್ತಿಯೊಬ್ಬರು ರಾಜಕೀಯ, ಆರ್ಥಿಕತೆ ಮತ್ತು ಸಿನಿಮಾ ಬಗ್ಗೆ ಸತತವಾಗಿ ಮಾತನಾಡುತ್ತಾ, ನೀವು ಒಪ್ಪದ ಅಭಿಪ್ರಾಯಗಳನ್ನು ಹೇಳುತ್ತಿರುತ್ತಾರೆ. ನೀವು:",
+"Feel it may hurt them, so you just say “oh, ha” and nod.":"ಅವರಿಗೆ ನೋವಾಗಬಹುದು ಎಂದು “ಓಹ್, ಹೌದಾ” ಎನ್ನುತ್ತಾ ತಲೆಯಾಡಿಸುತ್ತೀರಿ.",
+"Pretend you're not interested in the topics, and stay quiet.":"ಆ ವಿಷಯಗಳಲ್ಲಿ ಆಸಕ್ತಿ ಇಲ್ಲದಂತೆ ನಟಿಸಿ ಸುಮ್ಮನಿರುತ್ತೀರಿ.",
+"Diplomatically convey that you don't agree with their opinions.":"ಅವರ ಅಭಿಪ್ರಾಯಗಳನ್ನು ನೀವು ಒಪ್ಪುವುದಿಲ್ಲ ಎಂದು ಜಾಣ್ಮೆಯಿಂದ ತಿಳಿಸುತ್ತೀರಿ.",
+"Tell them to their face that their opinions are wrong.":"ಅವರ ಅಭಿಪ್ರಾಯಗಳು ತಪ್ಪು ಎಂದು ಮುಖದ ಮೇಲೆಯೇ ಹೇಳುತ್ತೀರಿ.",
+"A relative repeats claims at a family gathering that you believe are plainly wrong. You:":"ಕುಟುಂಬದ ಸಮಾರಂಭದಲ್ಲಿ ಸಂಬಂಧಿಕರೊಬ್ಬರು, ನಿಮ್ಮ ಪ್ರಕಾರ ಸ್ಪಷ್ಟವಾಗಿ ತಪ್ಪಾದ ಮಾತುಗಳನ್ನು ಪುನರಾವರ್ತಿಸುತ್ತಾರೆ. ನೀವು:",
+"Set out calmly where you see it differently.":"ನೀವು ಎಲ್ಲಿ ಭಿನ್ನವಾಗಿ ಯೋಚಿಸುತ್ತೀರಿ ಎಂಬುದನ್ನು ಶಾಂತವಾಗಿ ವಿವರಿಸುತ್ತೀರಿ.",
+"Tell them flatly, in front of everyone, that they are mistaken.":"ಎಲ್ಲರ ಎದುರಲ್ಲೇ ಅವರು ತಪ್ಪು ಎಂದು ನೇರವಾಗಿ ಹೇಳಿಬಿಡುತ್ತೀರಿ.",
+"Let it go and change the subject.":"ಅದನ್ನು ಬಿಟ್ಟು ವಿಷಯ ಬದಲಿಸುತ್ತೀರಿ.",
+"Agree outwardly to keep the peace.":"ಶಾಂತಿ ಕಾಪಾಡಲು ಮೇಲ್ನೋಟಕ್ಕೆ ಒಪ್ಪಿಕೊಳ್ಳುತ್ತೀರಿ.",
+"You are asked for your honest view in a group that clearly thinks otherwise. You:":"ಬೇರೆ ರೀತಿ ಯೋಚಿಸುತ್ತಿರುವ ಗುಂಪಿನಲ್ಲಿ ನಿಮ್ಮ ಪ್ರಾಮಾಣಿಕ ಅಭಿಪ್ರಾಯ ಕೇಳುತ್ತಾರೆ. ನೀವು:",
+"Give it plainly, with your reasons.":"ಕಾರಣಗಳೊಂದಿಗೆ ನೇರವಾಗಿ ಹೇಳುತ್ತೀರಿ.",
+"Give it, but wrap it very carefully.":"ಹೇಳುತ್ತೀರಿ, ಆದರೆ ಬಹಳ ಎಚ್ಚರಿಕೆಯಿಂದ ಸುತ್ತಿ ಬಳಸಿ.",
+"Give a vague, neutral answer instead.":"ಬದಲಿಗೆ ಅಸ್ಪಷ್ಟ, ತಟಸ್ಥ ಉತ್ತರ ನೀಡುತ್ತೀರಿ.",
+"Agree with the room; your real view would not go down well.":"ಗುಂಪಿನ ಜೊತೆ ಒಪ್ಪಿಕೊಳ್ಳುತ್ತೀರಿ; ನಿಮ್ಮ ನಿಜವಾದ ಅಭಿಪ್ರಾಯ ಅವರಿಗೆ ಹಿಡಿಸುವುದಿಲ್ಲ.",
+"You hold an opinion you know the people around you would disagree with. When it becomes relevant, you:":"ಸುತ್ತಲಿನವರು ಒಪ್ಪುವುದಿಲ್ಲ ಎಂದು ತಿಳಿದಿರುವ ಅಭಿಪ್ರಾಯವೊಂದು ನಿಮಗಿದೆ. ಅದು ಪ್ರಸ್ತುತವಾದಾಗ, ನೀವು:",
+"Say it clearly and calmly.":"ಸ್ಪಷ್ಟವಾಗಿ ಮತ್ತು ಶಾಂತವಾಗಿ ಹೇಳುತ್ತೀರಿ.",
+"Say it, but soften it until it barely registers.":"ಹೇಳುತ್ತೀರಿ, ಆದರೆ ಅದು ಗಮನಕ್ಕೇ ಬಾರದಷ್ಟು ಮೃದುಗೊಳಿಸಿ.",
+"Keep it to yourself; it isn't worth the reaction.":"ನಿಮ್ಮಲ್ಲೇ ಇಟ್ಟುಕೊಳ್ಳುತ್ತೀರಿ; ಅದರಿಂದ ಬರುವ ಪ್ರತಿಕ್ರಿಯೆ ಎದುರಿಸುವಷ್ಟು ಮುಖ್ಯವಲ್ಲ.",
+"Hide it; if they knew, they would think less of you.":"ಮುಚ್ಚಿಡುತ್ತೀರಿ; ಅವರಿಗೆ ತಿಳಿದರೆ ನಿಮ್ಮನ್ನು ಕೀಳಾಗಿ ಕಾಣುತ್ತಾರೆ.",
+/* Part A: Aachaar */
+"A colleague in your office asks you to help with their task. You:":"ಕಚೇರಿಯ ಸಹೋದ್ಯೋಗಿಯೊಬ್ಬರು ತಮ್ಮ ಕೆಲಸದಲ್ಲಿ ಸಹಾಯ ಮಾಡಲು ಕೇಳುತ್ತಾರೆ. ನೀವು:",
+"Accept it, because you can't bring yourself to reject their request.":"ಅವರ ಕೋರಿಕೆಯನ್ನು ತಿರಸ್ಕರಿಸಲು ಮನಸ್ಸು ಬಾರದೆ ಒಪ್ಪಿಕೊಳ್ಳುತ್ತೀರಿ.",
+"Agree, on the condition that they help you in future.":"ಮುಂದೆ ಅವರೂ ನಿಮಗೆ ಸಹಾಯ ಮಾಡಬೇಕೆಂಬ ಷರತ್ತಿನ ಮೇಲೆ ಒಪ್ಪುತ್ತೀರಿ.",
+"Refuse, giving some lame excuse.":"ಯಾವುದೋ ನೆಪ ಹೇಳಿ ನಿರಾಕರಿಸುತ್ತೀರಿ.",
+"Explain honestly why you can't help this time.":"ಈ ಬಾರಿ ಏಕೆ ಸಹಾಯ ಮಾಡಲಾಗದು ಎಂದು ಪ್ರಾಮಾಣಿಕವಾಗಿ ವಿವರಿಸುತ್ತೀರಿ.",
+"A neighbour asks for help that will take most of your Sunday. You had plans. You:":"ನಿಮ್ಮ ಭಾನುವಾರದ ಹೆಚ್ಚಿನ ಸಮಯ ತೆಗೆದುಕೊಳ್ಳುವ ಸಹಾಯವನ್ನು ನೆರೆಯವರು ಕೇಳುತ್ತಾರೆ. ನಿಮಗೆ ಬೇರೆ ಯೋಜನೆಗಳಿದ್ದವು. ನೀವು:",
+"Tell them honestly you're not free, and offer another time.":"ನಿಮಗೆ ಸಮಯವಿಲ್ಲ ಎಂದು ಪ್ರಾಮಾಣಿಕವಾಗಿ ಹೇಳಿ, ಬೇರೆ ಸಮಯ ಸೂಚಿಸುತ್ತೀರಿ.",
+"Tell them it's not your problem.":"ಅದು ನಿಮ್ಮ ಸಮಸ್ಯೆಯಲ್ಲ ಎಂದು ಹೇಳುತ್ತೀರಿ.",
+"Say you'll try, then find a reason not to turn up.":"ಪ್ರಯತ್ನಿಸುತ್ತೇನೆ ಎಂದು ಹೇಳಿ, ನಂತರ ಹೋಗದಿರಲು ಕಾರಣ ಹುಡುಕುತ್ತೀರಿ.",
+"Cancel your plans rather than let them down.":"ಅವರನ್ನು ನಿರಾಶೆಗೊಳಿಸುವ ಬದಲು ನಿಮ್ಮ ಯೋಜನೆಗಳನ್ನೇ ರದ್ದುಗೊಳಿಸುತ್ತೀರಿ.",
+"Your parents tell you they are attending a relative's function the day after tomorrow, and that you have no choice but to come along. You:":"ನಾಳಿದ್ದು ಸಂಬಂಧಿಕರ ಸಮಾರಂಭಕ್ಕೆ ಹೋಗುತ್ತಿದ್ದೇವೆ, ನೀನೂ ಬರಲೇಬೇಕು ಎಂದು ನಿಮ್ಮ ಪೋಷಕರು ಹೇಳುತ್ತಾರೆ. ನೀವು:",
+"Go along with it without checking your own plans.":"ನಿಮ್ಮ ಯೋಜನೆಗಳನ್ನು ಪರಿಶೀಲಿಸದೆ ಒಪ್ಪಿಕೊಳ್ಳುತ್ತೀರಿ.",
+"Reply curtly that you have very important work and can't go.":"ತುಂಬಾ ಮುಖ್ಯವಾದ ಕೆಲಸವಿದೆ, ಬರಲಾಗದು ಎಂದು ಒರಟಾಗಿ ಉತ್ತರಿಸುತ್ತೀರಿ.",
+"Say casually you'll try your best, and join if possible.":"ಸಾಧ್ಯವಾದರೆ ಬರುತ್ತೇನೆ, ಪ್ರಯತ್ನಿಸುತ್ತೇನೆ ಎಂದು ಹಗುರವಾಗಿ ಹೇಳುತ್ತೀರಿ.",
+"Say yes, then give some reason later and escape.":"ಆಗಲಿ ಎಂದು ಹೇಳಿ, ನಂತರ ಯಾವುದೋ ಕಾರಣ ಹೇಳಿ ತಪ್ಪಿಸಿಕೊಳ್ಳುತ್ತೀರಿ.",
+"Check your own plans, and tell them honestly whether you can come.":"ನಿಮ್ಮ ಯೋಜನೆಗಳನ್ನು ಪರಿಶೀಲಿಸಿ, ಬರಲು ಸಾಧ್ಯವೇ ಎಂದು ಪ್ರಾಮಾಣಿಕವಾಗಿ ತಿಳಿಸುತ್ತೀರಿ.",
+"Your manager announces you'll be staying late for a client event, without asking whether you're free. You:":"ನಿಮಗೆ ಸಮಯವಿದೆಯೇ ಎಂದು ಕೇಳದೆ, ಗ್ರಾಹಕರ ಕಾರ್ಯಕ್ರಮಕ್ಕಾಗಿ ನೀವು ತಡವಾಗಿ ಉಳಿಯಬೇಕು ಎಂದು ನಿಮ್ಮ ಮ್ಯಾನೇಜರ್ ಘೋಷಿಸುತ್ತಾರೆ. ನೀವು:",
+"Say plainly whether you can, and what you'd need to make it work.":"ನಿಮಗೆ ಸಾಧ್ಯವೇ, ಅದಕ್ಕೆ ಏನು ಬೇಕು ಎಂದು ನೇರವಾಗಿ ತಿಳಿಸುತ್ತೀರಿ.",
+"Refuse curtly in front of the team.":"ತಂಡದ ಎದುರೇ ಒರಟಾಗಿ ನಿರಾಕರಿಸುತ್ತೀರಿ.",
+"Agree, then quietly slip away early.":"ಒಪ್ಪಿಕೊಂಡು, ನಂತರ ಸದ್ದಿಲ್ಲದೆ ಬೇಗ ಜಾರಿಕೊಳ್ಳುತ್ತೀರಿ.",
+"Cancel your own commitments without a word.":"ಒಂದು ಮಾತೂ ಆಡದೆ ನಿಮ್ಮ ಸ್ವಂತ ಬದ್ಧತೆಗಳನ್ನು ರದ್ದುಗೊಳಿಸುತ್ತೀರಿ.",
+/* Part A: Darshan */
+"You buy something trending: a shirt, a hat, a watch. A friend says it's nice, but it doesn't suit you. You:":"ನೀವು ಟ್ರೆಂಡ್‌ನಲ್ಲಿರುವ ವಸ್ತುವೊಂದನ್ನು ಖರೀದಿಸುತ್ತೀರಿ: ಶರ್ಟ್, ಟೋಪಿ ಅಥವಾ ವಾಚ್. ಚೆನ್ನಾಗಿದೆ, ಆದರೆ ನಿಮಗೆ ಹೊಂದುವುದಿಲ್ಲ ಎಂದು ಸ್ನೇಹಿತರೊಬ್ಬರು ಹೇಳುತ್ತಾರೆ. ನೀವು:",
+"Reply sarcastically that they just can't stand seeing you comfortable.":"ನಾನು ಆರಾಮವಾಗಿರುವುದನ್ನು ನೋಡಿ ನಿನಗೆ ಸಹಿಸಲಾಗುತ್ತಿಲ್ಲ ಎಂದು ವ್ಯಂಗ್ಯವಾಗಿ ಉತ್ತರಿಸುತ್ತೀರಿ.",
+"Check with others whether it suits you.":"ಅದು ನಿಮಗೆ ಹೊಂದುತ್ತದೆಯೇ ಎಂದು ಇತರರನ್ನು ಕೇಳುತ್ತೀರಿ.",
+"Don't take it too seriously; you chose it for yourself.":"ಹೆಚ್ಚು ಗಂಭೀರವಾಗಿ ತೆಗೆದುಕೊಳ್ಳುವುದಿಲ್ಲ; ನೀವು ನಿಮಗಾಗಿ ಆರಿಸಿಕೊಂಡಿದ್ದೀರಿ.",
+"Go back to the shop and exchange it for another colour or design.":"ಅಂಗಡಿಗೆ ಮರಳಿ ಹೋಗಿ ಬೇರೆ ಬಣ್ಣ ಅಥವಾ ವಿನ್ಯಾಸಕ್ಕೆ ಬದಲಾಯಿಸುತ್ತೀರಿ.",
+"A colleague remarks that your outfit is too casual for an important meeting. You:":"ಮುಖ್ಯವಾದ ಸಭೆಗೆ ನಿಮ್ಮ ಉಡುಪು ತುಂಬಾ ಸಾಧಾರಣವಾಗಿದೆ ಎಂದು ಸಹೋದ್ಯೋಗಿಯೊಬ್ಬರು ಹೇಳುತ್ತಾರೆ. ನೀವು:",
+"Consider whether they have a point, and decide for next time yourself.":"ಅವರ ಮಾತಿನಲ್ಲಿ ಹುರುಳಿದೆಯೇ ಎಂದು ಯೋಚಿಸಿ, ಮುಂದಿನ ಬಾರಿಗೆ ನೀವೇ ನಿರ್ಧರಿಸುತ್ತೀರಿ.",
+"Tell them your clothes are none of their business.":"ನನ್ನ ಉಡುಪು ನಿಮಗೆ ಸಂಬಂಧಿಸಿದ್ದಲ್ಲ ಎಂದು ಹೇಳುತ್ತೀರಿ.",
+"Feel self-conscious through the rest of the meeting.":"ಸಭೆಯ ಉಳಿದ ಸಮಯವಿಡೀ ಸಂಕೋಚಪಡುತ್ತೀರಿ.",
+"Rush to borrow or buy something else before the meeting.":"ಸಭೆಗೆ ಮುನ್ನವೇ ಬೇರೆ ಉಡುಪನ್ನು ಎರವಲು ಪಡೆಯಲು ಅಥವಾ ಖರೀದಿಸಲು ಓಡುತ್ತೀರಿ.",
+"At the salon for a trim, the owner looks at your hair and says it looks bad, and that you must come more often or your face will look ugly. You:":"ಟ್ರಿಮ್ ಮಾಡಿಸಲು ಸಲೂನ್‌ಗೆ ಹೋದಾಗ, ಮಾಲೀಕರು ನಿಮ್ಮ ಕೂದಲು ನೋಡಿ ಚೆನ್ನಾಗಿಲ್ಲ, ಆಗಾಗ ಬರದಿದ್ದರೆ ನಿಮ್ಮ ಮುಖ ಕುರೂಪವಾಗಿ ಕಾಣುತ್ತದೆ ಎನ್ನುತ್ತಾರೆ. ನೀವು:",
+"Recognise it as a sales pitch to grow their business.":"ಇದು ಅವರ ವ್ಯಾಪಾರ ಹೆಚ್ಚಿಸುವ ತಂತ್ರ ಎಂದು ಅರಿತುಕೊಳ್ಳುತ್ತೀರಿ.",
+"Get worried about your looks, and take their advice seriously.":"ನಿಮ್ಮ ರೂಪದ ಬಗ್ಗೆ ಚಿಂತೆಗೊಳಗಾಗಿ, ಅವರ ಸಲಹೆಯನ್ನು ಗಂಭೀರವಾಗಿ ತೆಗೆದುಕೊಳ್ಳುತ್ತೀರಿ.",
+"Gently tell them that it's not so.":"ಹಾಗೇನಿಲ್ಲ ಎಂದು ಮೃದುವಾಗಿ ಹೇಳುತ್ತೀರಿ.",
+"Tell them directly they shouldn't insult customers to grow their business.":"ವ್ಯಾಪಾರ ಹೆಚ್ಚಿಸಲು ಗ್ರಾಹಕರನ್ನು ಅವಮಾನಿಸಬಾರದು ಎಂದು ನೇರವಾಗಿ ಹೇಳುತ್ತೀರಿ.",
+"A stylist tells you your look is outdated, and that you'd be taken more seriously after a complete makeover. You:":"ನಿಮ್ಮ ಶೈಲಿ ಹಳೆಯದಾಗಿದೆ, ಸಂಪೂರ್ಣ ಮೇಕ್‌ಓವರ್ ನಂತರ ಜನ ನಿಮ್ಮನ್ನು ಹೆಚ್ಚು ಗಂಭೀರವಾಗಿ ಪರಿಗಣಿಸುತ್ತಾರೆ ಎಂದು ಸ್ಟೈಲಿಸ್ಟ್ ಒಬ್ಬರು ಹೇಳುತ್ತಾರೆ. ನೀವು:",
+"Weigh it as one opinion, and change only what you agree with.":"ಅದನ್ನು ಒಂದು ಅಭಿಪ್ರಾಯವಾಗಿ ತೂಗಿ, ನೀವು ಒಪ್ಪುವುದನ್ನು ಮಾತ್ರ ಬದಲಿಸುತ್ತೀರಿ.",
+"Tell them sharply they have no idea what they're talking about.":"ನೀವು ಏನು ಮಾತನಾಡುತ್ತಿದ್ದೀರಿ ಎಂಬ ಅರಿವೇ ನಿಮಗಿಲ್ಲ ಎಂದು ಖಾರವಾಗಿ ಹೇಳುತ್ತೀರಿ.",
+"Start doubting how people at work see you.":"ಕೆಲಸದ ಸ್ಥಳದಲ್ಲಿ ಜನ ನಿಮ್ಮನ್ನು ಹೇಗೆ ನೋಡುತ್ತಾರೆ ಎಂದು ಅನುಮಾನಿಸಲು ಶುರು ಮಾಡುತ್ತೀರಿ.",
+"Book the full makeover on the spot.":"ಅಲ್ಲೇ ಸಂಪೂರ್ಣ ಮೇಕ್‌ಓವರ್ ಬುಕ್ ಮಾಡುತ್ತೀರಿ.",
+/* Part A: Prabhav */
+"At a brand showroom, the salesperson brings you a shirt, praises its quality and design, says it suits you well, and keeps pressing you to buy. You:":"ಬ್ರ್ಯಾಂಡ್ ಶೋರೂಮ್‌ನಲ್ಲಿ ಮಾರಾಟಗಾರರು ಒಂದು ಶರ್ಟ್ ತಂದು, ಅದರ ಗುಣಮಟ್ಟ ಮತ್ತು ವಿನ್ಯಾಸವನ್ನು ಹೊಗಳಿ, ನಿಮಗೆ ಚೆನ್ನಾಗಿ ಒಪ್ಪುತ್ತದೆ ಎಂದು ಹೇಳಿ, ಖರೀದಿಸಲು ಒತ್ತಾಯಿಸುತ್ತಲೇ ಇರುತ್ತಾರೆ. ನೀವು:",
+"See it as the usual tactic, and ask to see a different shirt.":"ಇದು ಸಾಮಾನ್ಯ ತಂತ್ರ ಎಂದು ತಿಳಿದು, ಬೇರೆ ಶರ್ಟ್ ತೋರಿಸಲು ಕೇಳುತ್ತೀರಿ.",
+"Tell them you know exactly what you want, and feel irritated.":"ನನಗೆ ಏನು ಬೇಕು ಎಂದು ಚೆನ್ನಾಗಿ ಗೊತ್ತು ಎಂದು ಹೇಳಿ, ಕಿರಿಕಿರಿಗೊಳ್ಳುತ್ತೀರಿ.",
+"Trust that they know quality and design, and buy that shirt.":"ಅವರಿಗೆ ಗುಣಮಟ್ಟ ಮತ್ತು ವಿನ್ಯಾಸ ಗೊತ್ತು ಎಂದು ನಂಬಿ, ಆ ಶರ್ಟ್ ಖರೀದಿಸುತ್ತೀರಿ.",
+"Appreciate their communication skills with a smile, but don't buy it.":"ನಗುತ್ತಾ ಅವರ ಮಾತಿನ ಕೌಶಲ್ಯವನ್ನು ಮೆಚ್ಚುತ್ತೀರಿ, ಆದರೆ ಖರೀದಿಸುವುದಿಲ್ಲ.",
+"A friend who is very confident about money urges you into an investment you hadn't planned. You:":"ಹಣಕಾಸಿನ ಬಗ್ಗೆ ಬಹಳ ಆತ್ಮವಿಶ್ವಾಸ ಇರುವ ಸ್ನೇಹಿತರೊಬ್ಬರು, ನೀವು ಯೋಜಿಸದ ಹೂಡಿಕೆಗೆ ಒತ್ತಾಯಿಸುತ್ತಾರೆ. ನೀವು:",
+"Say you'll look into it yourself before deciding.":"ನಿರ್ಧರಿಸುವ ಮೊದಲು ನೀವೇ ಪರಿಶೀಲಿಸುತ್ತೀರಿ ಎಂದು ಹೇಳುತ್ತೀರಿ.",
+"Tell them to stop pushing their schemes on you.":"ನಿಮ್ಮ ಮೇಲೆ ಅವರ ಯೋಜನೆಗಳನ್ನು ಹೇರುವುದನ್ನು ನಿಲ್ಲಿಸಿ ಎಂದು ಹೇಳುತ್ತೀರಿ.",
+"Put in a small amount so you don't seem doubtful.":"ಸಂಶಯ ಪಡುತ್ತಿರುವಂತೆ ಕಾಣಬಾರದೆಂದು ಸ್ವಲ್ಪ ಹಣ ಹೂಡುತ್ತೀರಿ.",
+"Invest on their say-so.":"ಅವರ ಮಾತಿನ ಮೇಲೆಯೇ ಹೂಡಿಕೆ ಮಾಡುತ್ತೀರಿ.",
+"You make a suggestion in a meeting and it is passed over. Later someone else makes the same point, and it is welcomed. You:":"ಸಭೆಯಲ್ಲಿ ನೀವು ನೀಡಿದ ಸಲಹೆಯನ್ನು ಕಡೆಗಣಿಸಲಾಗುತ್ತದೆ. ನಂತರ ಬೇರೊಬ್ಬರು ಅದೇ ಅಂಶ ಹೇಳಿದಾಗ ಅದನ್ನು ಸ್ವಾಗತಿಸಲಾಗುತ್ತದೆ. ನೀವು:",
+"Point out calmly that it builds on what you raised, and add to it.":"ಇದು ನೀವು ಹೇಳಿದ್ದರ ಮುಂದುವರಿಕೆ ಎಂದು ಶಾಂತವಾಗಿ ತಿಳಿಸಿ, ಅದಕ್ಕೆ ಇನ್ನಷ್ಟು ಸೇರಿಸುತ್ತೀರಿ.",
+"Call it out sharply as your idea.":"ಅದು ನಿಮ್ಮ ಆಲೋಚನೆ ಎಂದು ಖಾರವಾಗಿ ಹೇಳುತ್ತೀರಿ.",
+"Let it go; at least it's being done.":"ಬಿಟ್ಟುಬಿಡುತ್ತೀರಿ; ಕನಿಷ್ಠ ಕೆಲಸ ಆಗುತ್ತಿದೆಯಲ್ಲ.",
+"Conclude that your ideas don't carry weight here.":"ಇಲ್ಲಿ ನಿಮ್ಮ ಆಲೋಚನೆಗಳಿಗೆ ಬೆಲೆ ಇಲ್ಲ ಎಂದು ತೀರ್ಮಾನಿಸುತ್ತೀರಿ.",
+"Your team must choose between your plan and a colleague's. Theirs is pushed louder; you believe yours is better. You:":"ನಿಮ್ಮ ತಂಡ ನಿಮ್ಮ ಯೋಜನೆ ಮತ್ತು ಸಹೋದ್ಯೋಗಿಯ ಯೋಜನೆಯ ನಡುವೆ ಆಯ್ಕೆ ಮಾಡಬೇಕಿದೆ. ಅವರದನ್ನು ಜೋರಾಗಿ ಪ್ರತಿಪಾದಿಸಲಾಗುತ್ತಿದೆ; ನಿಮ್ಮದು ಉತ್ತಮ ಎಂದು ನೀವು ನಂಬುತ್ತೀರಿ. ನೀವು:",
+"Set out clearly why yours works, then let the team decide.":"ನಿಮ್ಮ ಯೋಜನೆ ಏಕೆ ಫಲ ನೀಡುತ್ತದೆ ಎಂದು ಸ್ಪಷ್ಟವಾಗಿ ವಿವರಿಸಿ, ನಂತರ ತಂಡಕ್ಕೆ ನಿರ್ಧರಿಸಲು ಬಿಡುತ್ತೀರಿ.",
+"Dismiss their plan as obviously weaker.":"ಅವರ ಯೋಜನೆ ಸ್ಪಷ್ಟವಾಗಿ ದುರ್ಬಲ ಎಂದು ತಳ್ಳಿಹಾಕುತ್ತೀರಿ.",
+"Mention yours briefly, then go along with theirs.":"ನಿಮ್ಮದನ್ನು ಸಂಕ್ಷಿಪ್ತವಾಗಿ ಹೇಳಿ, ನಂತರ ಅವರದನ್ನೇ ಒಪ್ಪಿಕೊಳ್ಳುತ್ತೀರಿ.",
+"Withdraw yours before it is even discussed.":"ಚರ್ಚೆಗೆ ಬರುವ ಮುನ್ನವೇ ನಿಮ್ಮ ಯೋಜನೆಯನ್ನು ಹಿಂತೆಗೆದುಕೊಳ್ಳುತ್ತೀರಿ.",
+/* Part B */
+"If others knew my real thoughts, I feel they would be disgusted.":"ನನ್ನ ನಿಜವಾದ ಆಲೋಚನೆಗಳು ಇತರರಿಗೆ ತಿಳಿದರೆ, ಅವರು ಅಸಹ್ಯಪಡುತ್ತಾರೆ ಎನಿಸುತ್ತದೆ.",
+"When I am emotionally upset, I feel hopeless.":"ನಾನು ಭಾವನಾತ್ಮಕವಾಗಿ ನೊಂದಾಗ, ನನ್ನನ್ನು ಹತಾಶೆ ಆವರಿಸುತ್ತದೆ.",
+"I get really worked up when someone comments critically on me.":"ಯಾರಾದರೂ ನನ್ನ ಬಗ್ಗೆ ಟೀಕಿಸಿದಾಗ ನಾನು ತುಂಬಾ ಉದ್ವೇಗಕ್ಕೊಳಗಾಗುತ್ತೇನೆ.",
+"I feel miserable saying “no” or “not possible” to someone.":"ಯಾರಿಗಾದರೂ “ಇಲ್ಲ” ಅಥವಾ “ಸಾಧ್ಯವಿಲ್ಲ” ಎಂದು ಹೇಳುವಾಗ ನನಗೆ ತುಂಬಾ ಸಂಕಟವಾಗುತ್ತದೆ.",
+"I feel disgusted when I meet people I find eccentric, odd or foolish.":"ವಿಚಿತ್ರವಾದ, ವಿಲಕ್ಷಣ ಅಥವಾ ಮೂರ್ಖರೆನಿಸುವ ಜನರನ್ನು ಭೇಟಿಯಾದಾಗ ನನಗೆ ಅಸಹ್ಯವಾಗುತ್ತದೆ.",
+"If someone hurts me, I immediately hurt them back.":"ಯಾರಾದರೂ ನನ್ನನ್ನು ನೋಯಿಸಿದರೆ, ನಾನು ತಕ್ಷಣವೇ ಅವರಿಗೂ ನೋವುಂಟುಮಾಡುತ್ತೇನೆ.",
+"I worry that people judge me by how I look.":"ಜನ ನನ್ನ ರೂಪ ನೋಡಿ ನನ್ನನ್ನು ಅಳೆಯುತ್ತಾರೆ ಎಂದು ನಾನು ಚಿಂತಿಸುತ್ತೇನೆ.",
+"I hold eye contact comfortably when speaking with someone.":"ಯಾರೊಂದಿಗಾದರೂ ಮಾತನಾಡುವಾಗ ನಾನು ಆರಾಮವಾಗಿ ಕಣ್ಣಿನ ಸಂಪರ್ಕ ಕಾಯ್ದುಕೊಳ್ಳುತ್ತೇನೆ.",
+"I shop based on my own needs, not because someone recommended something.":"ಯಾರೋ ಶಿಫಾರಸು ಮಾಡಿದರು ಎಂಬ ಕಾರಣಕ್ಕಲ್ಲ, ನನ್ನ ಅಗತ್ಯಕ್ಕೆ ತಕ್ಕಂತೆ ನಾನು ಖರೀದಿಸುತ್ತೇನೆ.",
+"I tend to change my opinion to match the most confident person in the room.":"ಗುಂಪಿನಲ್ಲಿ ಅತ್ಯಂತ ಆತ್ಮವಿಶ್ವಾಸದಿಂದ ಮಾತನಾಡುವವರಿಗೆ ತಕ್ಕಂತೆ ನಾನು ನನ್ನ ಅಭಿಪ್ರಾಯ ಬದಲಿಸುತ್ತೇನೆ.",
+"Strongly disagree":"ಖಂಡಿತ ಒಪ್ಪುವುದಿಲ್ಲ","Disagree":"ಒಪ್ಪುವುದಿಲ್ಲ","Neutral":"ತಟಸ್ಥ","Agree":"ಒಪ್ಪುತ್ತೇನೆ","Strongly agree":"ಸಂಪೂರ್ಣ ಒಪ್ಪುತ್ತೇನೆ",
+/* bands */
+"Heavily Influenced":"ಹೆಚ್ಚು ಪ್ರಭಾವಿತ",
+"Other people's voices lead":"ಇತರರ ಧ್ವನಿಯೇ ಮುನ್ನಡೆಸುತ್ತದೆ",
+"Your answers suggest you tend to accept what others say with little questioning, and that your self-confidence may be low at the moment. Holding your own view when someone else holds a different one is hard right now.":"ಇತರರು ಹೇಳಿದ್ದನ್ನು ನೀವು ಹೆಚ್ಚು ಪ್ರಶ್ನಿಸದೆ ಒಪ್ಪಿಕೊಳ್ಳುತ್ತೀರಿ ಮತ್ತು ಸದ್ಯಕ್ಕೆ ನಿಮ್ಮ ಆತ್ಮವಿಶ್ವಾಸ ಕಡಿಮೆಯಿರಬಹುದು ಎಂದು ನಿಮ್ಮ ಉತ್ತರಗಳು ಸೂಚಿಸುತ್ತವೆ. ಬೇರೊಬ್ಬರು ಭಿನ್ನ ಅಭಿಪ್ರಾಯ ಹೊಂದಿದ್ದಾಗ ನಿಮ್ಮ ನಿಲುವನ್ನು ಕಾಯ್ದುಕೊಳ್ಳುವುದು ಈಗ ಕಷ್ಟವಾಗುತ್ತಿದೆ.",
+"Your biggest positive is that you respect other people's opinions, which is why people find you easy to talk to. The cost is that your own needs and choices can get lost.":"ಇತರರ ಅಭಿಪ್ರಾಯಗಳನ್ನು ಗೌರವಿಸುವುದು ನಿಮ್ಮ ದೊಡ್ಡ ಸಕಾರಾತ್ಮಕ ಗುಣ; ಹಾಗಾಗಿಯೇ ಜನರಿಗೆ ನಿಮ್ಮೊಂದಿಗೆ ಮಾತನಾಡುವುದು ಸುಲಭ. ಆದರೆ ಇದರಿಂದ ನಿಮ್ಮ ಸ್ವಂತ ಅಗತ್ಯಗಳು ಮತ್ತು ಆಯ್ಕೆಗಳು ಕಳೆದುಹೋಗಬಹುದು.",
+"This is a pattern, not a verdict. Start by backing your own judgement in small, low-stakes things, and build from there.":"ಇದು ಒಂದು ಮಾದರಿ, ತೀರ್ಪಲ್ಲ. ಸಣ್ಣ, ಹೆಚ್ಚು ಅಪಾಯವಿಲ್ಲದ ವಿಷಯಗಳಲ್ಲಿ ನಿಮ್ಮ ವಿವೇಚನೆಯನ್ನು ನಂಬುವುದರಿಂದ ಆರಂಭಿಸಿ, ಅಲ್ಲಿಂದ ಬೆಳೆಸಿಕೊಳ್ಳಿ.",
+"Respectful of others' opinions":"ಇತರರ ಅಭಿಪ್ರಾಯಗಳಿಗೆ ಗೌರವ",
+"Approachable, and easy to talk to":"ಸುಲಭವಾಗಿ ಬೆರೆಯುವ, ಮಾತನಾಡಲು ಸುಲಭವಾದ ವ್ಯಕ್ತಿ",
+"Open to feedback and new ideas":"ಪ್ರತಿಕ್ರಿಯೆ ಮತ್ತು ಹೊಸ ಆಲೋಚನೆಗಳಿಗೆ ತೆರೆದ ಮನಸ್ಸು",
+"Accepting views without checking them":"ಪರಿಶೀಲಿಸದೆ ಅಭಿಪ್ರಾಯಗಳನ್ನು ಒಪ್ಪಿಕೊಳ್ಳುವುದು",
+"Saying yes when you mean no":"“ಇಲ್ಲ” ಎನ್ನಬೇಕಾದಾಗ “ಹೌದು” ಎನ್ನುವುದು",
+"Letting praise or criticism set how you see yourself":"ಹೊಗಳಿಕೆ ಅಥವಾ ಟೀಕೆಯೇ ನಿಮ್ಮ ಬಗ್ಗೆ ನಿಮ್ಮ ಅಭಿಪ್ರಾಯವನ್ನು ನಿರ್ಧರಿಸಲು ಬಿಡುವುದು",
+"Moderately Influenceable":"ಮಧ್ಯಮ ಪ್ರಭಾವಿತ",
+"Firm, but yields to strong personalities":"ದೃಢ, ಆದರೆ ಪ್ರಬಲ ವ್ಯಕ್ತಿತ್ವಗಳಿಗೆ ಮಣಿಯುವಿರಿ",
+"Others may find it fairly easy to persuade you, though you do have a real strength: you can stand firm, and you don't yield to everything.":"ಇತರರಿಗೆ ನಿಮ್ಮನ್ನು ಒಪ್ಪಿಸುವುದು ಸ್ವಲ್ಪ ಸುಲಭವಾಗಬಹುದು; ಆದರೂ ನಿಮ್ಮಲ್ಲಿ ನಿಜವಾದ ಶಕ್ತಿಯಿದೆ: ನೀವು ದೃಢವಾಗಿ ನಿಲ್ಲಬಲ್ಲಿರಿ ಮತ್ತು ಎಲ್ಲದಕ್ಕೂ ಮಣಿಯುವುದಿಲ್ಲ.",
+"Where you tend to give way is with a strong, commanding personality. That is a specific, workable gap rather than a general lack of confidence.":"ಪ್ರಬಲ, ಅಧಿಕಾರಯುತ ವ್ಯಕ್ತಿತ್ವದ ಎದುರು ನೀವು ಮಣಿಯುತ್ತೀರಿ. ಇದು ಸಾಮಾನ್ಯ ಆತ್ಮವಿಶ್ವಾಸದ ಕೊರತೆಯಲ್ಲ, ಸರಿಪಡಿಸಬಹುದಾದ ನಿರ್ದಿಷ್ಟ ಕೊರತೆ.",
+"Able to stand firm on things that matter":"ಮುಖ್ಯ ವಿಷಯಗಳಲ್ಲಿ ದೃಢವಾಗಿ ನಿಲ್ಲುವ ಸಾಮರ್ಥ್ಯ",
+"Considerate and cooperative":"ಪರರ ಬಗ್ಗೆ ಕಾಳಜಿ ಮತ್ತು ಸಹಕಾರ ಮನೋಭಾವ",
+"Giving in to forceful or very confident people":"ಒತ್ತಾಯಿಸುವ ಅಥವಾ ಅತಿಯಾದ ಆತ್ಮವಿಶ್ವಾಸದ ಜನರಿಗೆ ಮಣಿಯುವುದು",
+"Agreeing in the moment, regretting it later":"ಆ ಕ್ಷಣಕ್ಕೆ ಒಪ್ಪಿ, ನಂತರ ವಿಷಾದಿಸುವುದು",
+"Self-Assured":"ಆತ್ಮವಿಶ್ವಾಸಿ",
+"Confident and balanced":"ಆತ್ಮವಿಶ್ವಾಸ ಮತ್ತು ಸಮತೋಲನ",
+"Your answers suggest good self-confidence along with emotional maturity. You are usually a step ahead of people who try to influence you for their own advantage.":"ನಿಮ್ಮ ಉತ್ತರಗಳು ಉತ್ತಮ ಆತ್ಮವಿಶ್ವಾಸ ಮತ್ತು ಭಾವನಾತ್ಮಕ ಪ್ರಬುದ್ಧತೆಯನ್ನು ಸೂಚಿಸುತ್ತವೆ. ತಮ್ಮ ಲಾಭಕ್ಕಾಗಿ ನಿಮ್ಮನ್ನು ಪ್ರಭಾವಿಸಲು ಯತ್ನಿಸುವವರಿಗಿಂತ ನೀವು ಸಾಮಾನ್ಯವಾಗಿ ಒಂದು ಹೆಜ್ಜೆ ಮುಂದಿರುತ್ತೀರಿ.",
+"You take responsibility for your own direction, you can keep pressure at arm's length, and you can still be a good friend to those who like and trust you.":"ನಿಮ್ಮ ದಾರಿಯ ಜವಾಬ್ದಾರಿಯನ್ನು ನೀವೇ ಹೊರುತ್ತೀರಿ, ಒತ್ತಡವನ್ನು ದೂರವಿಡಬಲ್ಲಿರಿ, ಮತ್ತು ನಿಮ್ಮನ್ನು ಇಷ್ಟಪಡುವ ಹಾಗೂ ನಂಬುವವರಿಗೆ ಉತ್ತಮ ಸ್ನೇಹಿತರಾಗಿರಬಲ್ಲಿರಿ.",
+"Healthy self-confidence":"ಆರೋಗ್ಯಕರ ಆತ್ಮವಿಶ್ವಾಸ",
+"Weighs advice without being swayed":"ಪ್ರಭಾವಕ್ಕೆ ಒಳಗಾಗದೆ ಸಲಹೆಯನ್ನು ತೂಗುವ ಗುಣ",
+"Cordial and trustworthy with others":"ಇತರರೊಂದಿಗೆ ಸೌಹಾರ್ದ ಮತ್ತು ವಿಶ್ವಾಸಾರ್ಹ",
+"Staying genuinely open: confidence works best alongside listening":"ನಿಜವಾಗಿಯೂ ತೆರೆದ ಮನಸ್ಸಿನಿಂದಿರಿ: ಆಲಿಸುವಿಕೆಯ ಜೊತೆಗೇ ಆತ್ಮವಿಶ್ವಾಸ ಉತ್ತಮವಾಗಿ ಕೆಲಸ ಮಾಡುತ್ತದೆ",
+"Under stress, firmness can slide towards rigidity":"ಒತ್ತಡದಲ್ಲಿ, ದೃಢತೆ ಹಠಮಾರಿತನದತ್ತ ಜಾರಬಹುದು",
+"Rigid & Self-Protective":"ಹಠಮಾರಿ ಮತ್ತು ಸ್ವ-ರಕ್ಷಣಾತ್ಮಕ",
+"Ego may be standing in for confidence":"ಆತ್ಮವಿಶ್ವಾಸದ ಜಾಗದಲ್ಲಿ ಅಹಂ ಇರಬಹುದು",
+"Your answers lean towards fixed positions and pushing back hard, rather than balanced individuality. You may come across as very rational, or as ruthless, and even people close to you may keep some distance.":"ನಿಮ್ಮ ಉತ್ತರಗಳು ಸಮತೋಲಿತ ವ್ಯಕ್ತಿತ್ವಕ್ಕಿಂತ, ಸ್ಥಿರ ನಿಲುವುಗಳು ಮತ್ತು ಕಠಿಣ ಪ್ರತಿರೋಧದತ್ತ ವಾಲುತ್ತವೆ. ನೀವು ಅತಿ ತಾರ್ಕಿಕ ಅಥವಾ ನಿರ್ದಯಿ ಎಂದು ಕಾಣಬಹುದು; ನಿಮ್ಮ ಆಪ್ತರೂ ಸ್ವಲ್ಪ ಅಂತರ ಕಾಯ್ದುಕೊಳ್ಳಬಹುದು.",
+"You may feel you are never influenced by others. The pattern is usually subtler: when you do give way, it tends to be to negative views rather than constructive ones. Mistaking ego for self-confidence is the real weakness here.":"ಇತರರು ನಿಮ್ಮನ್ನು ಎಂದಿಗೂ ಪ್ರಭಾವಿಸುವುದಿಲ್ಲ ಎಂದು ನಿಮಗೆ ಅನಿಸಬಹುದು. ಆದರೆ ನಿಜ ಸ್ಥಿತಿ ಸೂಕ್ಷ್ಮವಾಗಿರುತ್ತದೆ: ನೀವು ಮಣಿದಾಗ, ರಚನಾತ್ಮಕ ಅಭಿಪ್ರಾಯಗಳಿಗಿಂತ ನಕಾರಾತ್ಮಕ ಅಭಿಪ್ರಾಯಗಳಿಗೇ ಮಣಿಯುವ ಸಾಧ್ಯತೆ ಹೆಚ್ಚು. ಅಹಂ ಅನ್ನು ಆತ್ಮವಿಶ್ವಾಸ ಎಂದು ತಪ್ಪಾಗಿ ತಿಳಿಯುವುದೇ ಇಲ್ಲಿನ ನಿಜವಾದ ದೌರ್ಬಲ್ಯ.",
+"This is a habit of responding rather than a fixed trait, and habits can be rebuilt.":"ಇದು ಸ್ಥಿರ ಗುಣವಲ್ಲ, ಪ್ರತಿಕ್ರಿಯಿಸುವ ಒಂದು ಅಭ್ಯಾಸ; ಅಭ್ಯಾಸಗಳನ್ನು ಮರುರೂಪಿಸಬಹುದು.",
+"Clear opinions, and the courage to state them":"ಸ್ಪಷ್ಟ ಅಭಿಪ್ರಾಯಗಳು ಮತ್ತು ಅವನ್ನು ಹೇಳುವ ಧೈರ್ಯ",
+"Not easily pressured":"ಸುಲಭವಾಗಿ ಒತ್ತಡಕ್ಕೆ ಮಣಿಯುವುದಿಲ್ಲ",
+"Reacting instantly to hurt or criticism":"ನೋವು ಅಥವಾ ಟೀಕೆಗೆ ತಕ್ಷಣ ಪ್ರತಿಕ್ರಿಯಿಸುವುದು",
+"Dismissing people who seem different":"ಭಿನ್ನವಾಗಿ ಕಾಣುವ ಜನರನ್ನು ತಳ್ಳಿಹಾಕುವುದು",
+"Confrontation as the default setting":"ಎಲ್ಲದಕ್ಕೂ ಸಂಘರ್ಷವೇ ಮೊದಲ ಪ್ರತಿಕ್ರಿಯೆ",
+/* levels and indicator values */
+"Strong":"ಬಲಿಷ್ಠ","Steady":"ಸ್ಥಿರ","Developing":"ಬೆಳೆಯುತ್ತಿದೆ","Priority":"ಆದ್ಯತೆ",
+"Differentiated":"ವಿಭಿನ್ನ","Moderately varied":"ಮಧ್ಯಮ ವ್ಯತ್ಯಾಸ","Flat":"ಸಮತಟ್ಟು",
+"Very decisive":"ಅತಿ ನಿರ್ಣಾಯಕ","Decisive":"ನಿರ್ಣಾಯಕ","Hesitant":"ಹಿಂಜರಿಕೆ","Balanced":"ಸಮತೋಲಿತ",
+"Good":"ಉತ್ತಮ","Moderate":"ಮಧ್ಯಮ","Low":"ಕಡಿಮೆ",
+/* question sources */
+"New (locus of control)":"ಹೊಸ (ನಿಯಂತ್ರಣ ಭಾವ)","New (from original B13)":"ಹೊಸ (ಮೂಲ B13 ಆಧಾರಿತ)","New (impact)":"ಹೊಸ (ಪರಿಣಾಮ)","New":"ಹೊಸ"
+};
+/* ================= STATE ================= */
+var SKEY="aviral_v1_state",AKEY="aviral_v1_attempt",SCHEMA_VERSION=7;
+var app=document.getElementById("app");
+function ls(k,v){try{return v===undefined?localStorage.getItem(k):localStorage.setItem(k,v)}catch(e){return null}}
+function ss(k,v){try{return v===undefined?sessionStorage.getItem(k):sessionStorage.setItem(k,v)}catch(e){return null}}
+var LKEY="pia_lang",LANG=ls(LKEY)==="kn"?"kn":"en";
+try{var qlang=new URLSearchParams(location.search).get("lang");if(qlang==="kn"||qlang==="en")LANG=qlang}catch(e){}
+function T(s){return LANG==="kn"&&Object.prototype.hasOwnProperty.call(KN,s)?KN[s]:s}
+function L(en,kn){return LANG==="kn"?kn:en}
+function applyLang(){document.documentElement.lang=LANG;document.title=L("AVIRAL\u2122 Assessment","AVIRAL\u2122 \u0CAE\u0CCC\u0CB2\u0CCD\u0CAF\u0CAE\u0CBE\u0CAA\u0CA8")}
+function rng(seed){var s=seed>>>0||1;return function(){s^=s<<13;s>>>=0;s^=s>>17;s^=s<<5;s>>>=0;return s/4294967296}}
+function shuffle(a,r){for(var i=a.length-1;i>0;i--){var j=Math.floor(r()*(i+1)),t=a[i];a[i]=a[j];a[j]=t}return a}
+function idx(n){var a=[];for(var i=0;i<n;i++)a.push(i);return a}
+function build(seed,variant){
+ var r=rng(seed);
+ var A=shuffle(idx(NA),r).map(function(i){
+  var q=PA[i].v[variant%PA[i].v.length];
+  return{src:i,d:PA[i].d,w:PA[i].w,q:q.q,o:shuffle(q.o.slice(),r)};
+ });
+ var B=shuffle(idx(NB),r).map(function(i){if(i>=NBS){var c=CHECKS[i-NBS];return{src:i,chk:c.chk,want:c.want,t:c.t}}var x=PB[i];return{src:i,d:x.d,w:x.w,k:x.k,t:x.t,rig:!!x.rig}});
+ return{A:A,B:B};
+}
+function fresh(){
+ var attempt=parseInt(ls(AKEY)||"0",10)||0;
+ return{v:SCHEMA_VERSION,seed:(Date.now()^Math.floor(Math.random()*1e9))>>>0,variant:attempt%2,page:0,name:"",a:{},b:{}};
+}
+var st=(function(){
+ var raw=ss(SKEY);
+ if(raw){try{var s=JSON.parse(raw);if(s&&s.seed&&s.v===SCHEMA_VERSION&&s.a&&s.b)return s}catch(e){}}
+ return fresh();
+})();
+var IT=build(st.seed,st.variant);
+/* page plan: intro, Part A pages, Part B pages, results */
+var PAGES=[{k:"intro"}],i;
+for(i=0;i<NA;i+=A_PER_PAGE)PAGES.push({k:"A",s:i,e:Math.min(i+A_PER_PAGE,NA)});
+for(i=0;i<NB;i+=B_PER_PAGE)PAGES.push({k:"B",s:i,e:Math.min(i+B_PER_PAGE,NB)});
+PAGES.push({k:"result"});
+var QPAGES=PAGES.length-2;
+function complete(){
+ for(var x=0;x<NA;x++)if(st.a[x]===undefined)return false;
+ for(x=0;x<NB;x++)if(st.b[x]===undefined)return false;
+ return true;
+}
+if(st.page<0||st.page>=PAGES.length)st.page=0;
+if(PAGES[st.page].k==="result"&&!complete()){var keep=st.name;st=fresh();st.name=keep;IT=build(st.seed,st.variant)}
+function save(){ss(SKEY,JSON.stringify(st))}
+function esc(s){return String(s).replace(/[&<>"']/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]})}
+function answered(){return Object.keys(st.a).length+Object.keys(st.b).length}
+function dim(id){for(var x=0;x<DIMS.length;x++)if(DIMS[x].id===id)return DIMS[x]}
+function level(p){return LEVELS.filter(function(l){return p>=l.min})[0]}
+/* ================= SCORING ================= */
+function bPoints(it,v){return it.k>0?v*2.5:(4-v)*2.5}
+function compute(){
+ var D={};DIMS.forEach(function(d){D[d.id]={sa:0,ma:0,sb:0,mb:0}});
+ var blunt=0,bluntAvail=0,aPts=[],bVals=[],rigPts=[];
+ IT.A.forEach(function(it,x){
+  var o=it.o[st.a[x]];
+  var mx=Math.max.apply(null,it.o.map(function(y){return y[1]}));
+  D[it.d].sa+=o[1]*it.w;D[it.d].ma+=mx*it.w;aPts.push(o[1]);
+  if(it.o.some(function(y){return y[2]===1}))bluntAvail++;
+  if(o[2]===1)blunt++;
+ });
+ var attFail=0,sdHits=0;
+ IT.B.forEach(function(it,x){
+  var v=st.b[x];
+  if(it.chk==="att"){if(v!==it.want)attFail++;return}
+  if(it.chk==="sd"){if(v>=3)sdHits++;return}
+  var p=bPoints(it,v);
+  D[it.d].sb+=p*it.w;D[it.d].mb+=10*it.w;bVals.push(v);
+  if(it.rig)rigPts.push(p);
+ });
+ var rows=DIMS.map(function(d){
+  var x=D[d.id],g=(x.sa+x.sb)/(x.ma+x.mb),pct=Math.round((1-g)*100);
+  return{d:d,pct:pct,a:Math.round((1-x.sa/x.ma)*100),b:Math.round((1-x.sb/x.mb)*100),lv:level(pct),
+   contrib:(1-g)*d.w,partA:x.ma/(x.ma+x.mb)};
+ });
+ var index=Math.round(rows.reduce(function(s,r){return s+r.contrib},0));
+ var rigAvg=rigPts.reduce(function(s,p){return s+p},0)/rigPts.length,
+ bluntRate=bluntAvail?blunt/bluntAvail:0,
+ rigidity=Math.round((rigAvg*10+bluntRate*100)/2);
+ var band=BANDS.filter(function(b){return index>=b.min}).sort(function(p,q){return q.min-p.min})[0],overridden=null;
+ if(rigidity>=50&&index>=45){overridden=band;band=RIGID_BAND}
+ var flags=[];
+ if(overridden)flags.push({w:1,h:L("Score alone would mislead here.","ಇಲ್ಲಿ ಕೇವಲ ಅಂಕ ತಪ್ಪು ಚಿತ್ರಣ ನೀಡಬಹುದು."),b:L(
+  "Your Index of "+index+" would normally read as “"+overridden.name+"”, but your Rigidity check is at "+rigidity+"%. A strong-looking Index that comes from pushing back hard, rather than from genuine steadiness, is a different pattern, so the result reflects that instead.",
+  "ನಿಮ್ಮ "+index+" ಸೂಚ್ಯಂಕವನ್ನು ಸಾಮಾನ್ಯವಾಗಿ “"+T(overridden.name)+"” ಎಂದು ಓದಲಾಗುತ್ತಿತ್ತು, ಆದರೆ ನಿಮ್ಮ ಹಠಮಾರಿತನ ಪರಿಶೀಲನೆ "+rigidity+"% ಇದೆ. ನಿಜವಾದ ಸ್ಥಿರತೆಯಿಂದಲ್ಲ, ಕಠಿಣ ಪ್ರತಿರೋಧದಿಂದ ಬಂದ, ಉತ್ತಮವಾಗಿ ಕಾಣುವ ಸೂಚ್ಯಂಕ ಬೇರೆಯೇ ಮಾದರಿ; ಹಾಗಾಗಿ ಫಲಿತಾಂಶ ಅದನ್ನು ತೋರಿಸುತ್ತದೆ.")});
+ if(rigidity>=50&&index<45)flags.push({w:1,h:L("Yielding outwardly, hard inwardly.","ಹೊರಗೆ ಮಣಿಯುವುದು, ಒಳಗೆ ಕಠಿಣತೆ."),b:L(
+  "Your Index is low, and your Rigidity check is high ("+rigidity+"%). You may go along with people while judging them privately, which tends to leave you resentful and them unaware.",
+  "ನಿಮ್ಮ ಸೂಚ್ಯಂಕ ಕಡಿಮೆ, ಆದರೆ ಹಠಮಾರಿತನ ಪರಿಶೀಲನೆ ಹೆಚ್ಚು ("+rigidity+"%). ನೀವು ಜನರೊಂದಿಗೆ ಹೊಂದಿಕೊಂಡಂತೆ ತೋರಿದರೂ ಒಳಗೊಳಗೇ ಅವರನ್ನು ತೀರ್ಮಾನಿಸುತ್ತಿರಬಹುದು; ಇದರಿಂದ ನಿಮಗೆ ಅಸಮಾಧಾನ, ಅವರಿಗೆ ಅದರ ಅರಿವೇ ಇರುವುದಿಲ್ಲ.")});
+ var gap=rows.slice().sort(function(x,y){return Math.abs(y.a-y.b)-Math.abs(x.a-x.b)})[0],gapV=Math.abs(gap.a-gap.b),gn=T(gap.d.n);
+ if(gapV>=30)flags.push({w:0,h:L("Say versus do, in "+gn+".",gn+": ನುಡಿ ಮತ್ತು ನಡೆಯ ನಡುವೆ ಅಂತರ."),b:gap.a<gap.b?L(
+  "In situations (Part A) you score lower in "+gn+" ("+gap.a+"%) than your self-view suggests (Part B, "+gap.b+"%). You may act less steadily here than you believe.",
+  "ಸನ್ನಿವೇಶಗಳಲ್ಲಿ (ಭಾಗ A) "+gn+" ಆಯಾಮದಲ್ಲಿ ನಿಮ್ಮ ಅಂಕ ("+gap.a+"%) ನಿಮ್ಮ ಸ್ವ-ಚಿತ್ರಣಕ್ಕಿಂತ (ಭಾಗ B, "+gap.b+"%) ಕಡಿಮೆ. ನೀವು ನಂಬಿರುವುದಕ್ಕಿಂತ ಕಡಿಮೆ ಸ್ಥಿರತೆಯಿಂದ ಇಲ್ಲಿ ನಡೆದುಕೊಳ್ಳುತ್ತಿರಬಹುದು."):L(
+  "Your self-view in "+gn+" (Part B, "+gap.b+"%) is harsher than your actual choices (Part A, "+gap.a+"%). You may handle this better than you give yourself credit for.",
+  gn+" ಆಯಾಮದಲ್ಲಿ ನಿಮ್ಮ ಸ್ವ-ಚಿತ್ರಣ (ಭಾಗ B, "+gap.b+"%) ನಿಮ್ಮ ನಿಜವಾದ ಆಯ್ಕೆಗಳಿಗಿಂತ (ಭಾಗ A, "+gap.a+"%) ಕಠಿಣವಾಗಿದೆ. ನೀವು ಅಂದುಕೊಂಡಿರುವುದಕ್ಕಿಂತ ಇದನ್ನು ಉತ್ತಮವಾಗಿ ನಿಭಾಯಿಸುತ್ತಿರಬಹುದು.")});
+ var sameB=bVals.every(function(v){return v===bVals[0]}),sameA=aPts.every(function(p){return p===aPts[0]}),
+ neutral=bVals.filter(function(v){return v===2}).length;
+ if(sameB)flags.push({w:1,h:L("Every statement got the same answer.","ಎಲ್ಲ ಹೇಳಿಕೆಗಳಿಗೂ ಒಂದೇ ಉತ್ತರ."),b:L(
+  "All "+NBS+" statements in Part B were marked “"+LIKERT[bVals[0]]+"”, which usually means they weren't read closely. Treat this result as unreliable, and retake it when you have a few quiet minutes.",
+  "ಭಾಗ B ಯ ಎಲ್ಲ "+NBS+" ಹೇಳಿಕೆಗಳಿಗೂ “"+T(LIKERT[bVals[0]])+"” ಎಂದು ಗುರುತಿಸಲಾಗಿದೆ; ಸಾಮಾನ್ಯವಾಗಿ ಇದರರ್ಥ ಅವುಗಳನ್ನು ಸರಿಯಾಗಿ ಓದಿಲ್ಲ. ಈ ಫಲಿತಾಂಶವನ್ನು ವಿಶ್ವಾಸಾರ್ಹವೆಂದು ಪರಿಗಣಿಸಬೇಡಿ; ಕೆಲವು ಶಾಂತ ನಿಮಿಷಗಳಿದ್ದಾಗ ಮತ್ತೆ ತೆಗೆದುಕೊಳ್ಳಿ.")});
+ else if(neutral>=Math.ceil(NBS/2))flags.push({w:0,h:L("Many “Neutral” answers ("+neutral+" of "+NBS+").","ಹಲವು “ತಟಸ್ಥ” ಉತ್ತರಗಳು ("+NBS+" ರಲ್ಲಿ "+neutral+")."),b:L(
+  "That pulls every dimension towards the middle and can hide your real pattern. Retaking with a clearer lean on each statement will sharpen the result.",
+  "ಇದರಿಂದ ಎಲ್ಲ ಆಯಾಮಗಳೂ ಮಧ್ಯದತ್ತ ಸರಿಯುತ್ತವೆ ಮತ್ತು ನಿಮ್ಮ ನಿಜವಾದ ಮಾದರಿ ಮರೆಯಾಗಬಹುದು. ಪ್ರತಿ ಹೇಳಿಕೆಗೂ ಸ್ಪಷ್ಟ ಒಲವಿನೊಂದಿಗೆ ಮತ್ತೆ ಉತ್ತರಿಸಿದರೆ ಫಲಿತಾಂಶ ಹೆಚ್ಚು ನಿಖರವಾಗುತ್ತದೆ.")});
+ if(sameA)flags.push({w:1,h:L("Every scenario carried identical weight.","ಎಲ್ಲ ಸನ್ನಿವೇಶಗಳಿಗೂ ಒಂದೇ ಅಂಕ."),b:L(
+  "All Part A choices scored the same, which is unlikely from careful reading. Treat the scenario half of this result with caution.",
+  "ಭಾಗ A ಯ ಎಲ್ಲ ಆಯ್ಕೆಗಳಿಗೂ ಒಂದೇ ಅಂಕ ಬಂದಿದೆ; ಎಚ್ಚರಿಕೆಯಿಂದ ಓದಿದಾಗ ಹೀಗಾಗುವುದು ಅಪರೂಪ. ಫಲಿತಾಂಶದ ಸನ್ನಿವೇಶ ಭಾಗವನ್ನು ಎಚ್ಚರಿಕೆಯಿಂದ ಪರಿಗಣಿಸಿ.")});
+ var rushedNow=!!(st.t0&&st.t1&&st.t1-st.t0<RUSH_MS);
+ if(attFail)flags.unshift({w:1,h:L("Attention checks missed.","ಗಮನ ಪರಿಶೀಲನೆ ತಪ್ಪಿದೆ."),b:L(
+  "One or both check statements weren't answered as instructed, so some answers may have been given without reading. Treat this result as unreliable.",
+  "ಒಂದು ಅಥವಾ ಎರಡೂ ಪರಿಶೀಲನಾ ಹೇಳಿಕೆಗಳಿಗೆ ಸೂಚಿಸಿದಂತೆ ಉತ್ತರಿಸಿಲ್ಲ; ಕೆಲವು ಉತ್ತರಗಳನ್ನು ಓದದೆ ನೀಡಿರಬಹುದು. ಈ ಫಲಿತಾಂಶವನ್ನು ವಿಶ್ವಾಸಾರ್ಹವೆಂದು ಪರಿಗಣಿಸಬೇಡಿ.")});
+ if(rushedNow)flags.unshift({w:1,h:L("Completed very quickly.","ಬಹಳ ವೇಗವಾಗಿ ಪೂರ್ಣಗೊಳಿಸಲಾಗಿದೆ."),b:L(
+  "You finished all "+TOTAL_Q+" questions in under 2 minutes. Reading each situation properly usually takes longer, so treat this result with caution.",
+  "ನೀವು ಎಲ್ಲ "+TOTAL_Q+" ಪ್ರಶ್ನೆಗಳನ್ನು 2 ನಿಮಿಷಗಳಿಗಿಂತ ಕಡಿಮೆ ಸಮಯದಲ್ಲಿ ಮುಗಿಸಿದ್ದೀರಿ. ಪ್ರತಿ ಸನ್ನಿವೇಶವನ್ನು ಸರಿಯಾಗಿ ಓದಲು ಸಾಮಾನ್ಯವಾಗಿ ಹೆಚ್ಚು ಸಮಯ ಬೇಕು; ಹಾಗಾಗಿ ಈ ಫಲಿತಾಂಶವನ್ನು ಎಚ್ಚರಿಕೆಯಿಂದ ಪರಿಗಣಿಸಿ.")});
+ if(sdHits>=2)flags.push({w:0,h:L("Answers may lean towards the ideal.","ಉತ್ತರಗಳು ಆದರ್ಶದತ್ತ ವಾಲಿರಬಹುದು."),b:L(
+  "You agreed with "+sdHits+" of 3 statements that almost nobody can truly claim, such as never having been annoyed with anyone. That often means answering as you'd like to be rather than as you are, so your scores may look steadier than they really are.",
+  "ಯಾರ ಮೇಲೂ ಎಂದಿಗೂ ಕಿರಿಕಿರಿಗೊಂಡಿಲ್ಲ ಎಂಬಂತಹ, ಬಹುತೇಕ ಯಾರೂ ನಿಜವಾಗಿ ಹೇಳಲಾಗದ 3 ಹೇಳಿಕೆಗಳಲ್ಲಿ "+sdHits+" ಹೇಳಿಕೆಗಳನ್ನು ನೀವು ಒಪ್ಪಿದ್ದೀರಿ. ಇದರರ್ಥ ಸಾಮಾನ್ಯವಾಗಿ ನೀವು ಇರುವಂತೆ ಅಲ್ಲ, ಇರಬಯಸುವಂತೆ ಉತ್ತರಿಸಿದ್ದೀರಿ; ಹಾಗಾಗಿ ನಿಮ್ಮ ಅಂಕಗಳು ವಾಸ್ತವಕ್ಕಿಂತ ಹೆಚ್ಚು ಸ್ಥಿರವಾಗಿ ಕಾಣಬಹುದು.")});
+ var ranked=rows.slice().sort(function(x,y){return x.pct-y.pct}),
+ spread=ranked[0].pct-ranked[ranked.length-1].pct,
+ extreme=Math.round(bVals.filter(function(v){return v===0||v===4}).length/NBS*100),
+ rushed=!!(st.t0&&st.t1&&st.t1-st.t0<RUSH_MS),
+ shape=spread>=40?"Differentiated":spread>=20?"Moderately varied":"Flat",
+ conf=(sameA||sameB||attFail||rushed)?"Low":(sdHits>=2||neutral>=Math.ceil(NBS/2)||shape==="Flat"&&extreme>=80)?"Moderate":"Good";
+ return{rows:rows,ranked:ranked,index:index,band:band,overridden:overridden,flags:flags,rigidity:rigidity,
+  gap:gap,gapV:gapV,spread:spread,shape:shape,extreme:extreme,neutral:neutral,conf:conf,attFail:attFail,sdHits:sdHits,rushed:rushed,
+  confWhy:attFail?"att":rushed?"rushed":(sameA||sameB)?"same":sdHits>=2?"sd":neutral>=Math.ceil(NBS/2)?"neutral":conf==="Good"?"good":"flat"};
+}
+/* ================= VIEWS ================= */
+function ansText(n){return L(n+" of "+TOTAL_Q+" answered",TOTAL_Q+" ರಲ್ಲಿ "+n+" ಉತ್ತರಿಸಲಾಗಿದೆ")}
+function langBar(){
+ return '<div class="lang noprint" role="group" aria-label="Language / ಭಾಷೆ">'+
+ '<button data-lang="en" lang="en" aria-pressed="'+(LANG==="en")+'">English</button>'+
+ '<button data-lang="kn" lang="kn" aria-pressed="'+(LANG==="kn")+'">ಕನ್ನಡ</button></div>';
+}
+function progress(){
+ var n=answered(),pct=Math.round(n/TOTAL_Q*100);
+ return '<div class="prog noprint"><div class="row"><span>'+L("Page "+st.page+" of "+QPAGES,"ಪುಟ "+st.page+" / "+QPAGES)+'</span><span id="pc">'+ansText(n)+'</span></div><div class="bar"><i id="pb" style="width:'+pct+'%"></i></div></div>';
+}
+function dimList(){return DIMS.map(function(d){return esc(T(d.n))+' <span class="dvn">'+d.dv+'</span> ('+esc(T(d.sub))+')'}).join(", ")}
+function intro(){
+ return '<div class="card"><div class="brand"><svg viewBox="0 0 48 48" width="50" height="50" aria-hidden="true"><polygon points="24,2 43,13 43,35 24,46 5,35 5,13" fill="var(--acc)" stroke="var(--gold)" stroke-width="2.5" stroke-linejoin="round"/><path d="M15 27 Q24 36 33 27 Z" fill="var(--gold)"/><path d="M24 25 C20 21 21 16 24 11 C27 16 28 21 24 25 Z" fill="#ffd87a"/></svg><div><h1>AVIRAL™</h1><p class="sub">'+L("Six Dimensions of Continuous Growth","ನಿರಂತರ ಬೆಳವಣಿಗೆಯ ಆರು ಆಯಾಮಗಳು")+'</p></div></div>'+
+ '<p class="small mute">'+'<span class="dvn">अविरल</span> · '+L("continuous, unbroken · Know · Grow · Lead","ಅವಿರಲ: ನಿರಂತರ, ಅಖಂಡ · ಅರಿಯಿರಿ · ಬೆಳೆಯಿರಿ · ಮುನ್ನಡೆಸಿ")+'</p>'+
+ '<p>'+L("AVIRAL looks at six dimensions of continuous growth: how clearly you think, how you speak up, how you master yourself, how you earn trust, how you come across and how purposefully you grow.",
+  "ನೀವು ಎಷ್ಟು ಸ್ಪಷ್ಟವಾಗಿ ಯೋಚಿಸುತ್ತೀರಿ, ಹೇಗೆ ಮಾತನಾಡುತ್ತೀರಿ, ನಿಮ್ಮನ್ನು ಹೇಗೆ ನಿಯಂತ್ರಿಸಿಕೊಳ್ಳುತ್ತೀರಿ, ಇತರರ ವಿಶ್ವಾಸವನ್ನು ಹೇಗೆ ಗಳಿಸುತ್ತೀರಿ, ಇತರರಿಗೆ ಹೇಗೆ ಕಾಣುತ್ತೀರಿ ಮತ್ತು ಎಷ್ಟು ಉದ್ದೇಶಪೂರ್ವಕವಾಗಿ ಬೆಳೆಯುತ್ತೀರಿ ಎಂಬ ನಿರಂತರ ಬೆಳವಣಿಗೆಯ ಆರು ಆಯಾಮಗಳನ್ನು AVIRAL ಪರಿಶೀಲಿಸುತ್ತದೆ.")+'</p>'+
+ '<p class="small mute">'+L("The six dimensions: ","ಆರು ಆಯಾಮಗಳು: ")+dimList()+'.</p>'+
+ '<ul><li><b>'+L("Part A — "+NA+" situations.","ಭಾಗ A — "+NA+" ಸನ್ನಿವೇಶಗಳು.")+'</b> '+L("Pick the reaction closest to what you would really do.","ನೀವು ನಿಜವಾಗಿ ಮಾಡುವುದಕ್ಕೆ ಹತ್ತಿರವಾದ ಪ್ರತಿಕ್ರಿಯೆಯನ್ನು ಆರಿಸಿ.")+'</li>'+
+ '<li><b>'+L("Part B — "+NB+" statements.","ಭಾಗ B — "+NB+" ಹೇಳಿಕೆಗಳು.")+'</b> '+L("Say how far you agree with each one.","ಪ್ರತಿಯೊಂದನ್ನು ನೀವು ಎಷ್ಟು ಒಪ್ಪುತ್ತೀರಿ ಎಂದು ತಿಳಿಸಿ.")+'</li>'+
+ '<li>'+L("About 9 to 10 minutes. Questions and answer order are shuffled, so no two people see quite the same test.","ಸುಮಾರು 9 ರಿಂದ 10 ನಿಮಿಷಗಳು. ಪ್ರಶ್ನೆಗಳು ಮತ್ತು ಉತ್ತರಗಳ ಕ್ರಮ ಬದಲಾಗುತ್ತಿರುತ್ತದೆ, ಹಾಗಾಗಿ ಯಾವ ಇಬ್ಬರಿಗೂ ಒಂದೇ ರೀತಿಯ ಪರೀಕ್ಷೆ ಸಿಗುವುದಿಲ್ಲ.")+'</li>'+
+ '<li>'+L("You can switch language at any time; your answers are kept.","ನೀವು ಯಾವಾಗ ಬೇಕಾದರೂ ಭಾಷೆ ಬದಲಿಸಬಹುದು; ನಿಮ್ಮ ಉತ್ತರಗಳು ಉಳಿಯುತ್ತವೆ.")+'</li></ul>'+
+ '<p>'+L("There are no right or wrong answers. Choose what suits your mentality, not what sounds best; your first instinct is usually the most honest.",
+  "ಇಲ್ಲಿ ಸರಿ ಅಥವಾ ತಪ್ಪು ಉತ್ತರಗಳಿಲ್ಲ. ಕೇಳಲು ಚೆನ್ನಾಗಿರುವುದನ್ನಲ್ಲ, ನಿಮ್ಮ ಮನಸ್ಥಿತಿಗೆ ಹೊಂದುವುದನ್ನು ಆರಿಸಿ; ಮೊದಲು ಹೊಳೆಯುವ ಉತ್ತರವೇ ಸಾಮಾನ್ಯವಾಗಿ ಅತ್ಯಂತ ಪ್ರಾಮಾಣಿಕ.")+'</p>'+
+ '<p class="small mute">'+L("A self-awareness tool, not a clinical or diagnostic test. Answers stay in your browser and are not sent anywhere.",
+  "ಇದು ಸ್ವ-ಅರಿವಿನ ಸಾಧನ, ಕ್ಲಿನಿಕಲ್ ಅಥವಾ ರೋಗನಿರ್ಣಯ ಪರೀಕ್ಷೆಯಲ್ಲ. ನಿಮ್ಮ ಉತ್ತರಗಳು ನಿಮ್ಮ ಬ್ರೌಸರ್‌ನಲ್ಲೇ ಉಳಿಯುತ್ತವೆ, ಎಲ್ಲಿಗೂ ಕಳುಹಿಸಲಾಗುವುದಿಲ್ಲ.")+'</p>'+
+ '<p class="tagline">'+'<span class="acr">'+L("<b>A</b>vabodha · <b>V</b>achana · <b>I</b>ndriyajaya · <b>R</b>anjana · <b>A</b>bha · <b>L</b>akshya","ಅವಬೋಧ · ವಚನ · ಇಂದ್ರಿಯಜಯ · ರಂಜನ · ಆಭಾ · ಲಕ್ಷ್ಯ")+'</span>'+'</p>'+
+ '<label class="small mute" for="nm" style="display:block;margin-top:14px">'+L("Your name (optional, shown on your results)","ನಿಮ್ಮ ಹೆಸರು (ಐಚ್ಛಿಕ, ಫಲಿತಾಂಶದಲ್ಲಿ ತೋರಿಸಲಾಗುತ್ತದೆ)")+'</label><input id="nm" type="text" maxlength="60" value="'+esc(st.name)+'">'+
+ '</div><div class="btns"><span></span><button class="pri" data-act="next">'+L("Start Part A","ಭಾಗ A ಆರಂಭಿಸಿ")+'</button></div>';
+}
+function qpage(p){
+ var h=progress(),x,j,isA=p.k==="A",first=p.s===0;
+ h+='<span class="part">'+(isA?L("Part A · Situations","ಭಾಗ A · ಸನ್ನಿವೇಶಗಳು"):L("Part B · Statements","ಭಾಗ B · ಹೇಳಿಕೆಗಳು"))+'</span>';
+ h+='<h2>'+(isA?L("What would you really do?","ನೀವು ನಿಜವಾಗಿ ಏನು ಮಾಡುತ್ತೀರಿ?"):L("How far do you agree?","ನೀವು ಎಷ್ಟು ಒಪ್ಪುತ್ತೀರಿ?"))+'</h2>';
+ if(first)h+='<p class="mute">'+(isA?L("Each situation has several reactions. Pick the one closest to yours, even if none fits perfectly.","ಪ್ರತಿ ಸನ್ನಿವೇಶಕ್ಕೂ ಹಲವು ಪ್ರತಿಕ್ರಿಯೆಗಳಿವೆ. ಯಾವುದೂ ಸಂಪೂರ್ಣವಾಗಿ ಹೊಂದದಿದ್ದರೂ, ನಿಮಗೆ ಅತ್ಯಂತ ಹತ್ತಿರವಾದುದನ್ನು ಆರಿಸಿ."):
+  L("Rate each statement as it applies to you most of the time. Use “Neutral” only when you genuinely can't lean either way.","ಪ್ರತಿ ಹೇಳಿಕೆ ಹೆಚ್ಚಿನ ಸಮಯ ನಿಮಗೆ ಎಷ್ಟು ಅನ್ವಯಿಸುತ್ತದೆ ಎಂದು ಗುರುತಿಸಿ. ಯಾವ ಕಡೆಗೂ ವಾಲಲು ಸಾಧ್ಯವಾಗದಿದ್ದಾಗ ಮಾತ್ರ “ತಟಸ್ಥ” ಆರಿಸಿ."))+'</p>';
+ for(x=p.s;x<p.e;x++){
+  if(isA){
+   var it=IT.A[x];
+   h+='<fieldset id="a'+x+'"><legend><span class="qn">A'+(x+1)+'.</span>'+esc(T(it.q))+'</legend>';
+   for(j=0;j<it.o.length;j++)
+    h+='<label class="opt"><input type="radio" name="a'+x+'" value="'+j+'"'+(st.a[x]===j?" checked":"")+'><span class="k">'+"abcde"[j]+'</span><span>'+esc(T(it.o[j][0]))+'</span></label>';
+   h+='</fieldset>';
+  }else{
+   var bt=IT.B[x];
+   h+='<fieldset id="b'+x+'"><legend><span class="qn">B'+(x+1)+'.</span>'+esc(T(bt.t))+'</legend><div class="lk">';
+   for(j=0;j<5;j++)
+    h+='<label class="opt"><input type="radio" name="b'+x+'" value="'+j+'"'+(st.b[x]===j?" checked":"")+'><span>'+esc(T(LIKERT[j]))+'</span></label>';
+   h+='</div></fieldset>';
+  }
+ }
+ var nextLabel=st.page===QPAGES?L("See my results","ನನ್ನ ಫಲಿತಾಂಶ ನೋಡಿ"):(PAGES[st.page+1].k==="B"&&isA?L("Continue to Part B","ಭಾಗ B ಗೆ ಮುಂದುವರಿಯಿರಿ"):L("Next","ಮುಂದೆ"));
+ return h+'<div class="msg" id="msg" role="alert"></div><div class="btns"><button data-act="back">'+L("Back","ಹಿಂದೆ")+'</button><button class="pri" data-act="next">'+nextLabel+'</button></div>';
+}
+function gauge(v){
+ var segs=[[45,"var(--b1)"],[25,"var(--b2)"],[30,"var(--b3)"]],h='<div class="gauge" role="img" aria-label="'+esc(L("Index "+v+" of 100","ಸೂಚ್ಯಂಕ 100 ರಲ್ಲಿ "+v))+'">';
+ segs.forEach(function(s){h+='<i style="width:'+s[0]+'%;background:'+s[1]+'"></i>'});
+ h+='<div class="mk" style="left:'+v+'%"></div></div><div class="ticks">';
+ [[0,"0"],[45,"45"],[70,"70"],[100,"100"]].forEach(function(t){h+='<span style="left:'+t[0]+'%;top:0">'+t[1]+'</span>'});
+ [[22,L("Emerging","ಉದಯೋನ್ಮುಖ")],[57,L("Established","ಸುಸ್ಥಾಪಿತ")],[85,L("Exemplary","ಆದರ್ಶಪ್ರಾಯ")]].forEach(function(t){h+='<span style="left:'+t[0]+'%;top:16px">'+t[1]+'</span>'});
+ return h+'</div>';
+}
+/* Radar: 6 AVIRAL axes, two series (Part A vs Part B) with a legend */
+function radar(rows){
+ var W=360,H=320,cx=W/2,cy=H/2+4,R=104,n=rows.length,g="",x,
+ sA=L("Situations","ಸನ್ನಿವೇಶಗಳು"),sB=L("Statements","ಹೇಳಿಕೆಗಳು");
+ function xy(i,r){var a=-Math.PI/2+i*2*Math.PI/n;return[cx+Math.cos(a)*r,cy+Math.sin(a)*r]}
+ [25,50,75,100].forEach(function(lv){var pts=[];for(x=0;x<n;x++)pts.push(xy(x,R*lv/100).join(","));
+  g+='<polygon points="'+pts.join(" ")+'" fill="none" stroke="var(--grid)" stroke-width="1"/>'});
+ for(x=0;x<n;x++){var e=xy(x,R);g+='<line x1="'+cx+'" y1="'+cy+'" x2="'+e[0]+'" y2="'+e[1]+'" stroke="var(--grid)" stroke-width="1"/>'}
+ [["a","var(--s1)",sA],["b","var(--s2)",sB]].forEach(function(s){
+  var pts=[];for(x=0;x<n;x++)pts.push(xy(x,R*Math.max(rows[x][s[0]],2)/100).join(","));
+  g+='<polygon points="'+pts.join(" ")+'" fill="'+s[1]+'" fill-opacity=".13" stroke="'+s[1]+'" stroke-width="2" stroke-linejoin="round"/>';
+  for(x=0;x<n;x++){var v=xy(x,R*Math.max(rows[x][s[0]],2)/100);
+   g+='<circle cx="'+v[0].toFixed(1)+'" cy="'+v[1].toFixed(1)+'" r="4" fill="'+s[1]+'" stroke="var(--card)" stroke-width="2"><title>'+esc(T(rows[x].d.n))+' — '+s[2]+': '+rows[x][s[0]]+'%</title></circle>'}
+ });
+ for(x=0;x<n;x++){
+  var l=xy(x,R+22),c=Math.cos(-Math.PI/2+x*2*Math.PI/n),anc=c>0.25?"start":c<-0.25?"end":"middle";
+  g+='<text x="'+l[0].toFixed(1)+'" y="'+(l[1]+4).toFixed(1)+'" text-anchor="'+anc+'" font-size="12.5" font-weight="600" fill="var(--ink)">'+esc(T(rows[x].d.n))+'</text>';
+ }
+ return '<div class="legend"><span><i class="sw" style="background:var(--s1)"></i>'+L("Part A — what you’d do","ಭಾಗ A — ನೀವು ಏನು ಮಾಡುತ್ತೀರಿ")+'</span><span><i class="sw" style="background:var(--s2)"></i>'+L("Part B — how you see yourself","ಭಾಗ B — ನಿಮ್ಮನ್ನು ನೀವು ಹೇಗೆ ನೋಡುತ್ತೀರಿ")+'</span></div>'+
+ '<svg viewBox="0 0 '+W+' '+H+'" style="width:100%;max-width:440px;height:auto;display:block;margin:0 auto" role="img" aria-label="'+esc(L("Strength by dimension. ","ಆಯಾಮವಾರು ಸಾಮರ್ಥ್ಯ. ")+
+ rows.map(function(r){return T(r.d.n)+": "+sA+" "+r.a+"%, "+sB+" "+r.b+"%"}).join("; "))+'">'+g+'</svg>';
+}
+function dimRow(r){
+ return '<div class="th"><div class="row"><span class="nm">'+esc(T(r.d.n))+' <span class="wt">· '+esc(T(r.d.sub))+' · '+L("weight","ತೂಕ")+' '+Math.round(r.d.w)+'%</span></span>'+
+ '<span class="rt" style="color:'+r.lv.c+'">'+esc(T(r.lv.n))+' · '+r.pct+'%</span></div>'+
+ '<div class="bar"><i style="width:'+r.pct+'%;background:'+r.d.c+'"></i></div>'+
+ '<div class="meaning">'+esc(T(r.pct<60?r.d.hi:r.d.lo))+' <span style="white-space:nowrap">('+L("Situations","ಸನ್ನಿವೇಶ")+' '+r.a+'% · '+L("Statements","ಹೇಳಿಕೆ")+' '+r.b+'%)</span> <span style="white-space:nowrap">'+L("Likely range","ಸಂಭಾವ್ಯ ವ್ಯಾಪ್ತಿ")+' '+rng2(r.pct,DIM_SEM)+'</span></div></div>';
+}
+function rng2(v,e){return Math.max(0,v-e)+'–'+Math.min(100,v+e)+'%'
+}
+function composition(rows,index){
+ var tot=rows.reduce(function(s,r){return s+r.contrib},0),h='<div style="display:flex;height:26px;border-radius:8px;overflow:hidden;gap:2px;margin:6px 0 12px">';
+ rows.forEach(function(r){var w=tot>0?r.contrib/tot*100:20;
+  h+='<i style="display:block;width:'+w.toFixed(2)+'%;background:'+r.d.c+'" title="'+esc(T(r.d.n))+': '+r.contrib.toFixed(1)+'"></i>'});
+ h+='</div><table class="t"><tr><th>'+L("Dimension","ಆಯಾಮ")+'</th><th class="n">'+L("Strength","ಸಾಮರ್ಥ್ಯ")+'</th><th class="n">'+L("Weight","ತೂಕ")+'</th><th class="n">'+L("Points","ಅಂಕ")+'</th></tr>';
+ rows.forEach(function(r){
+  h+='<tr><td><i class="sw" style="background:'+r.d.c+';margin-right:7px;vertical-align:-1px"></i>'+esc(T(r.d.n))+'</td><td class="n">'+r.pct+'%</td><td class="n">'+Math.round(r.d.w)+'%</td><td class="n"><b>'+r.contrib.toFixed(1)+'</b></td></tr>'});
+ return h+'<tr><td><b>'+L("Index","ಸೂಚ್ಯಂಕ")+'</b></td><td></td><td></td><td class="n"><b>'+index+'</b></td></tr></table>';
+}
+function report(r){
+ var best=r.ranked.slice().reverse(),grow=r.ranked.slice(0,2),strong=best.slice(0,2),h,
+ nm=function(d){return esc(T(d.n))+' <span class="dvn">'+d.dv+'</span>'};
+ h='<div class="card"><h2>'+L("Your AVIRAL\u2122 report","ನಿಮ್ಮ AVIRAL\u2122 ವರದಿ")+'</h2><p class="small mute">'+
+  L("All six dimensions, from where you scored highest to where you scored lowest.","ಆರೂ ಆಯಾಮಗಳು, ನೀವು ಅತಿ ಹೆಚ್ಚು ಅಂಕ ಗಳಿಸಿದಲ್ಲಿಂದ ಅತಿ ಕಡಿಮೆ ಅಂಕದವರೆಗೆ.")+'</p>';
+ best.forEach(function(x,i){
+  h+='<div class="rr"><span class="rk" style="background:'+x.d.c+'">'+(i+1)+'</span><div class="rb"><div class="row"><span class="nm">'+nm(x.d)+
+   ' <span class="wt">\u00B7 '+esc(T(x.d.sub))+'</span></span><span class="rt" style="color:'+x.lv.c+'">'+esc(T(x.lv.n))+' \u00B7 '+x.pct+'%</span></div>'+
+   '<div class="bar"><i style="width:'+x.pct+'%;background:'+x.d.c+'"></i></div>'+
+   '<div class="meaning">'+esc(T(x.pct<60?x.d.hi:x.d.lo))+' <span style="white-space:nowrap">('+L("Situations","ಸನ್ನಿವೇಶ")+' '+x.a+'% \u00B7 '+L("Statements","ಹೇಳಿಕೆ")+' '+x.b+'%)</span> <span style="white-space:nowrap">'+L("Likely range","ಸಂಭಾವ್ಯ ವ್ಯಾಪ್ತಿ")+' '+rng2(x.pct,DIM_SEM)+'</span></div></div></div>';
+ });
+ h+='<div class="sumgrid"><div class="sumbox"><h3>'+L("Where you scored higher","ನೀವು ಹೆಚ್ಚು ಅಂಕ ಗಳಿಸಿದ ಕ್ಷೇತ್ರಗಳು")+'</h3>'+
+  strong.map(function(x){return '<p><b style="color:'+x.d.c+'">'+nm(x.d)+'</b> \u00B7 '+x.pct+'%<br>'+(x.pct>=60?esc(T(x.d.lo)):L("Stronger than your other areas, though still in the developing range.","ನಿಮ್ಮ ಇತರ ಕ್ಷೇತ್ರಗಳಿಗಿಂತ ಬಲವಾಗಿದೆ, ಆದರೂ ಇನ್ನೂ ಬೆಳೆಯುತ್ತಿರುವ ವ್ಯಾಪ್ತಿಯಲ್ಲಿದೆ."))+'</p>'}).join("")+
+  '</div><div class="sumbox"><h3>'+L("Where you scored lower","ನೀವು ಕಡಿಮೆ ಅಂಕ ಗಳಿಸಿದ ಕ್ಷೇತ್ರಗಳು")+'</h3>'+
+  grow.map(function(x){return '<p><b style="color:'+x.d.c+'">'+nm(x.d)+'</b> \u00B7 '+x.pct+'%<br>'+(x.pct<60?esc(T(x.d.hi)):L("Still in the steady range, so this is refinement rather than repair.","ಇನ್ನೂ ಸ್ಥಿರ ವ್ಯಾಪ್ತಿಯಲ್ಲೇ ಇದೆ; ಹಾಗಾಗಿ ಇದು ಸರಿಪಡಿಸುವಿಕೆಯಲ್ಲ, ಇನ್ನಷ್ಟು ಸುಧಾರಣೆ."))+
+   '<br><span class="small mute">'+L("Try: ","ಪ್ರಯತ್ನಿಸಿ: ")+esc(T(x.d.tips[0]))+'</span></p>'}).join("")+'</div></div>';
+ var gaps=r.rows.filter(function(x){return Math.abs(x.a-x.b)>=20});
+ if(gaps.length){
+  h+='<h3 style="margin-top:18px">'+L("Where what you do and how you see yourself differ","ನೀವು ಮಾಡುವುದಕ್ಕೂ ನಿಮ್ಮನ್ನು ನೀವು ನೋಡುವುದಕ್ಕೂ ವ್ಯತ್ಯಾಸವಿರುವಲ್ಲಿ")+'</h3><ul>'+
+   gaps.map(function(x){return '<li><b>'+esc(T(x.d.n))+'</b>: '+L("situations","ಸನ್ನಿವೇಶಗಳು")+' '+x.a+'%, '+L("statements","ಹೇಳಿಕೆಗಳು")+' '+x.b+'%. '+
+    (x.a<x.b?L("In real situations you act less steadily than you see yourself.","ನಿಜ ಸನ್ನಿವೇಶಗಳಲ್ಲಿ ನೀವು ನಿಮ್ಮ ಸ್ವ-ಚಿತ್ರಣಕ್ಕಿಂತ ಕಡಿಮೆ ಸ್ಥಿರತೆಯಿಂದ ನಡೆದುಕೊಳ್ಳುತ್ತೀರಿ."):
+     L("You handle this better than you give yourself credit for.","ನೀವು ಅಂದುಕೊಂಡಿರುವುದಕ್ಕಿಂತ ಇದನ್ನು ಉತ್ತಮವಾಗಿ ನಿಭಾಯಿಸುತ್ತೀರಿ."))+'</li>'}).join("")+'</ul>';
+ }
+ h+='<h3 style="margin-top:18px">'+L("Where your Index comes from","ನಿಮ್ಮ ಸೂಚ್ಯಂಕ ಹೇಗೆ ರೂಪುಗೊಂಡಿದೆ")+'</h3><p class="small mute">'+L("Each dimension\u2019s equal share of your Index of "+r.index+".","ನಿಮ್ಮ "+r.index+" ಸೂಚ್ಯಂಕದಲ್ಲಿ ಪ್ರತಿ ಆಯಾಮದ ಸಮಾನ ಪಾಲು.")+'</p>'+composition(r.rows,r.index)+'</div>';
+ return h;
+}
+function list(a){return '<ul>'+a.map(function(x){return '<li>'+esc(T(x))+'</li>'}).join("")+'</ul>'}
+function srcLabel(s){return LANG==="kn"?(KN[s]||s.replace(/^Original /,"ಮೂಲ ")):s}
+function lead(s){var w=s.split(" ");return w.length>9?w.slice(0,9).join(" ")+"…":s}
+function scoring(){
+ var h='<details><summary>'+L("How scoring works","ಅಂಕ ನೀಡುವ ವಿಧಾನ")+'</summary><p class="small mute" style="margin-top:10px">'+L(
+  "Behind the scenes every answer scores 0\u201310 for growth need; the report shows the reverse, so higher means stronger. Part A points come from a structured rating of every option from four perspectives (clinical psychology, workplace psychology, executive coaching, and Indian family and cultural context), averaged; balanced reactions score near 0, while avoidant, yielding or combative ones score higher. These points are provisional until reviewed by a qualified expert panel. Part B: Strongly disagree to Strongly agree scores 0, 2.5, 5, 7.5, 10, reversed for positively worded statements. Every question counts equally, and each of the six dimensions carries an equal share of the Index, until response data justifies different weights. Two attention checks and three \u201Ctoo good to be true\u201D statements are not scored; they only judge how reliable the result is. The likely range shows how much a score could move given the test\u2019s short length. Blunt Part A choices and two Part B statements also feed a separate Rigidity check.",
+  "ಆಂತರಿಕವಾಗಿ ಪ್ರತಿ ಉತ್ತರಕ್ಕೂ ಬೆಳವಣಿಗೆಯ ಅಗತ್ಯದ ಆಧಾರದ ಮೇಲೆ 0\u201310 ಅಂಕ; ವರದಿಯಲ್ಲಿ ಇದನ್ನು ತಿರುಗಿಸಿ ತೋರಿಸಲಾಗುತ್ತದೆ, ಹಾಗಾಗಿ ಹೆಚ್ಚು ಅಂಕ ಎಂದರೆ ಹೆಚ್ಚು ಬಲ. ಭಾಗ A ಯ ಅಂಕಗಳನ್ನು ಪ್ರತಿ ಆಯ್ಕೆಯನ್ನು ನಾಲ್ಕು ದೃಷ್ಟಿಕೋನಗಳಿಂದ (ಕ್ಲಿನಿಕಲ್ ಮನೋವಿಜ್ಞಾನ, ಕಾರ್ಯಸ್ಥಳ ಮನೋವಿಜ್ಞಾನ, ಕಾರ್ಯನಿರ್ವಾಹಕ ತರಬೇತಿ, ಮತ್ತು ಭಾರತೀಯ ಕುಟುಂಬ ಹಾಗೂ ಸಾಂಸ್ಕೃತಿಕ ಸಂದರ್ಭ) ವ್ಯವಸ್ಥಿತವಾಗಿ ಮೌಲ್ಯಮಾಪನ ಮಾಡಿ, ಸರಾಸರಿ ತೆಗೆದು ನಿಗದಿಪಡಿಸಲಾಗಿದೆ; ಸಮತೋಲಿತ ಪ್ರತಿಕ್ರಿಯೆಗಳಿಗೆ 0 ಹತ್ತಿರ, ತಪ್ಪಿಸಿಕೊಳ್ಳುವ, ಮಣಿಯುವ ಅಥವಾ ಜಗಳದ ಪ್ರತಿಕ್ರಿಯೆಗಳಿಗೆ ಹೆಚ್ಚು ಅಂಕ. ಅರ್ಹ ತಜ್ಞರ ಸಮಿತಿ ಪರಿಶೀಲಿಸುವವರೆಗೆ ಈ ಅಂಕಗಳು ತಾತ್ಕಾಲಿಕ. ಭಾಗ B: \u201Cಖಂಡಿತ ಒಪ್ಪುವುದಿಲ್ಲ\u201D ದಿಂದ \u201Cಸಂಪೂರ್ಣ ಒಪ್ಪುತ್ತೇನೆ\u201D ವರೆಗೆ 0, 2.5, 5, 7.5, 10; ಸಕಾರಾತ್ಮಕ ಹೇಳಿಕೆಗಳಿಗೆ ಇದು ತಿರುವುಮುರುವು. ಪ್ರತಿಕ್ರಿಯೆ ದತ್ತಾಂಶ ಬೇರೆ ತೂಕಗಳನ್ನು ಸಮರ್ಥಿಸುವವರೆಗೆ, ಪ್ರತಿ ಪ್ರಶ್ನೆಗೂ ಸಮಾನ ಮಹತ್ವ, ಮತ್ತು ಆರೂ ಆಯಾಮಗಳಿಗೆ ಸೂಚ್ಯಂಕದಲ್ಲಿ ಸಮಾನ ಪಾಲು. ಎರಡು ಗಮನ ಪರಿಶೀಲನೆಗಳು ಮತ್ತು ಮೂರು \u201Cನಂಬಲಾಗದಷ್ಟು ಒಳ್ಳೆಯ\u201D ಹೇಳಿಕೆಗಳಿಗೆ ಅಂಕವಿಲ್ಲ; ಅವು ಫಲಿತಾಂಶ ಎಷ್ಟು ವಿಶ್ವಾಸಾರ್ಹ ಎಂಬುದನ್ನು ಮಾತ್ರ ನಿರ್ಧರಿಸುತ್ತವೆ. ಪರೀಕ್ಷೆ ಚಿಕ್ಕದಾಗಿರುವುದರಿಂದ ಅಂಕ ಎಷ್ಟು ಬದಲಾಗಬಹುದು ಎಂಬುದನ್ನು ಸಂಭಾವ್ಯ ವ್ಯಾಪ್ತಿ ತೋರಿಸುತ್ತದೆ. ಭಾಗ A ಯ ಒರಟು ಆಯ್ಕೆಗಳು ಮತ್ತು ಭಾಗ B ಯ ಎರಡು ಹೇಳಿಕೆಗಳು ಪ್ರತ್ಯೇಕ ಹಠಮಾರಿತನ ಪರಿಶೀಲನೆಗೂ ಸೇರುತ್ತವೆ.")+'</p>';
+ h+='<table class="t">';
+ DIMS.forEach(function(d){
+  h+='<tr><td colspan="2" style="padding-top:12px"><b style="color:'+d.c+'">'+esc(T(d.n))+'</b> <span class="mute">\u00B7 '+esc(T(d.sub))+'</span></td></tr>';
+  PA.filter(function(q){return q.d===d.id}).forEach(function(q){h+='<tr><td colspan="2">'+L("Situation: ","ಸನ್ನಿವೇಶ: ")+esc(lead(T(q.v[0].q)))+' <span class="mute">('+esc(srcLabel(q.src))+')</span></td></tr>'});
+  PB.filter(function(q){return q.d===d.id}).forEach(function(q){h+='<tr><td colspan="2">'+L("Statement: ","ಹೇಳಿಕೆ: ")+esc(T(q.t))+' <span class="mute">('+esc(srcLabel(q.src))+(q.k<0?L(", reverse-scored",", ತಿರುವುಮುರುವು ಅಂಕ"):"")+')</span></td></tr>'});
+ });
+ h+='<tr><td colspan="2" class="mute">'+L("Plus 2 attention checks and 3 \u201Ctoo good to be true\u201D statements (not scored).","ಜೊತೆಗೆ 2 ಗಮನ ಪರಿಶೀಲನೆಗಳು ಮತ್ತು 3 \u201Cನಂಬಲಾಗದಷ್ಟು ಒಳ್ಳೆಯ\u201D ಹೇಳಿಕೆಗಳು (ಅಂಕವಿಲ್ಲ).")+'</td></tr>';
+ return h+'</table></details>';
+}
+function result(){
+ var r=compute(),b=r.band,top=r.ranked[0],bot=r.ranked[r.ranked.length-1],h='',
+ dn=function(d){return '<b style="color:'+d.c+'">'+esc(T(d.n))+' — '+esc(T(d.sub))+'</b>'};
+ h+='<div class="card"><p class="small mute">'+(st.name?esc(st.name)+' · ':'')+esc(L("AVIRAL™ Assessment","AVIRAL™ ಮೌಲ್ಯಮಾಪನ"))+'</p>'+
+ '<div class="score"><b>'+r.index+'</b><span class="mute">'+L("AVIRAL Index, out of 100","AVIRAL ಸೂಚ್ಯಂಕ, 100 ರಲ್ಲಿ")+' · '+L("likely range ","ಸಂಭಾವ್ಯ ವ್ಯಾಪ್ತಿ ")+rng2(r.index,IDX_SEM).replace('%','')+'</span><span class="chip" style="color:'+b.c+'">'+esc(T(b.name))+'</span></div>'+
+ '<p class="mute" style="margin-top:6px">'+esc(T(b.tag))+L(". Higher is stronger; lower shows where to grow.",". ಹೆಚ್ಚು ಅಂಕ ಎಂದರೆ ಹೆಚ್ಚು ಬಲ; ಕಡಿಮೆ ಅಂಕ ಬೆಳೆಯಬೇಕಾದ ಕ್ಷೇತ್ರವನ್ನು ತೋರಿಸುತ್ತದೆ.")+'</p>'+gauge(r.index)+'</div>';
+ if(r.flags.length)h+='<div class="card">'+r.flags.map(function(f){return '<p class="note'+(f.w?' flag':'')+'"><b>'+esc(f.h)+'</b> '+esc(f.b)+'</p>'}).join("")+'</div>';
+ h+='<div class="card"><h2>'+L("Reading your score","ನಿಮ್ಮ ಅಂಕದ ಅರ್ಥ")+'</h2>'+b.p.map(function(x){return '<p>'+esc(T(x))+'</p>'}).join("")+'</div>';
+ h+='<div class="card"><h2>'+L("Your AVIRAL™ profile","ನಿಮ್ಮ AVIRAL™ ಪ್ರೊಫೈಲ್")+'</h2>'+
+ '<p>'+L(dn(top.d)+' is where you have the most room to grow (score '+top.pct+'%). ',dn(top.d)+' ಆಯಾಮದಲ್ಲಿ ನಿಮಗೆ ಬೆಳೆಯಲು ಅತಿ ಹೆಚ್ಚು ಅವಕಾಶವಿದೆ (ಅಂಕ '+top.pct+'%). ')+
+  (top.pct<60?esc(T(top.d.hi)):L('It still sits in the '+top.lv.n.toLowerCase()+' range, so this is refinement rather than repair.','ಇದು ಇನ್ನೂ “'+T(top.lv.n)+'” ವ್ಯಾಪ್ತಿಯಲ್ಲೇ ಇದೆ; ಹಾಗಾಗಿ ಇದು ಸರಿಪಡಿಸುವಿಕೆಯಲ್ಲ, ಇನ್ನಷ್ಟು ಸುಧಾರಣೆ.'))+'</p>'+
+ '<p>'+L(dn(bot.d)+' is your strongest ground (score '+bot.pct+'%). ',dn(bot.d)+' ನಿಮ್ಮ ಅತ್ಯಂತ ಬಲವಾದ ನೆಲೆ (ಅಂಕ '+bot.pct+'%). ')+esc(T(bot.d.lo))+'</p>'+
+ (r.spread>=40?'<p class="small mute">'+L("The gap between these two is wide, so your Index is being driven by one or two dimensions. Read the dimensions individually, not just the single number.","ಈ ಎರಡರ ನಡುವಿನ ಅಂತರ ದೊಡ್ಡದಿದೆ; ಹಾಗಾಗಿ ನಿಮ್ಮ ಸೂಚ್ಯಂಕವನ್ನು ಒಂದೆರಡು ಆಯಾಮಗಳೇ ನಿರ್ಧರಿಸುತ್ತಿವೆ. ಒಂದೇ ಸಂಖ್ಯೆಯನ್ನಲ್ಲ, ಪ್ರತಿ ಆಯಾಮವನ್ನೂ ಪ್ರತ್ಯೇಕವಾಗಿ ಓದಿ.")+'</p>':'')+
+ radar(r.rows)+
+ '<p class="small mute">'+L("The further a point sits from the centre, the stronger that dimension. Where the two shapes differ, what you would do and how you see yourself don’t match.","ಬಿಂದು ಕೇಂದ್ರದಿಂದ ಎಷ್ಟು ದೂರವಿದೆಯೋ, ಆ ಆಯಾಮ ಅಷ್ಟು ಬಲವಾಗಿದೆ. ಎರಡು ಆಕಾರಗಳು ಭಿನ್ನವಾಗಿರುವಲ್ಲಿ, ನೀವು ಮಾಡುವುದಕ್ಕೂ ನಿಮ್ಮನ್ನು ನೀವು ನೋಡುವುದಕ್ಕೂ ಹೊಂದಾಣಿಕೆ ಇಲ್ಲ.")+'</p></div>';
+ 
+ h+='<div class="split"><div class="card"><h3>'+L("Strengths to keep","ಉಳಿಸಿಕೊಳ್ಳಬೇಕಾದ ಸಾಮರ್ಥ್ಯಗಳು")+'</h3>'+list(b.s)+'</div><div class="card"><h3>'+L("Watch-outs","ಎಚ್ಚರ ವಹಿಸಬೇಕಾದವು")+'</h3>'+list(b.w)+'</div></div>';
+ var plan=r.ranked.slice(0,2).reduce(function(a,x){return a.concat(x.d.tips)},[]),t0=T(r.ranked[0].d.n),t1=T(r.ranked[1].d.n);
+ h+='<div class="card"><h3>'+L("Your 30-day practice plan","ನಿಮ್ಮ 30 ದಿನಗಳ ಅಭ್ಯಾಸ ಯೋಜನೆ")+'</h3><p class="small mute">'+esc(L("Focused on your two highest-need dimensions: "+t0+" and "+t1+".","ನಿಮಗೆ ಹೆಚ್ಚು ಅಗತ್ಯವಿರುವ ಎರಡು ಆಯಾಮಗಳ ಮೇಲೆ ಕೇಂದ್ರೀಕೃತ: "+t0+" ಮತ್ತು "+t1+"."))+'</p>'+list(plan)+'</div>';
+ var style=r.extreme>=70?"Very decisive":r.extreme>=35?"Decisive":r.neutral>=Math.ceil(NBS/2)?"Hesitant":"Balanced",gn=T(r.gap.d.n);
+ var ind=[
+  [L("Profile shape","ಪ್ರೊಫೈಲ್ ಆಕಾರ"),T(r.shape),L(r.spread+" point gap between your highest and lowest dimension","ಅತಿ ಹೆಚ್ಚು ಮತ್ತು ಅತಿ ಕಡಿಮೆ ಆಯಾಮಗಳ ನಡುವೆ "+r.spread+" ಅಂಕಗಳ ಅಂತರ"),r.shape==="Flat"?"var(--lv3)":"var(--lv1)"],
+  [L("Say vs. do","ನುಡಿ ಮತ್ತು ನಡೆ"),L("Largest in "+gn,gn+" ನಲ್ಲಿ ಅತಿ ಹೆಚ್ಚು"),L(r.gapV+" point gap between situations and statements","ಸನ್ನಿವೇಶ ಮತ್ತು ಹೇಳಿಕೆಗಳ ನಡುವೆ "+r.gapV+" ಅಂಕಗಳ ಅಂತರ"),r.gapV>=30?"var(--lv3)":"var(--lv1)"],
+  [L("Rigidity check","ಹಠಮಾರಿತನ ಪರಿಶೀಲನೆ"),r.rigidity+"%",L("Blunt reactions and fixed-judgement statements","ಒರಟು ಪ್ರತಿಕ್ರಿಯೆಗಳು ಮತ್ತು ಪೂರ್ವಗ್ರಹದ ಹೇಳಿಕೆಗಳು"),r.rigidity>=50?"var(--lv4)":r.rigidity>=30?"var(--lv3)":"var(--lv1)"],
+  [L("Response style","ಉತ್ತರಿಸುವ ಶೈಲಿ"),T(style),L(r.extreme+"% of statements answered at an extreme, "+r.neutral+" neutral",r.extreme+"% ಹೇಳಿಕೆಗಳಿಗೆ ತೀವ್ರ ಉತ್ತರ, "+r.neutral+" ತಟಸ್ಥ"),r.extreme>=70||r.neutral>=Math.ceil(NBS/2)?"var(--lv3)":"var(--lv1)"],
+  [L("Confidence in result","ಫಲಿತಾಂಶದ ವಿಶ್ವಾಸಾರ್ಹತೆ"),T(r.conf),({good:L("Varied, considered answers","ವೈವಿಧ್ಯಮಯ, ಯೋಚಿಸಿದ ಉತ್ತರಗಳು"),att:L("Attention checks missed","ಗಮನ ಪರಿಶೀಲನೆ ತಪ್ಪಿದೆ"),rushed:L("Completed in under 2 minutes","2 ನಿಮಿಷಕ್ಕಿಂತ ಕಡಿಮೆ ಸಮಯದಲ್ಲಿ ಪೂರ್ಣಗೊಂಡಿದೆ"),same:L("Identical answers throughout","ಎಲ್ಲೆಡೆ ಒಂದೇ ರೀತಿಯ ಉತ್ತರಗಳು"),sd:L("Answers may lean towards the ideal","ಉತ್ತರಗಳು ಆದರ್ಶದತ್ತ ವಾಲಿರಬಹುದು"),neutral:L("Many neutral answers","ಹಲವು ತಟಸ್ಥ ಉತ್ತರಗಳು"),flat:L("Answers were uniform enough to blur the profile","ಉತ್ತರಗಳು ಏಕರೂಪವಾಗಿದ್ದು ಪ್ರೊಫೈಲ್ ಅಸ್ಪಷ್ಟವಾಗಿದೆ")})[r.confWhy],r.conf==="Good"?"var(--lv1)":r.conf==="Moderate"?"var(--lv3)":"var(--lv4)"]];
+ h+='<div class="card"><h2>'+L("Assessment indicators","ಮೌಲ್ಯಮಾಪನ ಸೂಚಕಗಳು")+'</h2><table class="t">'+ind.map(function(x){
+  return '<tr><td>'+esc(x[0])+'<div class="small mute">'+esc(x[2])+'</div></td><td class="n" style="font-weight:700;color:'+x[3]+'">'+esc(x[1])+'</td></tr>'}).join("")+'</table></div>';
+ h+=report(r);
+ h+='<div class="card">'+scoring()+'</div>';
+ h+='<p class="small mute">'+L("A self-reflection tool, not a clinical or diagnostic instrument. Weights are reasoned rather than validated against response data, and results vary with mood and circumstance. If low confidence or distress is affecting daily life, consider speaking with a counsellor or mental health professional.",
+  "ಇದು ಸ್ವ-ಅವಲೋಕನದ ಸಾಧನ, ಕ್ಲಿನಿಕಲ್ ಅಥವಾ ರೋಗನಿರ್ಣಯ ಸಾಧನವಲ್ಲ. ತೂಕಗಳನ್ನು ತರ್ಕದ ಆಧಾರದ ಮೇಲೆ ನಿಗದಿಪಡಿಸಲಾಗಿದೆ, ಪ್ರತಿಕ್ರಿಯೆ ದತ್ತಾಂಶದಿಂದ ದೃಢೀಕರಿಸಲಾಗಿಲ್ಲ; ಮನಸ್ಥಿತಿ ಮತ್ತು ಸಂದರ್ಭಕ್ಕೆ ತಕ್ಕಂತೆ ಫಲಿತಾಂಶ ಬದಲಾಗಬಹುದು. ಆತ್ಮವಿಶ್ವಾಸದ ಕೊರತೆ ಅಥವಾ ಮಾನಸಿಕ ಒತ್ತಡ ದೈನಂದಿನ ಜೀವನದ ಮೇಲೆ ಪರಿಣಾಮ ಬೀರುತ್ತಿದ್ದರೆ, ಆಪ್ತಸಮಾಲೋಚಕರು ಅಥವಾ ಮಾನಸಿಕ ಆರೋಗ್ಯ ತಜ್ಞರೊಂದಿಗೆ ಮಾತನಾಡಿ.")+'</p>';
+ h+='<div class="btns noprint"><button data-act="retake">'+L("Retake","ಮತ್ತೆ ತೆಗೆದುಕೊಳ್ಳಿ")+'</button><span><button data-act="copy">'+L("Copy summary","ಸಾರಾಂಶ ನಕಲಿಸಿ")+'</button> <button class="pri" data-act="print">'+L("Print / Save PDF","ಮುದ್ರಿಸಿ / PDF ಉಳಿಸಿ")+'</button></span></div><div class="msg" id="msg"></div>';
+ return h;
+}
+function render(scroll){
+ var p=PAGES[st.page];
+ applyLang();
+ app.innerHTML=langBar()+(p.k==="intro"?intro():p.k==="result"?result():qpage(p));
+ if(scroll!==false)window.scrollTo(0,0);
+ save();
+}
+/* ================= EVENTS ================= */
+app.addEventListener("change",function(e){
+ var t=e.target;if(t.type!=="radio")return;
+ var m=/^([ab])(\d+)$/.exec(t.name);if(!m)return;
+ st[m[1]][m[2]]=+t.value;
+ var fs=document.getElementById(t.name);if(fs)fs.classList.remove("missing");
+ var n=answered(),pc=document.getElementById("pc");
+ if(pc){pc.textContent=ansText(n);document.getElementById("pb").style.width=Math.round(n/TOTAL_Q*100)+"%"}
+ var msg=document.getElementById("msg");if(msg)msg.textContent="";
+ save();
+});
+app.addEventListener("input",function(e){if(e.target.id==="nm"){st.name=e.target.value.trim();save()}});
+app.addEventListener("click",function(e){
+ var lb=e.target.closest("button[data-lang]");
+ if(lb){if(lb.dataset.lang!==LANG){LANG=lb.dataset.lang;ls(LKEY,LANG);render(false)}return}
+ var btn=e.target.closest("button[data-act]");if(!btn)return;
+ var act=btn.dataset.act,p=PAGES[st.page];
+ if(act==="back"){st.page=Math.max(0,st.page-1);render()}
+ else if(act==="next"){
+  if(p.k==="A"||p.k==="B"){
+   var key=p.k==="A"?"a":"b",miss=[],x;
+   for(x=p.s;x<p.e;x++)if(st[key][x]===undefined)miss.push(x);
+   for(x=p.s;x<p.e;x++)document.getElementById(key+x).classList.toggle("missing",miss.indexOf(x)>-1);
+   if(miss.length){
+    var mm=miss.length;
+    document.getElementById("msg").textContent=L("Please answer the highlighted question"+(mm>1?"s":"")+" ("+mm+" left) to continue.","ಮುಂದುವರಿಯಲು ಹೈಲೈಟ್ ಮಾಡಿದ ಪ್ರಶ್ನೆ"+(mm>1?"ಗಳಿಗೆ":"ಗೆ")+" ಉತ್ತರಿಸಿ ("+mm+" ಬಾಕಿ).");
+    document.getElementById(key+miss[0]).scrollIntoView({behavior:"smooth",block:"center"});
+    return;
+   }
+  }
+  if(st.page===0&&!st.t0)st.t0=Date.now();
+  st.page=Math.min(PAGES.length-1,st.page+1);
+  if(PAGES[st.page].k==="result"&&!st.t1)st.t1=Date.now();
+  render();
+ }
+ else if(act==="retake"){
+  var attempt=(parseInt(ls(AKEY)||"0",10)||0)+1;ls(AKEY,String(attempt));
+  var nm=st.name;st=fresh();st.name=nm;IT=build(st.seed,st.variant);render();
+ }
+ else if(act==="print"){window.print()}
+ else if(act==="copy"){
+  var r=compute(),txt=L("AVIRAL™ Assessment","AVIRAL™ ಮೌಲ್ಯಮಾಪನ")+(st.name?" — "+st.name:"")+
+  "\n"+L("AVIRAL Index","AVIRAL ಸೂಚ್ಯಂಕ")+": "+r.index+"/100 ("+T(r.band.name)+")\n"+r.rows.map(function(x){return T(x.d.n)+" ("+T(x.d.sub)+"): "+x.pct+"% "+T(x.lv.n)}).join("\n"),
+  say=function(s){document.getElementById("msg").textContent=s},
+  fail=L("Copy is blocked here. Use Print / Save PDF instead.","ಇಲ್ಲಿ ನಕಲಿಸಲು ಅನುಮತಿ ಇಲ್ಲ. ಬದಲಿಗೆ “ಮುದ್ರಿಸಿ / PDF ಉಳಿಸಿ” ಬಳಸಿ.");
+  try{navigator.clipboard.writeText(txt).then(function(){say(L("Summary copied.","ಸಾರಾಂಶ ನಕಲಿಸಲಾಗಿದೆ."))},function(){say(fail)})}
+  catch(err){say(fail)}
+ }
+});
+render(false);
+})();
+</script>
+</body>
+</html>
