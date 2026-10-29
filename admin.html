@@ -5,138 +5,163 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex,nofollow">
 <title>AVIRAL Admin</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Marcellus&display=swap" rel="stylesheet">
+<meta name="theme-color" content="#ecede8">
 <style>
-:root{
-  --bg:#f6f6f4;--surface:#fcfcfb;--ink:#1d1d1b;--ink2:#55554f;--muted:#7a7a72;--line:#e3e3de;--grid:#ececE7;
-  --accent:#3f5fd0;--accent-ink:#fff;--warn:#b4560a;--danger:#b3261e;
-  --s1:#3f5fd0;--s2:#11a7c9;--s3:#79a822;--s4:#d93a70;--s5:#ea9420;--s6:#8a54c9;
-  --q1:#dbe3fa;--q2:#a9b9ee;--q3:#7b92e2;--q4:#516ed6;--q5:#2c47a8;
-  --dvlo:#3f5fd0;--dvmid:#e7e7e2;--dvhi:#ea9420;--lv1:#2f8a4a;--lv2:#3f5fd0;--lv3:#d08a12;--lv4:#c8384a;
-}
-@media (prefers-color-scheme:dark){:root{
-  --bg:#121211;--surface:#1a1a19;--ink:#f0f0ec;--ink2:#c3c3bb;--muted:#8d8d85;--line:#2e2e2b;--grid:#272725;
-  --accent:#6f86ee;--accent-ink:#0d0d0c;--warn:#e0a04a;--danger:#f2837c;
-  --s1:#4d63dc;--s2:#0e9fa8;--s3:#6f9c1f;--s4:#e05080;--s5:#c87c14;--s6:#9a6ce0;
-  --q1:#2a3463;--q2:#34479a;--q3:#4a63cc;--q4:#7389ea;--q5:#b4c1f8;
-  --dvlo:#4d63dc;--dvmid:#33332f;--dvhi:#c87c14;--lv1:#4fae68;--lv2:#6f86ee;--lv3:#d9a03a;--lv4:#e5677a;
-}}
+:root{color-scheme:light;
+  --bg:#ecede8;--surface:#fbfbf8;--panel:rgba(251,251,248,.86);--ink:#1f2b28;--ink2:#4f5c57;--muted:#68736e;--line:rgba(36,68,62,.13);--line2:rgba(36,68,62,.24);--grid:#e4e6df;
+  --pine:#24443e;--pine2:#2f5a52;--sun:#e0b25c;--sage:#8f9a83;
+  --accent:var(--pine);--accent-ink:#f6f4ee;--warn:#9a6210;--danger:#b23a4f;
+  --s1:#008a7e;--s2:#b8862a;--s3:#4b6fc0;--s4:#c0506e;--s5:#6f9a2e;--s6:#8d5aa8;
+  --b1:#b0702a;--b2:#4b6fc0;--b3:#008a7e;--b4:#8d5aa8;
+  --q1:#dde8e4;--q2:#a8c5bc;--q3:#6f9b8f;--q4:#3f7065;--q5:#1f3d37;
+  --dvlo:#4b6fc0;--dvmid:#e6e7e1;--dvhi:#c08a2e;--lv1:#1f7a5a;--lv2:#4b6fc0;--lv3:#b0702a;--lv4:#b23a4f;
+  --disp:"Marcellus",Georgia,serif;--body:"Figtree",system-ui,-apple-system,"Segoe UI",sans-serif}
 *{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%}
-body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.45 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
-h1,h2,h3{margin:0;font-weight:650;letter-spacing:-.01em}
-h1{font-size:20px}h2{font-size:15px}h3{font-size:13px}
+body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.5 var(--body);-webkit-font-smoothing:antialiased;min-height:100vh;position:relative;isolation:isolate}
+body::before{content:"";position:fixed;inset:-60px;z-index:-2;background:url(data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wAARCAAiADwDASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwC/oMq78ZyWcEe/FdHiuQ0BjDcZWItg/eI9u1dZHKPLXew3Y5rKm9C5DyQgyxwMgfnTTcRKoYkgEZ6fh/WlLRuMEqQexqpf6hZWU1rFcAFrmTYmB0PUk+2cVdybF0SIX2A/NnGMe2f5VKBUQSLIO1cjj/P508yovVhmlcLEgFU5bW48w+VNIF9jU4uV7U17+JG2swBHtSbXUpJnO2L7dGmmQEOAcj3A7VHDqL4wWZTjJDVYs7OVbKOMXJCbiXAUfN/hSzWunhsSSSbh125J/lWa5uhUrE0Ny7tt/dE4yfnxxWTq16z6jGv2dH+yS5Un5snA7/jU80Gmx277Li43Y+XKk4P4Csfz0Z02wzFgd33WPPqaqTYo2R1lvJLeWsc0ahd65IYmlZLhAWO3A645qjpbphjJPNEoyVjGeM9TirMsNlJvMlzcEOckc+mPSmmJrUrNqWGKgtwOvSs+51dllwpB4/KtO50lVtzJYOZHboJCCuPpis3+ydRJJNtCTnnp/hUu7KSNKzJMAyT941OGPqaKKuJMiRuYyDzWbekqyBSQPaiiiQ4mna8Rgjg4qbJz1NFFAh69akZVZjuUH6iiipY0f//Z) center 30%/cover;filter:blur(28px) saturate(.85);opacity:.5}
+body::after{content:"";position:fixed;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(236,237,232,.35),rgba(236,237,232,.9) 40%,var(--bg))}
+h1,h2,h3{margin:0;font-family:var(--disp);font-weight:400;color:var(--pine);letter-spacing:0}
+h1{font-size:26px}h2{font-size:19px;line-height:1.25}h3{font-size:15px}
 button,select,input{font:inherit;color:inherit}
 button{cursor:pointer}
-.wrap{max-width:1240px;margin:0 auto;padding:16px}
-.top{display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap;margin-bottom:12px}
-.brand{display:flex;gap:10px;align-items:baseline;flex-wrap:wrap}
-.brand small{color:var(--muted)}
-.btn{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:7px 12px}
-.btn:hover{border-color:var(--muted)}
-.btn.pri{background:var(--accent);border-color:var(--accent);color:var(--accent-ink);font-weight:600}
-.btn.danger{color:var(--danger)}
-.filters{display:flex;gap:8px;flex-wrap:wrap;align-items:center;padding:10px 12px;background:var(--surface);border:1px solid var(--line);border-radius:12px;margin-bottom:12px}
-.seg{display:inline-flex;border:1px solid var(--line);border-radius:8px;overflow:hidden}
-.seg button{border:0;background:transparent;padding:6px 11px;border-right:1px solid var(--line)}
-.seg button:last-child{border-right:0}
-.seg button[aria-pressed=true]{background:var(--accent);color:var(--accent-ink);font-weight:600}
-.chk{display:inline-flex;gap:6px;align-items:center;color:var(--ink2)}
+:focus-visible{outline:2px solid var(--pine);outline-offset:2px}
+.wrap{max-width:1240px;margin:0 auto;padding:20px 16px 48px}
+/* app bar */
+.abar{position:sticky;top:0;z-index:30;background:rgba(236,237,232,.84);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.abar .in{max-width:1240px;margin:0 auto;padding:0 16px;display:flex;align-items:center;gap:20px;min-height:60px;flex-wrap:wrap}
+.wm{font-family:var(--disp);font-size:20px;letter-spacing:.2em;color:var(--pine);text-decoration:none;display:flex;align-items:baseline;gap:10px}
+.wm small{font-family:var(--body);font-size:12px;letter-spacing:.02em;color:var(--muted)}
+.tabs{display:flex;gap:2px;align-self:stretch}
+.tabs a{display:flex;align-items:center;padding:0 14px;color:var(--ink2);text-decoration:none;border-bottom:2px solid transparent;font-weight:600;font-size:13.5px}
+.tabs a:hover{color:var(--pine)}
+.tabs a.on{color:var(--pine);border-color:var(--pine)}
+.acct{margin-left:auto;display:flex;align-items:center;gap:8px}
+.who{color:var(--muted);font-size:12.5px;max-width:220px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+@media(max-width:760px){.abar .in{gap:8px 12px;padding:8px 12px 0}.tabs{order:3;width:100%;min-height:40px}.who{display:none}}
+.top{display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap;margin-bottom:14px}
+.btn{background:rgba(251,251,248,.7);border:1px solid var(--line2);border-radius:999px;padding:7px 15px;color:var(--pine);font-weight:600;font-size:13px;transition:background .15s,border-color .15s}
+.btn:hover{border-color:var(--pine);background:var(--surface)}
+.btn:disabled{opacity:.45;cursor:default}
+.btn.pri{background:var(--pine);border-color:var(--pine);color:var(--accent-ink)}
+.btn.pri:hover{background:var(--pine2)}
+.btn.danger{color:var(--danger);border-color:color-mix(in srgb,var(--danger) 40%,transparent)}
+.filters{display:flex;gap:10px;flex-wrap:wrap;align-items:center;padding:10px 14px;background:var(--panel);border:1px solid var(--line);border-radius:16px;margin-bottom:14px;-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}
+.seg{display:inline-flex;gap:2px;padding:3px;border-radius:999px;background:rgba(36,68,62,.06)}
+.seg button{border:0;background:transparent;padding:5px 12px;border-radius:999px;font-size:13px;color:var(--ink2);font-weight:500}
+.seg button[aria-pressed=true]{background:var(--pine);color:var(--accent-ink);font-weight:600}
+.chk{display:inline-flex;gap:7px;align-items:center;color:var(--ink2)}
+.chk input{accent-color:var(--pine);width:15px;height:15px}
 .sp{flex:1}
 .grid>*{min-width:0}
-.card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px;min-width:0}
-.card h2{margin-bottom:2px}
-.sub{color:var(--muted);font-size:12.5px;margin:0 0 10px}
-.grid{display:grid;gap:12px;margin-bottom:12px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:18px;min-width:0;-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}
+.card h2{margin-bottom:3px}
+.sub{color:var(--muted);font-size:12.5px;margin:0 0 12px}
+.grid{display:grid;gap:14px;margin-bottom:14px}
 .g4{grid-template-columns:repeat(4,1fr)}.g6{grid-template-columns:repeat(6,1fr)}
 .g2{grid-template-columns:repeat(2,1fr)}.g3{grid-template-columns:repeat(3,1fr)}
 .g21{grid-template-columns:2fr 1fr}.g12{grid-template-columns:1fr 2fr}
 @media(max-width:900px){.g6{grid-template-columns:repeat(3,1fr)}.g4,.g3{grid-template-columns:repeat(2,1fr)}.g2,.g21,.g12{grid-template-columns:1fr}}
-@media(max-width:520px){.g6,.g4,.g3{grid-template-columns:repeat(2,1fr)}.wrap{padding:12px}}
-.kpi .v{font-size:26px;font-weight:700;letter-spacing:-.02em;line-height:1.1}
-.kpi .l{color:var(--muted);font-size:12px;margin-top:2px}
-.kpi .d{color:var(--ink2);font-size:12px;margin-top:4px}
+@media(max-width:520px){.g6,.g4,.g3{grid-template-columns:repeat(2,1fr)}.wrap{padding:14px 12px 40px}}
+.kpi{padding:16px 18px}
+.kpi .v{font-family:var(--disp);font-size:32px;line-height:1.05;color:var(--pine)}
+.kpi .l{color:var(--ink2);font-size:12.5px;margin-top:6px;font-weight:600}
+.kpi .d{color:var(--muted);font-size:12px;margin-top:1px}
 .insights{margin:0;padding-left:18px;color:var(--ink2)}
-.insights li{margin:3px 0}.insights b{color:var(--ink)}
-.hb{display:grid;grid-template-columns:minmax(90px,150px) 1fr auto;gap:8px;align-items:center;margin:5px 0}
+.insights li{margin:5px 0}.insights b{color:var(--ink)}
+.hb{display:grid;grid-template-columns:minmax(90px,150px) 1fr auto;gap:10px;align-items:center;margin:7px 0}
 .hb .lab{color:var(--ink2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.hb .trk{height:14px;background:var(--grid);border-radius:4px;position:relative;overflow:hidden}
+.hb .trk{height:12px;background:var(--grid);border-radius:4px;position:relative;overflow:hidden}
 .hb .bar{height:100%;border-radius:0 4px 4px 0;min-width:2px}
 .hb .val{font-variant-numeric:tabular-nums;color:var(--ink);min-width:70px;text-align:right}
 svg{display:block;width:100%;height:auto;overflow:visible}
-svg text{fill:var(--muted);font:11px system-ui,sans-serif}
-svg .ax{stroke:var(--line);stroke-width:1}svg .gr{stroke:var(--grid);stroke-width:1}
-.legend{display:flex;gap:12px;flex-wrap:wrap;color:var(--ink2);font-size:12.5px;margin:2px 0 8px}
-.legend i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:5px;vertical-align:-1px}
+svg text{fill:var(--muted);font:11px var(--body)}
+svg .ax{stroke:var(--line2);stroke-width:1}svg .gr{stroke:var(--grid);stroke-width:1}
+.legend{display:flex;gap:14px;flex-wrap:wrap;color:var(--ink2);font-size:12.5px;margin:2px 0 10px}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:6px;vertical-align:-1px}
 table{border-collapse:collapse;width:100%}
-th,td{padding:7px 8px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+th,td{padding:9px 8px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
 th{color:var(--muted);font-weight:600;font-size:12px;white-space:nowrap;position:sticky;top:0;background:var(--surface)}
-th.s{cursor:pointer}th.s:hover{color:var(--ink)}
+th.s{cursor:pointer}th.s:hover{color:var(--pine)}
 td.n,th.n{text-align:right;font-variant-numeric:tabular-nums}
-tbody tr.click{cursor:pointer}tbody tr.click:hover{background:var(--grid)}
+tbody tr.click{cursor:pointer;transition:background .12s}tbody tr.click:hover{background:rgba(36,68,62,.05)}
 .scroll{overflow:auto;max-height:520px}
-.pill{display:inline-block;padding:1px 8px;border-radius:999px;font-size:12px;border:1px solid var(--line);color:var(--ink2);white-space:nowrap}
-.pill.warn{color:var(--warn);border-color:var(--warn)}
-.stk{display:flex;height:16px;border-radius:4px;overflow:hidden;gap:2px;background:var(--surface)}
+.pill{display:inline-block;padding:2px 9px;border-radius:999px;font-size:12px;border:1px solid var(--line2);color:var(--ink2);white-space:nowrap;background:rgba(255,255,255,.5)}
+.pill.warn{color:var(--danger);border-color:color-mix(in srgb,var(--danger) 45%,transparent)}
+.stk{display:flex;height:14px;border-radius:4px;overflow:hidden;gap:2px;background:transparent}
 .stk span{display:block;height:100%}
 .hm{display:grid;gap:2px}
-.hm div{display:flex;align-items:center;justify-content:center;min-height:34px;border-radius:4px;font-size:12px;color:#111;font-variant-numeric:tabular-nums}
+.hm div{display:flex;align-items:center;justify-content:center;min-height:34px;border-radius:5px;font-size:12px;color:#1f2b28;font-variant-numeric:tabular-nums}
 .hm .h{background:transparent;color:var(--muted);font-size:11.5px;min-height:24px}
-.tip{position:fixed;z-index:50;pointer-events:none;background:var(--ink);color:var(--bg);padding:6px 9px;border-radius:7px;font-size:12px;max-width:260px;opacity:0;transition:opacity .08s;white-space:pre-line}
-.empty{color:var(--muted);padding:18px;text-align:center}
-.login{max-width:420px;margin:12vh auto;padding:24px}
-.login input{width:100%;padding:10px 12px;border:1px solid var(--line);border-radius:8px;background:var(--bg);margin:10px 0}
-.msg{margin-top:10px;color:var(--ink2)}.msg.err{color:var(--danger)}
-.detail{position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:40;display:none;overflow:auto;padding:20px}
-.detail.open{display:block}
-.detail .panel{max-width:760px;margin:0 auto;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px}
-.qa{border-top:1px solid var(--line);padding:8px 0}
+.tip{position:fixed;z-index:50;pointer-events:none;background:var(--pine);color:#f6f4ee;padding:7px 10px;border-radius:9px;font-size:12px;max-width:260px;opacity:0;transition:opacity .08s;white-space:pre-line;box-shadow:0 8px 24px -10px rgba(36,68,62,.6)}
+.empty{color:var(--muted);padding:28px;text-align:center}
+.msg{margin-top:12px;color:var(--ink2);min-height:1.4em}.msg.err{color:var(--danger)}
+.solo{min-height:100vh;display:grid;place-items:center;padding:24px}
+.solo .card{max-width:440px;width:100%;padding:28px}
+/* login */
+.signin{min-height:100vh;display:grid;grid-template-columns:minmax(0,1.15fr) minmax(360px,1fr);background:var(--bg)}
+.si-img{position:relative;overflow:hidden;background:#e9e6df url(data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wAARCAAiADwDASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwC/oMq78ZyWcEe/FdHiuQ0BjDcZWItg/eI9u1dZHKPLXew3Y5rKm9C5DyQgyxwMgfnTTcRKoYkgEZ6fh/WlLRuMEqQexqpf6hZWU1rFcAFrmTYmB0PUk+2cVdybF0SIX2A/NnGMe2f5VKBUQSLIO1cjj/P508yovVhmlcLEgFU5bW48w+VNIF9jU4uV7U17+JG2swBHtSbXUpJnO2L7dGmmQEOAcj3A7VHDqL4wWZTjJDVYs7OVbKOMXJCbiXAUfN/hSzWunhsSSSbh125J/lWa5uhUrE0Ny7tt/dE4yfnxxWTq16z6jGv2dH+yS5Un5snA7/jU80Gmx277Li43Y+XKk4P4Csfz0Z02wzFgd33WPPqaqTYo2R1lvJLeWsc0ahd65IYmlZLhAWO3A645qjpbphjJPNEoyVjGeM9TirMsNlJvMlzcEOckc+mPSmmJrUrNqWGKgtwOvSs+51dllwpB4/KtO50lVtzJYOZHboJCCuPpis3+ydRJJNtCTnnp/hUu7KSNKzJMAyT941OGPqaKKuJMiRuYyDzWbekqyBSQPaiiiQ4mna8Rgjg4qbJz1NFFAh69akZVZjuUH6iiipY0f//Z) center/cover}
+.si-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 45%}
+.si-form{display:flex;align-items:center;justify-content:center;padding:40px 28px}
+.si-in{width:100%;max-width:380px}
+.si-in .wm{margin-bottom:28px}
+.si-in h1{font-size:34px;margin-bottom:6px}
+.si-in .sub{font-size:14px;margin-bottom:24px}
+.field{display:block;margin-bottom:14px}
+.field span{display:block;font-size:12.5px;font-weight:600;color:var(--ink2);margin-bottom:6px}
+.field input{width:100%;padding:12px 14px;border:1px solid var(--line2);border-radius:12px;background:rgba(255,255,255,.75);font-size:15px}
+.field input:focus{outline:2px solid var(--pine);outline-offset:1px;border-color:transparent}
+.si-in .btn.pri{width:100%;padding:13px;font-size:15px;margin-top:6px}
+.si-in .chk{font-size:13px;margin:2px 0 8px}
+@media(max-width:820px){.signin{grid-template-columns:1fr;grid-template-rows:38vh auto}.si-form{align-items:flex-start;padding:28px 20px 40px}.si-in .wm{display:none}}
+.qa{border-top:1px solid var(--line);padding:10px 0}
 .qa .q{color:var(--ink2)}.qa .a{font-weight:600}
 .mute{color:var(--muted)}
-.tabs{display:flex;gap:4px;border-bottom:1px solid var(--line);margin:0 0 12px}
-.tabs a{padding:9px 14px;color:var(--ink2);text-decoration:none;border-bottom:2px solid transparent;margin-bottom:-1px;font-weight:550}
-.tabs a.on{color:var(--ink);border-color:var(--accent)}
 a.btn{text-decoration:none;display:inline-block}
 .dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:6px;vertical-align:0}
 .dotl{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:5px;vertical-align:-1px}
-.pill.lg{font-size:13px;padding:3px 10px}
-.rlist td{vertical-align:middle}.rlist .go{color:var(--accent);white-space:nowrap;font-size:12.5px}
-.big{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin:6px 0}
-.big>b{font-size:56px;line-height:1;letter-spacing:-.03em}
+.pill.lg{font-size:13px;padding:3px 11px}
+.rlist td{vertical-align:middle}.rlist .go{color:var(--pine);white-space:nowrap;font-size:12.5px;font-weight:600}
+.big{display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin:8px 0}
+.big>b{font-family:var(--disp);font-weight:400;font-size:64px;line-height:1;color:var(--pine)}
 .big>span:not(.pill){font-size:13px;color:var(--ink2)}
 .gauge{position:relative;display:flex;height:12px;border-radius:6px;overflow:visible;gap:2px}
 .gauge span{display:block;height:100%}.gauge span:first-child{border-radius:6px 0 0 6px}.gauge span:nth-child(3){border-radius:0 6px 6px 0}
-.gauge b{position:absolute;top:-4px;width:4px;height:20px;margin-left:-2px;border-radius:2px;background:var(--ink);box-shadow:0 0 0 2px var(--surface)}
-.gl{display:grid;grid-template-columns:45fr 25fr 30fr;font-size:11.5px;color:var(--muted);margin-top:5px}
-.kv td{padding:6px 4px}.kv tr:last-child td{border-bottom:0}
-.note-low{border-color:var(--danger)}.note-mid{border-color:var(--warn)}
-.dimr{padding:12px 0;border-top:1px solid var(--line)}
+.gauge b{position:absolute;top:-5px;width:5px;height:22px;margin-left:-2.5px;border-radius:3px;background:var(--pine);box-shadow:0 0 0 2px var(--surface)}
+.gl{display:grid;grid-template-columns:45fr 25fr 30fr;font-size:11.5px;color:var(--muted);margin-top:6px}
+.kv td{padding:7px 4px}.kv tr:last-child td{border-bottom:0}
+.note-low{border-color:color-mix(in srgb,var(--danger) 50%,transparent);background:color-mix(in srgb,var(--danger) 6%,var(--surface))}.note-mid{border-color:color-mix(in srgb,var(--warn) 50%,transparent);background:color-mix(in srgb,var(--sun) 12%,var(--surface))}
+.dimr{padding:14px 0;border-top:1px solid var(--line)}
 .dimh{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;align-items:baseline}
-.rk{display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:50%;background:var(--grid);font-size:11.5px;margin-right:8px;color:var(--ink2)}
+.dimh b{font-family:var(--disp);font-weight:400;font-size:17px;color:var(--pine)}
+.rk{display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:50%;background:rgba(36,68,62,.08);font-size:11.5px;margin-right:9px;color:var(--pine);font-weight:600}
 .lvt{white-space:nowrap}
-.trk2{position:relative;height:12px;background:var(--grid);border-radius:4px;margin:8px 0 6px}
-.trk2 span{display:block;height:100%;border-radius:0 4px 4px 0;min-width:2px}
-.trk2 em{position:absolute;top:-3px;width:3px;height:18px;margin-left:-1.5px;background:var(--ink);border-radius:2px;box-shadow:0 0 0 2px var(--surface)}
+.trk2{position:relative;height:10px;background:var(--grid);border-radius:5px;margin:9px 0 7px}
+.trk2 span{display:block;height:100%;border-radius:5px;min-width:2px}
+.trk2 em{position:absolute;top:-4px;width:3px;height:18px;margin-left:-1.5px;background:var(--pine);border-radius:2px;box-shadow:0 0 0 2px var(--surface)}
 .dims{font-size:12.5px;color:var(--ink2)}.mean{margin:6px 0 0;color:var(--ink2)}
-.sw{padding:8px 0;border-top:1px solid var(--line)}.sw span{color:var(--ink2)}
-.ul{margin:4px 0 0;padding-left:20px;color:var(--ink2)}.ul li{margin:4px 0}.ul b{color:var(--ink)}
-.better{margin-top:3px;font-size:12.5px;color:var(--ink2)}
-
-.tabs{margin:2px 0 10px}
-details summary{cursor:pointer;color:var(--ink2)}
-.opt-row{margin:6px 0}
+.sw{padding:10px 0;border-top:1px solid var(--line)}.sw span{color:var(--ink2)}
+.sw b{font-family:var(--disp);font-weight:400;font-size:16px;color:var(--pine)}
+.ul{margin:4px 0 0;padding-left:20px;color:var(--ink2)}.ul li{margin:5px 0}.ul b{color:var(--ink)}
+.better{margin-top:4px;font-size:12.5px;color:var(--pine)}
+details summary{cursor:pointer;color:var(--pine)}
+.opt-row{margin:7px 0}
 .chip{font-size:11.5px;color:var(--muted);margin-left:6px}
-@media print{.filters,.top .btn,.noprint{display:none}body{background:#fff}.card{break-inside:avoid}}
+@media print{.abar,.filters,.top .btn,.noprint{display:none!important}body::before,body::after{display:none}body{background:#fff}.card{break-inside:avoid;background:#fff;backdrop-filter:none}}
 </style>
 </head>
 <body>
-<div class="wrap" id="root"></div>
+<div id="root"></div>
 <div class="tip" id="tip"></div>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
 <script>
 var META={"DIMS":[{"id":"avabodha","n":"Avabodha","dv":"अवबोध","sub":"Insight & Clear Thinking","hi":"Alarming news, big decisions and other people's opinions cloud your judgement, and you can lose sight of what you actually think.","lo":"You see situations clearly, weigh evidence calmly and decide from your own judgement.","tips":["Before any big decision, write down the two strongest arguments against your first instinct.","When a worrying headline lands, wait a day and check one reliable source before acting."]},{"id":"vachana","n":"Vachana","dv":"वचन","sub":"Voice & Communication","hi":"Speaking up, disagreeing and taking criticism are hard, so your real view often goes unsaid.","lo":"You say what you think clearly and take feedback without losing your footing.","tips":["In your next meeting, state one view plainly, with one reason, before anyone asks.","When criticised, say “let me think about that” instead of defending or going silent."]},{"id":"indriyajaya","n":"Indriyajaya","dv":"इन्द्रियजय","sub":"Self-Mastery & Integrity","hi":"Under pressure your boundaries slip or your reactions run hot, and owning a mistake can feel too costly.","lo":"You stay composed, keep your word, own your mistakes and treat people with respect.","tips":["Practise one honest “I can't take that on” a week, without inventing an excuse.","When you feel the urge to snap back, pause one breath and name what bothered you instead."]},{"id":"ranjana","n":"Ranjana","dv":"रंजन","sub":"Influence & Trust","hi":"Pressure and louder voices sway you, and winning people's trust and support for your ideas does not come easily yet.","lo":"You hold your ground, earn people's trust and bring them with you.","tips":["Before asking for someone's support, find out what matters to them and show how your idea helps.","When your idea is passed over, restate it once, calmly, with the reason it matters."]},{"id":"abha","n":"Abha","dv":"आभा","sub":"Presence & Bearing","hi":"How you look and carry yourself takes up a lot of attention, and bends to other people's remarks.","lo":"You present yourself appropriately, then stop thinking about it once you are in the room.","tips":["Decide your outfit the night before, against the occasion, then stop checking.","Practise holding eye contact for a full sentence in everyday conversations."]},{"id":"lakshya","n":"Lakshya","dv":"लक्ष्य","sub":"Purposeful Growth","hi":"Setbacks and change knock you off course for a while, and learning new ways can feel like a threat rather than a step up.","lo":"You recover from setbacks, adapt to change and keep learning towards your goals.","tips":["After a setback, write down three things within your control before deciding anything.","Learn one small new skill each month, and tell someone what you learnt."]}],"PA":[{"d":"avabodha","src":"Original A2","v":[{"q":"You read in the media that a new disease is spreading in your area. You:","o":[["Think, thank God I haven't caught it, and carry on.",2.25,0],["Feel you may already have some of its symptoms.",9.25,0],["Start recalling that a friend of yours has had symptoms.",4.25,0],["Decide to visit a doctor and get examined, though you feel fine.",4.25,0],["Check a reliable source, and take sensible precautions if needed.",0,0]]},{"q":"A report says a product you use every day may carry a health risk. You:","o":[["Look at the evidence, and change the habit only if it holds up.",0,0],["Note it and carry on as usual.",2.5,0],["Keep searching for more about it, and feel uneasy.",6.25,0],["Become convinced it has already harmed you.",9.25,0]]}]},{"d":"lakshya","src":"New (locus of control)","v":[{"q":"Something you worked hard on fails. You:","o":[["Look at what you would do differently next time.",0,0],["Review it, accepting part of it was outside your hands.",1.25,0],["Conclude the circumstances were stacked against you.",6.25,0],["Feel it proves things rarely go your way, whatever you do.",9.25,0]]},{"q":"An opportunity you wanted goes to someone else. You:","o":[["Ask what you could strengthen for the next one.",0,0],["Accept that some of it was yours to control and some was not.",1.25,0],["Assume it was decided by connections, not merit.",5.5,0],["Take it as proof that outcomes are not yours to influence.",9.5,0]]}]},{"d":"vachana","src":"Original A6","v":[{"q":"A person you know keeps holding forth on politics, the economy and cinema, with opinions you don't agree with. You:","o":[["Feel it may hurt them, so you just say “oh, ha” and nod.",7.75,0],["Pretend you're not interested in the topics, and stay quiet.",6,0],["Diplomatically convey that you don't agree with their opinions.",0,0],["Tell them to their face that their opinions are wrong.",6.25,1]]},{"q":"A relative repeats claims at a family gathering that you believe are plainly wrong. You:","o":[["Set out calmly where you see it differently.",0,0],["Tell them flatly, in front of everyone, that they are mistaken.",6.5,1],["Let it go and change the subject.",4.25,0],["Agree outwardly to keep the peace.",7.75,0]]}]},{"d":"vachana","src":"New (from original B13)","v":[{"q":"You are asked for your honest view in a group that clearly thinks otherwise. You:","o":[["Give it plainly, with your reasons.",0,0],["Give it, but wrap it very carefully.",2,0],["Give a vague, neutral answer instead.",6,0],["Agree with the room; your real view would not go down well.",9.5,0]]},{"q":"You hold an opinion you know the people around you would disagree with. When it becomes relevant, you:","o":[["Say it clearly and calmly.",0,0],["Say it, but soften it until it barely registers.",4,0],["Keep it to yourself; it isn't worth the reaction.",5.25,0],["Hide it; if they knew, they would think less of you.",9.25,0]]}]},{"d":"indriyajaya","src":"Original A3","v":[{"q":"A colleague in your office asks you to help with their task. You:","o":[["Accept it, because you can't bring yourself to reject their request.",8.5,0],["Agree, on the condition that they help you in future.",2.75,0],["Refuse, giving some lame excuse.",6.5,0],["Explain honestly why you can't help this time.",0.25,0]]},{"q":"A neighbour asks for help that will take most of your Sunday. You had plans. You:","o":[["Tell them honestly you're not free, and offer another time.",0,0],["Tell them it's not your problem.",6.75,1],["Say you'll try, then find a reason not to turn up.",7,0],["Cancel your plans rather than let them down.",7.25,0]]}]},{"d":"indriyajaya","src":"Original A4","v":[{"q":"Your parents tell you they are attending a relative's function the day after tomorrow, and that you have no choice but to come along. You:","o":[["Go along with it without checking your own plans.",4,0],["Reply curtly that you have very important work and can't go.",6,1],["Say casually you'll try your best, and join if possible.",5,0],["Say yes, then give some reason later and escape.",7.75,0],["Check your own plans, and tell them honestly whether you can come.",0.25,0]]},{"q":"Your manager announces you'll be staying late for a client event, without asking whether you're free. You:","o":[["Say plainly whether you can, and what you'd need to make it work.",0,0],["Refuse curtly in front of the team.",6.5,1],["Agree, then quietly slip away early.",7.75,0],["Cancel your own commitments without a word.",7.75,0]]}]},{"d":"abha","src":"Original A1","v":[{"q":"You buy something trending: a shirt, a hat, a watch. A friend says it's nice, but it doesn't suit you. You:","o":[["Reply sarcastically that they just can't stand seeing you comfortable.",5.5,1],["Check with others whether it suits you.",4.75,0],["Don't take it too seriously; you chose it for yourself.",0,0],["Go back to the shop and exchange it for another colour or design.",7.75,0]]},{"q":"A colleague remarks that your outfit is too casual for an important meeting. You:","o":[["Consider whether they have a point, and decide for next time yourself.",0,0],["Tell them your clothes are none of their business.",6,1],["Feel self-conscious through the rest of the meeting.",6.25,0],["Rush to borrow or buy something else before the meeting.",6.75,0]]}]},{"d":"abha","src":"Original A7","v":[{"q":"At the salon for a haircut, the owner looks at your hair and says it looks bad, and that you must come more often or you will look unattractive. You:","o":[["Recognise it as a sales pitch to grow their business.",0,0],["Get worried about your looks, and take their advice seriously.",9,0],["Gently tell them that it's not so.",1,0],["Tell them directly they shouldn't insult customers to grow their business.",4.25,1]]},{"q":"A stylist tells you your look is outdated, and that you'd be taken more seriously after a complete makeover. You:","o":[["Weigh it as one opinion, and change only what you agree with.",0,0],["Tell them sharply they have no idea what they're talking about.",6,1],["Start doubting how people at work see you.",6.75,0],["Book the full makeover on the spot.",8.75,0]]}]},{"d":"ranjana","src":"Original A5","v":[{"q":"At a brand showroom, the salesperson brings you a shirt, praises its quality and design, says it suits you well, and keeps pressing you to buy. You:","o":[["See it as the usual tactic, and ask to see a different shirt.",0,0],["Tell them you know exactly what you want, and feel irritated.",3.25,1],["Trust that they know quality and design, and buy that shirt.",9,0],["Appreciate their communication skills with a smile, but don't buy it.",0,0]]},{"q":"A friend who is very confident about money urges you into an investment you hadn't planned. You:","o":[["Say you'll look into it yourself before deciding.",0,0],["Tell them to stop pushing their schemes on you.",5.25,1],["Put in a small amount so you don't seem doubtful.",6.75,0],["Invest on their say-so.",9.75,0]]}]},{"d":"ranjana","src":"New (impact)","v":[{"q":"You make a suggestion in a meeting and it is passed over. Later someone else makes the same point, and it is welcomed. You:","o":[["Point out calmly that it builds on what you raised, and add to it.",0,0],["Call it out sharply as your idea.",5.5,1],["Let it go; at least it's being done.",5.75,0],["Conclude that your ideas don't carry weight here.",8.75,0]]},{"q":"Your team must choose between your plan and a colleague's. Theirs is pushed louder; you believe yours is better. You:","o":[["Set out clearly why yours works, then let the team decide.",0,0],["Dismiss their plan as obviously weaker.",6,1],["Mention yours briefly, then go along with theirs.",6,0],["Withdraw yours before it is even discussed.",9.5,0]]}]},{"d":"avabodha","src":"New (decision-making)","v":[{"q":"You face a decision that matters, with no obvious right answer. You:","o":[["Weigh it against what matters most to you, and decide.",0,0],["Take one or two trusted views, then decide yourself.",0.75,0],["Keep asking more people; each view shifts you.",6,0],["Put it off until someone decides for you.",9,0]]},{"q":"Two good options, and no clear winner between them. You:","o":[["Decide by which one fits what you care about.",0,0],["Sound out one person, then choose.",0.75,0],["Collect many opinions, and swing with each.",6,0],["Delay until the choice is made for you.",9,0]]}]},{"d":"lakshya","src":"New (adaptability)","v":[{"q":"Your workplace switches to a new system you have never used. You:","o":[["Dive in and learn it properly.",0,0],["Learn what you need, and ask for help where you're stuck.",0.5,0],["Stick to the old way for as long as you can.",6,0],["Feel it's beyond you, and avoid it.",8.5,0]]},{"q":"You learn that a skill you are proud of is becoming outdated. You:","o":[["Plan how to update it, and start.",0,0],["Pick up the essentials of the newer approach.",1,0],["Insist your way still works better.",5.75,1],["Feel you've fallen behind for good.",8.75,0]]}]},{"d":"indriyajaya","src":"New (integrity)","v":[{"q":"You discover a mistake in your work that nobody else has noticed yet. You:","o":[["Tell the people affected, and fix it.",0,0],["Fix it quietly without mentioning it.",2.75,0],["Wait to see whether anyone notices.",6.75,0],["If it comes up, put it down to someone else's input.",9.75,0]]},{"q":"Your manager praises work that a teammate mostly did. You:","o":[["Say on the spot that it was mainly your teammate's work.",0,0],["Mention your teammate's part to the manager later.",1.75,0],["Accept the praise and say nothing.",6.75,0],["Present it as your own work.",10,0]]}]},{"d":"ranjana","src":"New (earning trust)","v":[{"q":"You need support for your project from a senior colleague who barely knows you. You:","o":[["Learn what matters to them, and show how the project helps.",0,0],["Send a detailed proposal by email, and wait.",3.25,0],["Ask your own boss to pressure them into it.",5.75,0],["Drop the idea of their support, and manage without.",8,0]]},{"q":"Two people in your team are in a conflict that is slowing everyone down. You:","o":[["Talk to both, and help them find common ground.",0,0],["Raise it with your manager straight away.",3.75,0],["Side with the person you agree with.",6,1],["Stay out of it, and hope it settles.",6.75,0]]}]}],"PB":[{"d":"avabodha","k":1,"rig":0,"src":"Original B13","t":"If others knew my real thoughts, I feel they would be disgusted."},{"d":"lakshya","k":1,"rig":0,"src":"Original B15","t":"When I am emotionally upset, I feel hopeless."},{"d":"vachana","k":1,"rig":0,"src":"Original B5","t":"I get really worked up when someone comments critically on me."},{"d":"vachana","k":1,"rig":0,"src":"Original B11","t":"I feel miserable saying “no” or “not possible” to someone."},{"d":"indriyajaya","k":1,"rig":1,"src":"Original B7","t":"I feel disgusted when I meet people I find eccentric, odd or foolish."},{"d":"indriyajaya","k":1,"rig":1,"src":"Original B8","t":"If someone hurts me, I immediately hurt them back."},{"d":"abha","k":-1,"rig":0,"src":"New","t":"I feel at ease with how I come across in professional settings."},{"d":"abha","k":-1,"rig":0,"src":"New","t":"I hold eye contact comfortably when speaking with someone."},{"d":"ranjana","k":-1,"rig":0,"src":"Original B4","t":"I shop based on my own needs, not because someone recommended something."},{"d":"ranjana","k":-1,"rig":0,"src":"New","t":"People often come to me for advice or a second opinion."},{"d":"avabodha","k":-1,"rig":0,"src":"New","t":"Before a big decision, I look at it from several angles, including ones I don't like."},{"d":"lakshya","k":-1,"rig":0,"src":"New","t":"I regularly learn something new, even when no one requires it."},{"d":"indriyajaya","k":-1,"rig":0,"src":"New","t":"I admit my mistakes openly, even when it costs me."}],"CH":[{"chk":"att","want":1,"t":"To show you're reading carefully, please choose “Disagree” for this statement."},{"chk":"att","want":4,"t":"This is a check question: please select “Strongly agree”."},{"chk":"sd","want":null,"t":"I have never been annoyed with anyone."},{"chk":"sd","want":null,"t":"I always keep every promise I make, without exception."},{"chk":"sd","want":null,"t":"I have never said something I later regretted."}],"LIK":["Strongly disagree","Disagree","Neutral","Agree","Strongly agree"],"BANDS":[{"min":0,"name":"Emerging","tag":"Heavily influenced: other people's voices lead","p":["Your answers suggest you tend to accept what others say with little questioning, and that your self-confidence may be low at the moment. Holding your own view when someone else holds a different one is hard right now.","Your biggest positive is that you respect other people's opinions, which is why people find you easy to talk to. The cost is that your own needs and choices can get lost.","This is a pattern, not a verdict. Start by backing your own judgement in small, low-stakes things, and build from there."],"s":["Respectful of others' opinions","Approachable, and easy to talk to","Open to feedback and new ideas"],"w":["Accepting views without checking them","Saying yes when you mean no","Letting praise or criticism set how you see yourself"]},{"min":45,"name":"Established","tag":"Moderately influenceable: firm, but yields to strong personalities","p":["Others may find it fairly easy to persuade you, though you do have a real strength: you can stand firm, and you don't yield to everything.","Where you tend to give way is with a strong, commanding personality. That is a specific, workable gap rather than a general lack of confidence."],"s":["Able to stand firm on things that matter","Considerate and cooperative"],"w":["Giving in to forceful or very confident people","Agreeing in the moment, regretting it later"]},{"min":70,"name":"Exemplary","tag":"Self-assured: confident and balanced","p":["Your answers suggest good self-confidence along with emotional maturity. You are usually a step ahead of people who try to influence you for their own advantage.","You take responsibility for your own direction, you can keep pressure at arm's length, and you can still be a good friend to those who like and trust you."],"s":["Healthy self-confidence","Weighs advice without being swayed","Cordial and trustworthy with others"],"w":["Staying genuinely open: confidence works best alongside listening","Under stress, firmness can slide towards rigidity"]}],"RIGID":{"name":"Guarded","tag":"Rigid and self-protective: ego may be standing in for confidence","p":["Your answers lean towards fixed positions and pushing back hard, rather than balanced individuality. You may come across as very rational, or as ruthless, and even people close to you may keep some distance.","You may feel you are never influenced by others. The pattern is usually subtler: when you do give way, it tends to be to negative views rather than constructive ones. Mistaking ego for self-confidence is the real weakness here.","This is a habit of responding rather than a fixed trait, and habits can be rebuilt."],"s":["Clear opinions, and the courage to state them","Not easily pressured"],"w":["Reacting instantly to hurt or criticism","Dismissing people who seem different","Confrontation as the default setting"]},"LEVELS":[{"min":80,"n":"Strong"},{"min":60,"n":"Steady"},{"min":40,"n":"Developing"},{"min":0,"n":"Priority"}]};
 var SB_URL="https://ybomjzbrtdghqofjutor.supabase.co",SB_KEY="sb_publishable_cyNVfIVqLC8_IfV_7N2D4Q__R-_ioYX";
 var BANDS=["Emerging","Established","Exemplary","Guarded"];
-var BAND_COL={Emerging:"var(--s5)",Established:"var(--s2)",Exemplary:"var(--s3)",Guarded:"var(--s4)"};
+var BAND_COL={Emerging:"var(--b1)",Established:"var(--b2)",Exemplary:"var(--b3)",Guarded:"var(--b4)"};
 var DIMCOL={avabodha:"var(--s1)",vachana:"var(--s2)",indriyajaya:"var(--s3)",ranjana:"var(--s4)",abha:"var(--s5)",lakshya:"var(--s6)"};
 var CONF_WHY={good:"Good",att:"Attention checks missed",rushed:"Completed under 2 minutes",same:"Same answer throughout",sd:"Idealised answering",neutral:"Many neutral answers",flat:"Flat profile"};
 var $=function(id){return document.getElementById(id)};
@@ -154,12 +179,13 @@ var sb=null,session=null,ALL=[],S={range:30,lang:"all",reliable:false,sort:{k:"c
 
 /* ---------- login ---------- */
 function loginView(msg,err){
-  $("root").innerHTML='<div class="card login"><h1>AVIRAL admin</h1><p class="sub">Sign in with the email and password of a user you added in Supabase.</p>'+
-  '<form id="lf"><label class="mute" for="em" style="font-size:12.5px">Email</label><input id="em" type="email" required autocomplete="username" placeholder="you@example.com">'+
-  '<label class="mute" for="pw" style="font-size:12.5px">Password</label><input id="pw" type="password" required autocomplete="current-password" placeholder="Password">'+
-  '<label class="chk" style="font-size:12.5px;margin:-4px 0 12px"><input type="checkbox" id="sp" style="width:auto;margin:0"> Show password</label>'+
-  '<button class="btn pri" id="lb" style="width:100%">Sign in</button></form>'+
-  '<div class="msg'+(err?' err':'')+'" id="lm">'+esc(msg||"")+'</div></div>';
+  $("root").innerHTML='<div class="signin"><div class="si-img"><img src="img/hero-1100.jpg" srcset="img/hero-1100.jpg 1100w, img/hero-1672.jpg 1672w" sizes="60vw" alt=""></div><div class="si-form"><div class="si-in"><div class="wm">AVIRAL<small>Admin</small></div>'+
+  '<h1>Sign in</h1><p class="sub">Use the email and password of a user you added in Supabase.</p>'+
+  '<form id="lf"><label class="field"><span>Email</span><input id="em" type="email" required autocomplete="username" placeholder="you@example.com"></label>'+
+  '<label class="field"><span>Password</span><input id="pw" type="password" required autocomplete="current-password"></label>'+
+  '<label class="chk"><input type="checkbox" id="sp"> Show password</label>'+
+  '<button class="btn pri" id="lb">Sign in</button></form>'+
+  '<div class="msg'+(err?' err':'')+'" id="lm" role="status">'+esc(msg||"")+'</div></div></div></div>';
   $("sp").onchange=function(){$("pw").type=this.checked?"text":"password"};
   $("lf").onsubmit=function(e){e.preventDefault();var em=$("em").value.trim().toLowerCase(),pw=$("pw").value;$("lm").className="msg";$("lm").textContent="Signing in…";$("lb").disabled=true;
     sb.auth.signInWithPassword({email:em,password:pw}).then(function(r){
@@ -172,14 +198,14 @@ function loginView(msg,err){
     });};
 }
 function boot(){
-  if(!window.supabase){$("root").innerHTML='<div class="card login"><h1>AVIRAL admin</h1><p class="msg err">Could not load the sign-in library. Check your connection and reload.</p></div>';return}
+  if(!window.supabase){$("root").innerHTML='<div class="solo"><div class="card"><h1>AVIRAL admin</h1><p class="msg err">Could not load the sign-in library. Check your connection and reload.</p></div></div>';return}
   sb=window.supabase.createClient(SB_URL,SB_KEY,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:false}});
   sb.auth.getSession().then(function(r){session=r.data&&r.data.session;if(session)start();else loginView()});
   }
 function start(){
-  $("root").innerHTML='<div class="card login"><p class="msg">Loading responses…</p></div>';
+  $("root").innerHTML='<div class="solo"><p class="mute">Loading responses…</p></div>';
   sb.rpc("is_aviral_admin").then(function(r){
-    if(r.error||r.data!==true){$("root").innerHTML='<div class="card login"><h1>No access</h1><p class="sub">'+esc(session.user.email)+' does not have access. Check that this user still exists in Supabase → Authentication → Users.</p><button class="btn" id="so">Sign out</button></div>';$("so").onclick=signOut;return}
+    if(r.error||r.data!==true){$("root").innerHTML='<div class="solo"><div class="card"><h1>No access</h1><p class="sub">'+esc(session.user.email)+' does not have access. Check that this user still exists in Supabase → Authentication → Users.</p><button class="btn" id="so">Sign out</button></div></div>';$("so").onclick=signOut;return}
     load();
   });
 }
@@ -188,7 +214,7 @@ function load(){
   var rows=[],from=0,step=1000;
   (function page(){
     sb.from("aviral_responses").select("*").order("created_at",{ascending:false}).range(from,from+step-1).then(function(r){
-      if(r.error){$("root").innerHTML='<div class="card login"><p class="msg err">'+esc(r.error.message)+'</p></div>';return}
+      if(r.error){$("root").innerHTML='<div class="solo"><div class="card"><p class="msg err">'+esc(r.error.message)+'</p></div></div>';return}
       rows=rows.concat(r.data);
       if(r.data.length===step&&rows.length<20000){from+=step;page()}else{ALL=rows.map(norm);S.page=0;render()}
     });
@@ -384,7 +410,7 @@ function tableCard(R){
   rows.slice(S.page*per,S.page*per+per).forEach(function(r,i){var e=extremes(r);
     h+='<tr class="click" data-id="'+r.id+'"><td class="n mute">'+(S.page*per+i+1)+'</td><td style="white-space:nowrap">'+r.t.toLocaleString(undefined,{day:"numeric",month:"short",year:"numeric",hour:"2-digit",minute:"2-digit"})+'</td><td class="n"><b style="font-size:15px">'+r.idx+'</b></td><td><span class="pill"><i class="dot" style="background:'+BAND_COL[r.band]+'"></i>'+esc(r.band)+'</span></td>'+
     '<td>'+esc(e.hi.n)+' <span class="mute">'+fmt(e.hi.p)+'%</span></td><td>'+esc(e.lo.n)+' <span class="mute">'+fmt(e.lo.p)+'%</span></td>'+
-    '<td>'+(r.conf==="Low"?'<span class="pill warn">Low</span>':esc(r.conf))+'</td><td>'+(r.lang==="kn"?"Kannada":"English")+'</td><td class="n">'+durTxt(r.dur)+'</td><td class="go">View report →</td></tr>'});
+    '<td>'+(r.conf==="Low"?'<span class="pill warn">Low</span>':esc(r.conf))+'</td><td>'+(r.lang==="kn"?"Kannada":"English")+'</td><td class="n">'+durTxt(r.dur)+'</td><td class="go">View report</td></tr>'});
   h+='</tbody></table></div><div class="top" style="margin:10px 0 0"><span class="mute">'+plural(rows.length,"response")+' · page '+(S.page+1)+' of '+pages+'</span><span><button class="btn" id="pv"'+(S.page?'':' disabled')+'>Previous</button> <button class="btn" id="nx"'+(S.page<pages-1?'':' disabled')+'>Next</button> <button class="btn" id="csv">Export CSV</button></span></div>';
   return '<div class="card"><h2>Responses</h2><p class="sub">Click any response to open its full report: scores on each dimension, strengths and areas to improve. Click a column heading to sort.</p>'+h+'</div>';
 }
@@ -398,8 +424,10 @@ function ul(a){return '<ul class="ul">'+a.map(function(x){return '<li>'+esc(x)+'
 
 /* ---------- header, tabs, filters ---------- */
 function route(){var h=decodeURIComponent(location.hash.slice(1));if(h.indexOf("r/")===0)return{v:"report",id:h.slice(2)};if(h==="patterns")return{v:"patterns"};return{v:"list"}}
-function header(){return '<div class="top noprint"><div class="brand"><h1>AVIRAL admin</h1><small>'+esc(session&&session.user?session.user.email:"")+'</small></div><div><button class="btn" id="rf">Refresh</button> <button class="btn" id="so">Sign out</button></div></div>'}
-function tabs(v){return '<nav class="tabs noprint"><a href="#" class="'+(v==="list"?"on":"")+'">Responses</a><a href="#patterns" class="'+(v==="patterns"?"on":"")+'">Patterns across everyone</a></nav>'}
+function header(v){var on=v==="patterns"?"patterns":"list";return '<header class="abar noprint"><div class="in"><a class="wm" href="#">AVIRAL<small>Admin</small></a>'+
+  '<nav class="tabs" aria-label="Sections"><a href="#" class="'+(on==="list"?"on":"")+'"'+(on==="list"?' aria-current="page"':'')+'>Responses</a><a href="#patterns" class="'+(on==="patterns"?"on":"")+'"'+(on==="patterns"?' aria-current="page"':'')+'>Patterns across everyone</a></nav>'+
+  '<div class="acct"><span class="who">'+esc(session&&session.user?session.user.email:"")+'</span><button class="btn" id="rf">Refresh</button><button class="btn" id="so">Sign out</button></div></div></header><div class="wrap">'}
+function tabs(){return ""}
 function filterBar(R){
   return '<div class="filters noprint"><span class="mute">Period</span><span class="seg" id="sgR">'+[[7,"7 days"],[30,"30 days"],[90,"90 days"],[0,"All"]].map(function(x){return '<button data-v="'+x[0]+'" aria-pressed="'+(S.range===x[0])+'">'+x[1]+'</button>'}).join("")+'</span>'+
     '<span class="mute">Language</span><span class="seg" id="sgL">'+[["all","All"],["en","English"],["kn","Kannada"]].map(function(x){return '<button data-v="'+x[0]+'" aria-pressed="'+(S.lang===x[0])+'">'+x[1]+'</button>'}).join("")+'</span>'+
@@ -410,7 +438,7 @@ function filterBar(R){
 var LOADED=false;
 window.addEventListener("hashchange",function(){if(LOADED){render();scrollTo(0,0)}});
 function render(){
-  LOADED=true;var rt=route(),h=header();
+  LOADED=true;var rt=route(),h=header(rt.v);
   if(rt.v==="report"){
     var r=ALL.filter(function(x){return x.id===rt.id})[0];
     h+=r?reportView(r):'<div class="card empty">This response was not found. It may have been deleted. <a href="#">Back to responses</a></div>';
@@ -452,9 +480,9 @@ function reportView(r){
     ranked=rows.slice().sort(function(a,b){return b.p-a.p}),strong=ranked.slice(0,2),weak=ranked.slice(-2).reverse(),bi=bandInfo(r.band),
     idxBeat=beats(r.idx,ALL.map(function(y){return y.idx})),h='';
   /* toolbar */
-  h+='<div class="top noprint"><a class="btn" href="#">← All responses</a><span><button class="btn" id="rpr">Print / Save PDF</button> <button class="btn danger" id="del">Delete</button></span></div>';
+  h+='<div class="top noprint"><a class="btn" href="#">Back to responses</a><span><button class="btn" id="rpr">Print / Save PDF</button> <button class="btn danger" id="del">Delete</button></span></div>';
   /* score */
-  var gauge='<div class="gauge"><span style="width:45%;background:color-mix(in srgb,var(--s5) 22%,transparent)"></span><span style="width:25%;background:color-mix(in srgb,var(--s2) 22%,transparent)"></span><span style="width:30%;background:color-mix(in srgb,var(--s3) 22%,transparent)"></span><b style="left:'+r.idx+'%"></b></div><div class="gl"><span>Emerging</span><span>Established</span><span>Exemplary</span></div>';
+  var gauge='<div class="gauge"><span style="width:45%;background:color-mix(in srgb,var(--b1) 30%,transparent)"></span><span style="width:25%;background:color-mix(in srgb,var(--b2) 30%,transparent)"></span><span style="width:30%;background:color-mix(in srgb,var(--b3) 30%,transparent)"></span><b style="left:'+r.idx+'%"></b></div><div class="gl"><span>Emerging</span><span>Established</span><span>Exemplary</span></div>';
   h+='<div class="grid g21"><div class="card"><p class="sub" style="margin:0">AVIRAL™ report · '+esc(r.t.toLocaleString(undefined,{weekday:"short",day:"numeric",month:"long",year:"numeric",hour:"2-digit",minute:"2-digit"}))+'</p>'+
      '<div class="big"><b>'+r.idx+'</b><span>AVIRAL Index, out of 100<br><span class="mute">likely range '+Math.max(0,r.idx-7)+'–'+Math.min(100,r.idx+7)+'</span></span><span class="pill lg"><i class="dot" style="background:'+BAND_COL[r.band]+'"></i>'+esc(r.band)+'</span></div>'+
      '<p style="margin:4px 0 10px;color:var(--ink2)">'+esc(bi.tag)+'.</p>'+gauge+
