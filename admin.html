@@ -126,23 +126,32 @@ var sb=null,session=null,ALL=[],S={range:30,lang:"all",reliable:false,sort:{k:"c
 
 /* ---------- login ---------- */
 function loginView(msg,err){
-  $("root").innerHTML='<div class="card login"><h1>AVIRAL admin</h1><p class="sub">Sign in with your admin email. We will send you a one-time link.</p>'+
-  '<form id="lf"><input id="em" type="email" required autocomplete="email" placeholder="you@example.com"><button class="btn pri" style="width:100%">Send sign-in link</button></form>'+
+  $("root").innerHTML='<div class="card login"><h1>AVIRAL admin</h1><p class="sub">Sign in with the email and password of a user you added in Supabase.</p>'+
+  '<form id="lf"><label class="mute" for="em" style="font-size:12.5px">Email</label><input id="em" type="email" required autocomplete="username" placeholder="you@example.com">'+
+  '<label class="mute" for="pw" style="font-size:12.5px">Password</label><input id="pw" type="password" required autocomplete="current-password" placeholder="Password">'+
+  '<label class="chk" style="font-size:12.5px;margin:-4px 0 12px"><input type="checkbox" id="sp" style="width:auto;margin:0"> Show password</label>'+
+  '<button class="btn pri" id="lb" style="width:100%">Sign in</button></form>'+
   '<div class="msg'+(err?' err':'')+'" id="lm">'+esc(msg||"")+'</div></div>';
-  $("lf").onsubmit=function(e){e.preventDefault();var em=$("em").value.trim().toLowerCase();$("lm").className="msg";$("lm").textContent="Sending…";
-    sb.auth.signInWithOtp({email:em,options:{emailRedirectTo:location.origin+location.pathname}}).then(function(r){
-      if(r.error){$("lm").className="msg err";$("lm").textContent=r.error.message}else $("lm").textContent="Check your inbox for the sign-in link, then open it on this device."});};
+  $("sp").onchange=function(){$("pw").type=this.checked?"text":"password"};
+  $("lf").onsubmit=function(e){e.preventDefault();var em=$("em").value.trim().toLowerCase(),pw=$("pw").value;$("lm").className="msg";$("lm").textContent="Signing in…";$("lb").disabled=true;
+    sb.auth.signInWithPassword({email:em,password:pw}).then(function(r){
+      $("lb").disabled=false;
+      if(r.error){var m=r.error.message||"Sign-in failed";
+        if(/invalid login/i.test(m))m="Wrong email or password.";
+        else if(/not confirmed/i.test(m))m="This user is not confirmed yet. Wait a moment and try again.";
+        $("lm").className="msg err";$("lm").textContent=m;return}
+      session=r.data.session;start();
+    });};
 }
 function boot(){
   if(!window.supabase){$("root").innerHTML='<div class="card login"><h1>AVIRAL admin</h1><p class="msg err">Could not load the sign-in library. Check your connection and reload.</p></div>';return}
-  sb=window.supabase.createClient(SB_URL,SB_KEY,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true}});
+  sb=window.supabase.createClient(SB_URL,SB_KEY,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:false}});
   sb.auth.getSession().then(function(r){session=r.data&&r.data.session;if(session)start();else loginView()});
-  sb.auth.onAuthStateChange(function(ev,s){if(ev==="SIGNED_IN"&&s&&!session){session=s;if(location.hash)history.replaceState(null,"",location.pathname);start()}});
-}
+  }
 function start(){
   $("root").innerHTML='<div class="card login"><p class="msg">Loading responses…</p></div>';
   sb.rpc("is_aviral_admin").then(function(r){
-    if(r.error||r.data!==true){$("root").innerHTML='<div class="card login"><h1>No access</h1><p class="sub">'+esc(session.user.email)+' is not on the admin list.</p><button class="btn" id="so">Sign out</button></div>';$("so").onclick=signOut;return}
+    if(r.error||r.data!==true){$("root").innerHTML='<div class="card login"><h1>No access</h1><p class="sub">'+esc(session.user.email)+' does not have access. Check that this user still exists in Supabase → Authentication → Users.</p><button class="btn" id="so">Sign out</button></div>';$("so").onclick=signOut;return}
     load();
   });
 }
