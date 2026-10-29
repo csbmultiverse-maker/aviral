@@ -1,0 +1,423 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>AVIRAL Admin</title>
+<style>
+:root{
+  --bg:#f6f6f4;--surface:#fcfcfb;--ink:#1d1d1b;--ink2:#55554f;--muted:#7a7a72;--line:#e3e3de;--grid:#ececE7;
+  --accent:#3f5fd0;--accent-ink:#fff;--warn:#b4560a;--danger:#b3261e;
+  --s1:#3f5fd0;--s2:#11a7c9;--s3:#79a822;--s4:#d93a70;--s5:#ea9420;--s6:#8a54c9;
+  --q1:#dbe3fa;--q2:#a9b9ee;--q3:#7b92e2;--q4:#516ed6;--q5:#2c47a8;
+  --dvlo:#3f5fd0;--dvmid:#e7e7e2;--dvhi:#ea9420;
+}
+@media (prefers-color-scheme:dark){:root{
+  --bg:#121211;--surface:#1a1a19;--ink:#f0f0ec;--ink2:#c3c3bb;--muted:#8d8d85;--line:#2e2e2b;--grid:#272725;
+  --accent:#6f86ee;--accent-ink:#0d0d0c;--warn:#e0a04a;--danger:#f2837c;
+  --s1:#4d63dc;--s2:#0e9fa8;--s3:#6f9c1f;--s4:#e05080;--s5:#c87c14;--s6:#9a6ce0;
+  --q1:#2a3463;--q2:#34479a;--q3:#4a63cc;--q4:#7389ea;--q5:#b4c1f8;
+  --dvlo:#4d63dc;--dvmid:#33332f;--dvhi:#c87c14;
+}}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.45 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+h1,h2,h3{margin:0;font-weight:650;letter-spacing:-.01em}
+h1{font-size:20px}h2{font-size:15px}h3{font-size:13px}
+button,select,input{font:inherit;color:inherit}
+button{cursor:pointer}
+.wrap{max-width:1240px;margin:0 auto;padding:16px}
+.top{display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap;margin-bottom:12px}
+.brand{display:flex;gap:10px;align-items:baseline;flex-wrap:wrap}
+.brand small{color:var(--muted)}
+.btn{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:7px 12px}
+.btn:hover{border-color:var(--muted)}
+.btn.pri{background:var(--accent);border-color:var(--accent);color:var(--accent-ink);font-weight:600}
+.btn.danger{color:var(--danger)}
+.filters{display:flex;gap:8px;flex-wrap:wrap;align-items:center;padding:10px 12px;background:var(--surface);border:1px solid var(--line);border-radius:12px;margin-bottom:12px}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:8px;overflow:hidden}
+.seg button{border:0;background:transparent;padding:6px 11px;border-right:1px solid var(--line)}
+.seg button:last-child{border-right:0}
+.seg button[aria-pressed=true]{background:var(--accent);color:var(--accent-ink);font-weight:600}
+.chk{display:inline-flex;gap:6px;align-items:center;color:var(--ink2)}
+.sp{flex:1}
+.grid>*{min-width:0}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px;min-width:0}
+.card h2{margin-bottom:2px}
+.sub{color:var(--muted);font-size:12.5px;margin:0 0 10px}
+.grid{display:grid;gap:12px;margin-bottom:12px}
+.g4{grid-template-columns:repeat(4,1fr)}.g6{grid-template-columns:repeat(6,1fr)}
+.g2{grid-template-columns:repeat(2,1fr)}.g3{grid-template-columns:repeat(3,1fr)}
+.g21{grid-template-columns:2fr 1fr}.g12{grid-template-columns:1fr 2fr}
+@media(max-width:900px){.g6{grid-template-columns:repeat(3,1fr)}.g4,.g3{grid-template-columns:repeat(2,1fr)}.g2,.g21,.g12{grid-template-columns:1fr}}
+@media(max-width:520px){.g6,.g4,.g3{grid-template-columns:repeat(2,1fr)}.wrap{padding:12px}}
+.kpi .v{font-size:26px;font-weight:700;letter-spacing:-.02em;line-height:1.1}
+.kpi .l{color:var(--muted);font-size:12px;margin-top:2px}
+.kpi .d{color:var(--ink2);font-size:12px;margin-top:4px}
+.insights{margin:0;padding-left:18px;color:var(--ink2)}
+.insights li{margin:3px 0}.insights b{color:var(--ink)}
+.hb{display:grid;grid-template-columns:minmax(90px,150px) 1fr auto;gap:8px;align-items:center;margin:5px 0}
+.hb .lab{color:var(--ink2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.hb .trk{height:14px;background:var(--grid);border-radius:4px;position:relative;overflow:hidden}
+.hb .bar{height:100%;border-radius:0 4px 4px 0;min-width:2px}
+.hb .val{font-variant-numeric:tabular-nums;color:var(--ink);min-width:70px;text-align:right}
+svg{display:block;width:100%;height:auto;overflow:visible}
+svg text{fill:var(--muted);font:11px system-ui,sans-serif}
+svg .ax{stroke:var(--line);stroke-width:1}svg .gr{stroke:var(--grid);stroke-width:1}
+.legend{display:flex;gap:12px;flex-wrap:wrap;color:var(--ink2);font-size:12.5px;margin:2px 0 8px}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:5px;vertical-align:-1px}
+table{border-collapse:collapse;width:100%}
+th,td{padding:7px 8px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+th{color:var(--muted);font-weight:600;font-size:12px;white-space:nowrap;position:sticky;top:0;background:var(--surface)}
+th.s{cursor:pointer}th.s:hover{color:var(--ink)}
+td.n,th.n{text-align:right;font-variant-numeric:tabular-nums}
+tbody tr.click{cursor:pointer}tbody tr.click:hover{background:var(--grid)}
+.scroll{overflow:auto;max-height:520px}
+.pill{display:inline-block;padding:1px 8px;border-radius:999px;font-size:12px;border:1px solid var(--line);color:var(--ink2);white-space:nowrap}
+.pill.warn{color:var(--warn);border-color:var(--warn)}
+.stk{display:flex;height:16px;border-radius:4px;overflow:hidden;gap:2px;background:var(--surface)}
+.stk span{display:block;height:100%}
+.hm{display:grid;gap:2px}
+.hm div{display:flex;align-items:center;justify-content:center;min-height:34px;border-radius:4px;font-size:12px;color:#111;font-variant-numeric:tabular-nums}
+.hm .h{background:transparent;color:var(--muted);font-size:11.5px;min-height:24px}
+.tip{position:fixed;z-index:50;pointer-events:none;background:var(--ink);color:var(--bg);padding:6px 9px;border-radius:7px;font-size:12px;max-width:260px;opacity:0;transition:opacity .08s;white-space:pre-line}
+.empty{color:var(--muted);padding:18px;text-align:center}
+.login{max-width:420px;margin:12vh auto;padding:24px}
+.login input{width:100%;padding:10px 12px;border:1px solid var(--line);border-radius:8px;background:var(--bg);margin:10px 0}
+.msg{margin-top:10px;color:var(--ink2)}.msg.err{color:var(--danger)}
+.detail{position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:40;display:none;overflow:auto;padding:20px}
+.detail.open{display:block}
+.detail .panel{max-width:760px;margin:0 auto;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px}
+.qa{border-top:1px solid var(--line);padding:8px 0}
+.qa .q{color:var(--ink2)}.qa .a{font-weight:600}
+.mute{color:var(--muted)}
+.tabs{margin:2px 0 10px}
+details summary{cursor:pointer;color:var(--ink2)}
+.opt-row{margin:6px 0}
+.chip{font-size:11.5px;color:var(--muted);margin-left:6px}
+@media print{.filters,.top .btn,.noprint{display:none}}
+</style>
+</head>
+<body>
+<div class="wrap" id="root"></div>
+<div class="tip" id="tip"></div>
+<div class="detail" id="detail"><div class="panel" id="panel"></div></div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
+<script>
+var META={"DIMS":[{"id":"avabodha","n":"Avabodha","dv":"अवबोध","sub":"Insight & Clear Thinking"},{"id":"vachana","n":"Vachana","dv":"वचन","sub":"Voice & Communication"},{"id":"indriyajaya","n":"Indriyajaya","dv":"इन्द्रियजय","sub":"Self-Mastery & Integrity"},{"id":"ranjana","n":"Ranjana","dv":"रंजन","sub":"Influence & Trust"},{"id":"abha","n":"Abha","dv":"आभा","sub":"Presence & Bearing"},{"id":"lakshya","n":"Lakshya","dv":"लक्ष्य","sub":"Purposeful Growth"}],"PA":[{"d":"avabodha","src":"Original A2","v":[{"q":"You read in the media that a new disease is spreading in your area. You:","o":[["Think, thank God I haven't caught it, and carry on.",2.25,0],["Feel you may already have some of its symptoms.",9.25,0],["Start recalling that a friend of yours has had symptoms.",4.25,0],["Decide to visit a doctor and get examined, though you feel fine.",4.25,0],["Check a reliable source, and take sensible precautions if needed.",0,0]]},{"q":"A report says a product you use every day may carry a health risk. You:","o":[["Look at the evidence, and change the habit only if it holds up.",0,0],["Note it and carry on as usual.",2.5,0],["Keep searching for more about it, and feel uneasy.",6.25,0],["Become convinced it has already harmed you.",9.25,0]]}]},{"d":"lakshya","src":"New (locus of control)","v":[{"q":"Something you worked hard on fails. You:","o":[["Look at what you would do differently next time.",0,0],["Review it, accepting part of it was outside your hands.",1.25,0],["Conclude the circumstances were stacked against you.",6.25,0],["Feel it proves things rarely go your way, whatever you do.",9.25,0]]},{"q":"An opportunity you wanted goes to someone else. You:","o":[["Ask what you could strengthen for the next one.",0,0],["Accept that some of it was yours to control and some was not.",1.25,0],["Assume it was decided by connections, not merit.",5.5,0],["Take it as proof that outcomes are not yours to influence.",9.5,0]]}]},{"d":"vachana","src":"Original A6","v":[{"q":"A person you know keeps holding forth on politics, the economy and cinema, with opinions you don't agree with. You:","o":[["Feel it may hurt them, so you just say “oh, ha” and nod.",7.75,0],["Pretend you're not interested in the topics, and stay quiet.",6,0],["Diplomatically convey that you don't agree with their opinions.",0,0],["Tell them to their face that their opinions are wrong.",6.25,1]]},{"q":"A relative repeats claims at a family gathering that you believe are plainly wrong. You:","o":[["Set out calmly where you see it differently.",0,0],["Tell them flatly, in front of everyone, that they are mistaken.",6.5,1],["Let it go and change the subject.",4.25,0],["Agree outwardly to keep the peace.",7.75,0]]}]},{"d":"vachana","src":"New (from original B13)","v":[{"q":"You are asked for your honest view in a group that clearly thinks otherwise. You:","o":[["Give it plainly, with your reasons.",0,0],["Give it, but wrap it very carefully.",2,0],["Give a vague, neutral answer instead.",6,0],["Agree with the room; your real view would not go down well.",9.5,0]]},{"q":"You hold an opinion you know the people around you would disagree with. When it becomes relevant, you:","o":[["Say it clearly and calmly.",0,0],["Say it, but soften it until it barely registers.",4,0],["Keep it to yourself; it isn't worth the reaction.",5.25,0],["Hide it; if they knew, they would think less of you.",9.25,0]]}]},{"d":"indriyajaya","src":"Original A3","v":[{"q":"A colleague in your office asks you to help with their task. You:","o":[["Accept it, because you can't bring yourself to reject their request.",8.5,0],["Agree, on the condition that they help you in future.",2.75,0],["Refuse, giving some lame excuse.",6.5,0],["Explain honestly why you can't help this time.",0.25,0]]},{"q":"A neighbour asks for help that will take most of your Sunday. You had plans. You:","o":[["Tell them honestly you're not free, and offer another time.",0,0],["Tell them it's not your problem.",6.75,1],["Say you'll try, then find a reason not to turn up.",7,0],["Cancel your plans rather than let them down.",7.25,0]]}]},{"d":"indriyajaya","src":"Original A4","v":[{"q":"Your parents tell you they are attending a relative's function the day after tomorrow, and that you have no choice but to come along. You:","o":[["Go along with it without checking your own plans.",4,0],["Reply curtly that you have very important work and can't go.",6,1],["Say casually you'll try your best, and join if possible.",5,0],["Say yes, then give some reason later and escape.",7.75,0],["Check your own plans, and tell them honestly whether you can come.",0.25,0]]},{"q":"Your manager announces you'll be staying late for a client event, without asking whether you're free. You:","o":[["Say plainly whether you can, and what you'd need to make it work.",0,0],["Refuse curtly in front of the team.",6.5,1],["Agree, then quietly slip away early.",7.75,0],["Cancel your own commitments without a word.",7.75,0]]}]},{"d":"abha","src":"Original A1","v":[{"q":"You buy something trending: a shirt, a hat, a watch. A friend says it's nice, but it doesn't suit you. You:","o":[["Reply sarcastically that they just can't stand seeing you comfortable.",5.5,1],["Check with others whether it suits you.",4.75,0],["Don't take it too seriously; you chose it for yourself.",0,0],["Go back to the shop and exchange it for another colour or design.",7.75,0]]},{"q":"A colleague remarks that your outfit is too casual for an important meeting. You:","o":[["Consider whether they have a point, and decide for next time yourself.",0,0],["Tell them your clothes are none of their business.",6,1],["Feel self-conscious through the rest of the meeting.",6.25,0],["Rush to borrow or buy something else before the meeting.",6.75,0]]}]},{"d":"abha","src":"Original A7","v":[{"q":"At the salon for a haircut, the owner looks at your hair and says it looks bad, and that you must come more often or you will look unattractive. You:","o":[["Recognise it as a sales pitch to grow their business.",0,0],["Get worried about your looks, and take their advice seriously.",9,0],["Gently tell them that it's not so.",1,0],["Tell them directly they shouldn't insult customers to grow their business.",4.25,1]]},{"q":"A stylist tells you your look is outdated, and that you'd be taken more seriously after a complete makeover. You:","o":[["Weigh it as one opinion, and change only what you agree with.",0,0],["Tell them sharply they have no idea what they're talking about.",6,1],["Start doubting how people at work see you.",6.75,0],["Book the full makeover on the spot.",8.75,0]]}]},{"d":"ranjana","src":"Original A5","v":[{"q":"At a brand showroom, the salesperson brings you a shirt, praises its quality and design, says it suits you well, and keeps pressing you to buy. You:","o":[["See it as the usual tactic, and ask to see a different shirt.",0,0],["Tell them you know exactly what you want, and feel irritated.",3.25,1],["Trust that they know quality and design, and buy that shirt.",9,0],["Appreciate their communication skills with a smile, but don't buy it.",0,0]]},{"q":"A friend who is very confident about money urges you into an investment you hadn't planned. You:","o":[["Say you'll look into it yourself before deciding.",0,0],["Tell them to stop pushing their schemes on you.",5.25,1],["Put in a small amount so you don't seem doubtful.",6.75,0],["Invest on their say-so.",9.75,0]]}]},{"d":"ranjana","src":"New (impact)","v":[{"q":"You make a suggestion in a meeting and it is passed over. Later someone else makes the same point, and it is welcomed. You:","o":[["Point out calmly that it builds on what you raised, and add to it.",0,0],["Call it out sharply as your idea.",5.5,1],["Let it go; at least it's being done.",5.75,0],["Conclude that your ideas don't carry weight here.",8.75,0]]},{"q":"Your team must choose between your plan and a colleague's. Theirs is pushed louder; you believe yours is better. You:","o":[["Set out clearly why yours works, then let the team decide.",0,0],["Dismiss their plan as obviously weaker.",6,1],["Mention yours briefly, then go along with theirs.",6,0],["Withdraw yours before it is even discussed.",9.5,0]]}]},{"d":"avabodha","src":"New (decision-making)","v":[{"q":"You face a decision that matters, with no obvious right answer. You:","o":[["Weigh it against what matters most to you, and decide.",0,0],["Take one or two trusted views, then decide yourself.",0.75,0],["Keep asking more people; each view shifts you.",6,0],["Put it off until someone decides for you.",9,0]]},{"q":"Two good options, and no clear winner between them. You:","o":[["Decide by which one fits what you care about.",0,0],["Sound out one person, then choose.",0.75,0],["Collect many opinions, and swing with each.",6,0],["Delay until the choice is made for you.",9,0]]}]},{"d":"lakshya","src":"New (adaptability)","v":[{"q":"Your workplace switches to a new system you have never used. You:","o":[["Dive in and learn it properly.",0,0],["Learn what you need, and ask for help where you're stuck.",0.5,0],["Stick to the old way for as long as you can.",6,0],["Feel it's beyond you, and avoid it.",8.5,0]]},{"q":"You learn that a skill you are proud of is becoming outdated. You:","o":[["Plan how to update it, and start.",0,0],["Pick up the essentials of the newer approach.",1,0],["Insist your way still works better.",5.75,1],["Feel you've fallen behind for good.",8.75,0]]}]},{"d":"indriyajaya","src":"New (integrity)","v":[{"q":"You discover a mistake in your work that nobody else has noticed yet. You:","o":[["Tell the people affected, and fix it.",0,0],["Fix it quietly without mentioning it.",2.75,0],["Wait to see whether anyone notices.",6.75,0],["If it comes up, put it down to someone else's input.",9.75,0]]},{"q":"Your manager praises work that a teammate mostly did. You:","o":[["Say on the spot that it was mainly your teammate's work.",0,0],["Mention your teammate's part to the manager later.",1.75,0],["Accept the praise and say nothing.",6.75,0],["Present it as your own work.",10,0]]}]},{"d":"ranjana","src":"New (earning trust)","v":[{"q":"You need support for your project from a senior colleague who barely knows you. You:","o":[["Learn what matters to them, and show how the project helps.",0,0],["Send a detailed proposal by email, and wait.",3.25,0],["Ask your own boss to pressure them into it.",5.75,0],["Drop the idea of their support, and manage without.",8,0]]},{"q":"Two people in your team are in a conflict that is slowing everyone down. You:","o":[["Talk to both, and help them find common ground.",0,0],["Raise it with your manager straight away.",3.75,0],["Side with the person you agree with.",6,1],["Stay out of it, and hope it settles.",6.75,0]]}]}],"PB":[{"d":"avabodha","k":1,"rig":0,"src":"Original B13","t":"If others knew my real thoughts, I feel they would be disgusted."},{"d":"lakshya","k":1,"rig":0,"src":"Original B15","t":"When I am emotionally upset, I feel hopeless."},{"d":"vachana","k":1,"rig":0,"src":"Original B5","t":"I get really worked up when someone comments critically on me."},{"d":"vachana","k":1,"rig":0,"src":"Original B11","t":"I feel miserable saying “no” or “not possible” to someone."},{"d":"indriyajaya","k":1,"rig":1,"src":"Original B7","t":"I feel disgusted when I meet people I find eccentric, odd or foolish."},{"d":"indriyajaya","k":1,"rig":1,"src":"Original B8","t":"If someone hurts me, I immediately hurt them back."},{"d":"abha","k":-1,"rig":0,"src":"New","t":"I feel at ease with how I come across in professional settings."},{"d":"abha","k":-1,"rig":0,"src":"New","t":"I hold eye contact comfortably when speaking with someone."},{"d":"ranjana","k":-1,"rig":0,"src":"Original B4","t":"I shop based on my own needs, not because someone recommended something."},{"d":"ranjana","k":-1,"rig":0,"src":"New","t":"People often come to me for advice or a second opinion."},{"d":"avabodha","k":-1,"rig":0,"src":"New","t":"Before a big decision, I look at it from several angles, including ones I don't like."},{"d":"lakshya","k":-1,"rig":0,"src":"New","t":"I regularly learn something new, even when no one requires it."},{"d":"indriyajaya","k":-1,"rig":0,"src":"New","t":"I admit my mistakes openly, even when it costs me."}],"CH":[{"chk":"att","want":1,"t":"To show you're reading carefully, please choose “Disagree” for this statement."},{"chk":"att","want":4,"t":"This is a check question: please select “Strongly agree”."},{"chk":"sd","want":null,"t":"I have never been annoyed with anyone."},{"chk":"sd","want":null,"t":"I always keep every promise I make, without exception."},{"chk":"sd","want":null,"t":"I have never said something I later regretted."}],"LIK":["Strongly disagree","Disagree","Neutral","Agree","Strongly agree"]};
+var SB_URL="https://ybomjzbrtdghqofjutor.supabase.co",SB_KEY="sb_publishable_cyNVfIVqLC8_IfV_7N2D4Q__R-_ioYX";
+var BANDS=["Emerging","Established","Exemplary","Guarded"];
+var BAND_COL={Emerging:"var(--s5)",Established:"var(--s2)",Exemplary:"var(--s3)",Guarded:"var(--s4)"};
+var DIMCOL={avabodha:"var(--s1)",vachana:"var(--s2)",indriyajaya:"var(--s3)",ranjana:"var(--s4)",abha:"var(--s5)",lakshya:"var(--s6)"};
+var CONF_WHY={good:"Good",att:"Attention checks missed",rushed:"Completed under 2 minutes",same:"Same answer throughout",sd:"Idealised answering",neutral:"Many neutral answers",flat:"Flat profile"};
+var $=function(id){return document.getElementById(id)};
+function esc(s){return String(s==null?"":s).replace(/[&<>"']/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]})}
+function fmt(n,d){return n==null||isNaN(n)?"–":Number(n).toFixed(d==null?0:d)}
+function pct(n,t){return t?Math.round(n/t*100):0}
+function mean(a){return a.length?a.reduce(function(s,x){return s+x},0)/a.length:null}
+function median(a){if(!a.length)return null;var s=a.slice().sort(function(x,y){return x-y}),m=s.length>>1;return s.length%2?s[m]:(s[m-1]+s[m])/2}
+function pearson(x,y){var n=x.length;if(n<5)return null;var mx=mean(x),my=mean(y),sxy=0,sxx=0,syy=0;for(var i=0;i<n;i++){var a=x[i]-mx,b=y[i]-my;sxy+=a*b;sxx+=a*a;syy+=b*b}return sxx&&syy?sxy/Math.sqrt(sxx*syy):null}
+function dimName(id){for(var i=0;i<META.DIMS.length;i++)if(META.DIMS[i].id===id)return META.DIMS[i].n;return id}
+function plural(n,w){return n+" "+w+(n===1?"":"s")}
+
+/* ---------- state ---------- */
+var sb=null,session=null,ALL=[],S={range:30,lang:"all",reliable:false,sort:{k:"created",dir:-1},page:0,scn:0,statusMsg:""};
+
+/* ---------- login ---------- */
+function loginView(msg,err){
+  $("root").innerHTML='<div class="card login"><h1>AVIRAL admin</h1><p class="sub">Sign in with your admin email. We will send you a one-time link.</p>'+
+  '<form id="lf"><input id="em" type="email" required autocomplete="email" placeholder="you@example.com"><button class="btn pri" style="width:100%">Send sign-in link</button></form>'+
+  '<div class="msg'+(err?' err':'')+'" id="lm">'+esc(msg||"")+'</div></div>';
+  $("lf").onsubmit=function(e){e.preventDefault();var em=$("em").value.trim().toLowerCase();$("lm").className="msg";$("lm").textContent="Sending…";
+    sb.auth.signInWithOtp({email:em,options:{emailRedirectTo:location.origin+location.pathname}}).then(function(r){
+      if(r.error){$("lm").className="msg err";$("lm").textContent=r.error.message}else $("lm").textContent="Check your inbox for the sign-in link, then open it on this device."});};
+}
+function boot(){
+  if(!window.supabase){$("root").innerHTML='<div class="card login"><h1>AVIRAL admin</h1><p class="msg err">Could not load the sign-in library. Check your connection and reload.</p></div>';return}
+  sb=window.supabase.createClient(SB_URL,SB_KEY,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true}});
+  sb.auth.getSession().then(function(r){session=r.data&&r.data.session;if(session)start();else loginView()});
+  sb.auth.onAuthStateChange(function(ev,s){if(ev==="SIGNED_IN"&&s&&!session){session=s;if(location.hash)history.replaceState(null,"",location.pathname);start()}});
+}
+function start(){
+  $("root").innerHTML='<div class="card login"><p class="msg">Loading responses…</p></div>';
+  sb.rpc("is_aviral_admin").then(function(r){
+    if(r.error||r.data!==true){$("root").innerHTML='<div class="card login"><h1>No access</h1><p class="sub">'+esc(session.user.email)+' is not on the admin list.</p><button class="btn" id="so">Sign out</button></div>';$("so").onclick=signOut;return}
+    load();
+  });
+}
+function signOut(){sb.auth.signOut().then(function(){session=null;ALL=[];loginView()})}
+function load(){
+  var rows=[],from=0,step=1000;
+  (function page(){
+    sb.from("aviral_responses").select("*").order("created_at",{ascending:false}).range(from,from+step-1).then(function(r){
+      if(r.error){$("root").innerHTML='<div class="card login"><p class="msg err">'+esc(r.error.message)+'</p></div>';return}
+      rows=rows.concat(r.data);
+      if(r.data.length===step&&rows.length<20000){from+=step;page()}else{ALL=rows.map(norm);S.page=0;render()}
+    });
+  })();
+}
+function norm(r){
+  var d={};META.DIMS.forEach(function(m){var x=(r.dims||{})[m.id]||{};d[m.id]={p:x.p,a:x.a,b:x.b}});
+  return {id:r.id,t:new Date(r.created_at),lang:r.lang,variant:r.variant,dur:r.duration_s,idx:r.index_score,band:r.band,rig:r.rigidity,conf:r.confidence,why:r.conf_why,
+    shape:r.shape,spread:r.spread,neutral:r.neutral_count,ext:r.extreme_pct,sd:r.sd_hits,att:r.att_fail,d:d,a:(r.answers||{}).a||{},b:(r.answers||{}).b||{},raw:r};
+}
+function filtered(){
+  var cut=S.range?Date.now()-S.range*864e5:0;
+  return ALL.filter(function(r){return r.t.getTime()>=cut&&(S.lang==="all"||r.lang===S.lang)&&(!S.reliable||r.conf!=="Low")});
+}
+
+/* ---------- tooltip ---------- */
+var tip=$("tip");
+document.addEventListener("mousemove",function(e){
+  var t=e.target.closest&&e.target.closest("[data-tip]");
+  if(!t){tip.style.opacity=0;return}
+  tip.textContent=t.getAttribute("data-tip");tip.style.opacity=1;
+  var w=tip.offsetWidth,h=tip.offsetHeight,x=e.clientX+12,y=e.clientY+14;
+  if(x+w>innerWidth-8)x=e.clientX-w-12;if(y+h>innerHeight-8)y=e.clientY-h-12;
+  tip.style.left=x+"px";tip.style.top=y+"px";
+});
+
+/* ---------- chart helpers ---------- */
+function hbars(items,max,suffix){
+  max=max||Math.max.apply(null,items.map(function(i){return i.v}))||1;
+  return items.map(function(i){
+    return '<div class="hb" data-tip="'+esc(i.tip||i.label+": "+i.v+(suffix||""))+'"><span class="lab" title="'+esc(i.label)+'">'+esc(i.label)+'</span>'+
+    '<span class="trk"><span class="bar" style="display:block;width:'+Math.max(0,i.v/max*100)+'%;background:'+(i.c||"var(--s1)")+'"></span></span>'+
+    '<span class="val">'+esc(i.text!=null?i.text:i.v+(suffix||""))+'</span></div>'}).join("");
+}
+function columns(vals,labels,opt){
+  opt=opt||{};var W=600,H=opt.h||170,L=30,B=22,T=8,n=vals.length,mx=Math.max.apply(null,vals.concat([opt.min||1])),
+  bw=(W-L)/n,g='',i;
+  var ticks=[0,.5,1].map(function(f){return Math.round(mx*f)});
+  ticks.forEach(function(t){var y=T+(H-T-B)*(1-t/mx);g+='<line class="gr" x1="'+L+'" x2="'+W+'" y1="'+y+'" y2="'+y+'"/><text x="'+(L-6)+'" y="'+(y+4)+'" text-anchor="end">'+t+'</text>'});
+  vals.forEach(function(v,k){var h=(H-T-B)*v/mx,x=L+k*bw+Math.min(2,bw*.15),w=Math.max(2,bw-Math.min(4,bw*.3));
+    g+='<rect x="'+x+'" y="'+(H-B-h)+'" width="'+w+'" height="'+Math.max(h,0)+'" rx="3" fill="'+(opt.colors?opt.colors[k]:"var(--s1)")+'" data-tip="'+esc((opt.tips?opt.tips[k]:labels[k]+": "+v))+'"/>'});
+  var every=Math.ceil(n/(opt.maxLabels||10));
+  labels.forEach(function(l,k){if(k%every===0)g+='<text x="'+(L+k*bw+bw/2)+'" y="'+(H-6)+'" text-anchor="middle">'+esc(l)+'</text>'});
+  return '<svg viewBox="0 0 '+W+' '+H+'" role="img" aria-label="'+esc(opt.aria||"Column chart")+'">'+g+'<line class="ax" x1="'+L+'" x2="'+W+'" y1="'+(H-B)+'" y2="'+(H-B)+'"/></svg>';
+}
+function linechart(pts,labels,opt){
+  opt=opt||{};var W=600,H=opt.h||170,L=30,B=22,T=10,n=pts.length,g='',lo=opt.lo!=null?opt.lo:0,hi=opt.hi!=null?opt.hi:100;
+  [0,25,50,75,100].forEach(function(t){if(t<lo||t>hi)return;var y=T+(H-T-B)*(1-(t-lo)/(hi-lo));g+='<line class="gr" x1="'+L+'" x2="'+W+'" y1="'+y+'" y2="'+y+'"/><text x="'+(L-6)+'" y="'+(y+4)+'" text-anchor="end">'+t+'</text>'});
+  var xs=function(k){return n>1?L+10+k*(W-L-20)/(n-1):L+(W-L)/2},ys=function(v){return T+(H-T-B)*(1-(v-lo)/(hi-lo))},path='',pen=false;
+  pts.forEach(function(v,k){if(v==null){pen=false;return}path+=(pen?"L":"M")+xs(k)+" "+ys(v)+" ";pen=true});
+  g+='<path d="'+path+'" fill="none" stroke="var(--s1)" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>';
+  pts.forEach(function(v,k){if(v==null)return;g+='<circle cx="'+xs(k)+'" cy="'+ys(v)+'" r="4.5" fill="var(--s1)" stroke="var(--surface)" stroke-width="2" data-tip="'+esc(labels[k]+": "+fmt(v,1)+(opt.n?" ("+opt.n[k]+" responses)":""))+'"/>'});
+  var every=Math.ceil(n/8);labels.forEach(function(l,k){if(k%every===0)g+='<text x="'+xs(k)+'" y="'+(H-6)+'" text-anchor="middle">'+esc(l)+'</text>'});
+  return '<svg viewBox="0 0 '+W+' '+H+'" role="img" aria-label="'+esc(opt.aria||"Line chart")+'">'+g+'<line class="ax" x1="'+L+'" x2="'+W+'" y1="'+(H-B)+'" y2="'+(H-B)+'"/></svg>';
+}
+
+/* ---------- sections ---------- */
+function kpis(R){
+  var n=R.length,avg=mean(R.map(function(r){return r.idx})),dur=median(R.filter(function(r){return r.dur!=null}).map(function(r){return r.dur})),
+  low=R.filter(function(r){return r.conf==="Low"}).length,gu=R.filter(function(r){return r.band==="Guarded"}).length,kn=R.filter(function(r){return r.lang==="kn"}).length;
+  var items=[["Responses",n,"in this view"],["Average Index",fmt(avg,1),"out of 100"],["Median time",dur==null?"–":(dur>=60?Math.round(dur/60)+" min":dur+" s"),"to complete"],
+   ["Low confidence",pct(low,n)+"%",plural(low,"response")],["Guarded tier",pct(gu,n)+"%",plural(gu,"response")],["Kannada",pct(kn,n)+"%",plural(kn,"response")]];
+  return '<div class="grid g6">'+items.map(function(k){return '<div class="card kpi"><div class="v">'+esc(k[1])+'</div><div class="l">'+esc(k[0])+'</div><div class="d">'+esc(k[2])+'</div></div>'}).join("")+'</div>';
+}
+function dimStats(R){
+  return META.DIMS.map(function(m){
+    var p=R.map(function(r){return r.d[m.id].p}).filter(function(x){return x!=null}),a=R.map(function(r){return r.d[m.id].a}).filter(function(x){return x!=null}),b=R.map(function(r){return r.d[m.id].b}).filter(function(x){return x!=null});
+    var gapBig=R.filter(function(r){var x=r.d[m.id];return x.a!=null&&x.b!=null&&Math.abs(x.a-x.b)>=30}).length;
+    return{m:m,p:mean(p),a:mean(a),b:mean(b),gap:(mean(a)||0)-(mean(b)||0),gapBig:gapBig,n:p.length};
+  });
+}
+function scenarioStats(R){
+  return META.PA.map(function(q,i){
+    var pts=[],blunt=0,n=0,per=[];
+    R.forEach(function(r){var oi=r.a[i];if(oi==null||oi<0)return;var v=q.v[r.variant%q.v.length],o=v.o[oi];if(!o)return;n++;pts.push(o[1]);if(o[2])blunt++});
+    return{i:i,q:q,n:n,avg:mean(pts),blunt:n?blunt/n:null};
+  });
+}
+function insights(R,DS,SS){
+  if(R.length<3)return '<p class="empty">Not enough responses yet to show patterns (need at least 3).</p>';
+  var o=DS.slice().sort(function(x,y){return x.p-y.p}),L=[],w=o[0],s=o[o.length-1];
+  L.push('Lowest dimension on average is <b>'+esc(w.m.n)+'</b> ('+fmt(w.p)+'%); highest is <b>'+esc(s.m.n)+'</b> ('+fmt(s.p)+'%).');
+  var g=DS.slice().sort(function(x,y){return Math.abs(y.gap)-Math.abs(x.gap)})[0];
+  if(Math.abs(g.gap)>=5)L.push('Biggest say-versus-do gap: <b>'+esc(g.m.n)+'</b>. People score '+(g.gap<0?'lower in situations than in self-view':'higher in situations than in self-view')+' by '+fmt(Math.abs(g.gap))+' points on average.');
+  var sc=SS.filter(function(x){return x.n>=3&&x.blunt!=null}).sort(function(x,y){return y.blunt-x.blunt})[0];
+  if(sc&&sc.blunt>0)L.push('The scenario that most often draws a blunt reaction is <b>"'+esc(trunc(sc.q.v[0].q,70))+'"</b> ('+Math.round(sc.blunt*100)+'% of answers).');
+  var low=R.filter(function(r){return r.conf==="Low"}).length;
+  L.push(pct(low,R.length)+'% of responses are low confidence. '+(pct(low,R.length)>=25?'That is high; consider the Reliable only filter before reading the averages.':'Averages are reasonably safe to read.'));
+  var gu=R.filter(function(r){return r.band==="Guarded"}).length;
+  if(gu)L.push(plural(gu,"respondent")+' ('+pct(gu,R.length)+'%) landed in the Guarded tier, where a high Index comes with high rigidity.');
+  return '<ul class="insights">'+L.map(function(x){return '<li>'+x+'</li>'}).join("")+'</ul>';
+}
+function trunc(s,n){return s.length>n?s.slice(0,n-1)+"…":s}
+
+function tierCard(R){
+  var items=BANDS.map(function(b){var n=R.filter(function(r){return r.band===b}).length;return{label:b,v:n,c:BAND_COL[b],text:n+" · "+pct(n,R.length)+"%",tip:b+": "+n+" ("+pct(n,R.length)+"%)"}});
+  return '<div class="card"><h2>Tier distribution</h2><p class="sub">Emerging 0–44 · Established 45–69 · Exemplary 70–100 · Guarded = high index with high rigidity</p>'+hbars(items)+'</div>';
+}
+function histCard(R){
+  var bins=new Array(10).fill(0);R.forEach(function(r){bins[Math.min(9,Math.floor(r.idx/10))]++});
+  var labels=bins.map(function(_,i){return i*10+"s"}),tips=bins.map(function(v,i){return (i*10)+"–"+(i===9?100:i*10+9)+": "+plural(v,"response")});
+  return '<div class="card"><h2>Index distribution</h2><p class="sub">Responses by AVIRAL Index, in 10-point bands</p>'+columns(bins,labels,{tips:tips,maxLabels:10,aria:"Histogram of AVIRAL Index"})+'</div>';
+}
+function dimCard(DS){
+  var o=DS.slice().sort(function(a,b){return a.p-b.p});
+  var W=600,rowH=34,H=o.length*rowH+30,L=150,x=function(v){return L+(W-L-20)*v/100},g='';
+  [0,25,50,75,100].forEach(function(t){g+='<line class="gr" x1="'+x(t)+'" x2="'+x(t)+'" y1="4" y2="'+(H-22)+'"/><text x="'+x(t)+'" y="'+(H-6)+'" text-anchor="middle">'+t+'</text>'});
+  o.forEach(function(d,i){var y=18+i*rowH;
+    g+='<text x="'+(L-10)+'" y="'+(y+4)+'" text-anchor="end" style="fill:var(--ink)">'+esc(d.m.n)+'</text>';
+    if(d.a!=null&&d.b!=null)g+='<line x1="'+x(d.a)+'" x2="'+x(d.b)+'" y1="'+y+'" y2="'+y+'" stroke="var(--muted)" stroke-width="3" stroke-linecap="round" opacity=".55"/>';
+    if(d.a!=null)g+='<circle cx="'+x(d.a)+'" cy="'+y+'" r="6" fill="var(--s1)" stroke="var(--surface)" stroke-width="2" data-tip="'+esc(d.m.n+" · Situations (Part A): "+fmt(d.a,1)+"%")+'"/>';
+    if(d.b!=null)g+='<circle cx="'+x(d.b)+'" cy="'+y+'" r="6" fill="var(--s2)" stroke="var(--surface)" stroke-width="2" data-tip="'+esc(d.m.n+" · Statements (Part B): "+fmt(d.b,1)+"%")+'"/>';
+    g+='<text x="'+(W-2)+'" y="'+(y+4)+'" text-anchor="end" style="fill:var(--ink2)">'+fmt(d.p)+'%</text>';
+  });
+  return '<div class="card"><h2>Dimension profile</h2><p class="sub">Average strength per dimension, weakest first. Distance between the dots is the say-versus-do gap. Right-hand number is the overall score.</p>'+
+  '<div class="legend"><span><i style="background:var(--s1)"></i>Situations (Part A, what people do)</span><span><i style="background:var(--s2)"></i>Statements (Part B, how people see themselves)</span></div>'+
+  '<svg viewBox="0 0 '+W+' '+H+'" role="img" aria-label="Dumbbell chart of Part A versus Part B per dimension">'+g+'</svg></div>';
+}
+function gapCard(DS){
+  var items=DS.slice().sort(function(a,b){return b.gapBig-a.gapBig}).map(function(d){return{label:d.m.n,v:pct(d.gapBig,d.n),c:DIMCOL[d.m.id],text:pct(d.gapBig,d.n)+"%",tip:d.m.n+": "+d.gapBig+" of "+d.n+" respondents have a gap of 30+ points"}});
+  return '<div class="card"><h2>Say versus do</h2><p class="sub">Share of respondents whose Part A and Part B scores differ by 30+ points, per dimension</p>'+hbars(items,100,"%")+'</div>';
+}
+function corrCard(R){
+  var D=META.DIMS,vec=D.map(function(m){return R.map(function(r){return r.d[m.id].p})}),h='<div class="hm" style="grid-template-columns:90px repeat('+D.length+',1fr)"><div class="h"></div>'+D.map(function(m){return '<div class="h">'+esc(m.n.slice(0,5))+'</div>'}).join("");
+  D.forEach(function(m,i){h+='<div class="h" style="justify-content:flex-end;padding-right:6px">'+esc(m.n)+'</div>';D.forEach(function(_,j){
+    var r=i===j?1:pearson(vec[i],vec[j]),bg,txt;
+    if(r==null){bg="var(--grid)";txt="–"}else{var a=Math.abs(r);bg='color-mix(in srgb, '+(r>=0?"var(--dvhi)":"var(--dvlo)")+' '+Math.round(a*100)+'%, var(--dvmid))';txt=r.toFixed(2)}
+    h+='<div style="background:'+bg+'" data-tip="'+esc(D[i].n+" × "+D[j].n+(r==null?": not enough data":": r = "+r.toFixed(2)))+'">'+txt+'</div>'})});
+  h+='</div>';
+  return '<div class="card"><h2>How dimensions move together</h2><p class="sub">Correlation between dimension scores across respondents. Orange: they rise together. Blue: one rises as the other falls. Needs 5+ responses.</p>'+h+'</div>';
+}
+function scatterCard(R){
+  var W=600,H=300,L=36,B=30,T=10,R_=12,x=function(v){return L+(W-L-R_)*v/100},y=function(v){return T+(H-T-B)*(1-v/100)},g='';
+  [0,25,50,75,100].forEach(function(t){g+='<line class="gr" x1="'+L+'" x2="'+(W-R_)+'" y1="'+y(t)+'" y2="'+y(t)+'"/><text x="'+(L-6)+'" y="'+(y(t)+4)+'" text-anchor="end">'+t+'</text><text x="'+x(t)+'" y="'+(H-12)+'" text-anchor="middle">'+t+'</text>'});
+  g+='<line x1="'+x(45)+'" x2="'+x(45)+'" y1="'+T+'" y2="'+(H-B)+'" stroke="var(--muted)" stroke-dasharray="3 4"/><line x1="'+L+'" x2="'+(W-R_)+'" y1="'+y(50)+'" y2="'+y(50)+'" stroke="var(--muted)" stroke-dasharray="3 4"/>';
+  g+='<text x="'+(W/2)+'" y="'+(H-1)+'" text-anchor="middle">AVIRAL Index</text><text transform="translate(10 '+(T+(H-T-B)/2)+') rotate(-90)" text-anchor="middle">Rigidity</text>';
+  R.slice(0,1500).forEach(function(r){g+='<circle cx="'+x(r.idx)+'" cy="'+y(r.rig)+'" r="4.5" fill="'+BAND_COL[r.band]+'" fill-opacity=".85" stroke="var(--surface)" stroke-width="1.5" data-tip="'+esc(r.band+" · Index "+r.idx+" · Rigidity "+r.rig+"% · "+r.conf+" confidence")+'"/>'});
+  return '<div class="card"><h2>Index versus rigidity</h2><p class="sub">Top-right (high Index, rigidity 50+) is the Guarded pattern: strength that comes from pushing back, not steadiness. Dashed lines mark Index 45 and rigidity 50.</p>'+
+  '<div class="legend">'+BANDS.map(function(b){return '<span><i style="background:'+BAND_COL[b]+'"></i>'+b+'</span>'}).join("")+'</div>'+
+  '<svg viewBox="0 0 '+W+' '+H+'" role="img" aria-label="Scatter plot of Index versus rigidity">'+g+'</svg></div>';
+}
+function qualityCard(R){
+  var n=R.length,c=function(f){return R.filter(f).length};
+  var items=[["Completed under 2 minutes",c(function(r){return r.why==="rushed"||(r.dur!=null&&r.dur<120)})],["Missed an attention check",c(function(r){return r.att>0})],["Idealised answering (2+ of 3)",c(function(r){return r.sd>=2})],
+   ["Many neutral answers",c(function(r){return r.neutral>=7})],["Low confidence overall",c(function(r){return r.conf==="Low"})],["Moderate confidence",c(function(r){return r.conf==="Moderate"})]].map(function(x){return{label:x[0],v:pct(x[1],n),text:x[1]+" · "+pct(x[1],n)+"%",c:"var(--s5)",tip:x[0]+": "+x[1]+" of "+n}});
+  return '<div class="card"><h2>Response quality</h2><p class="sub">How many responses carry a reliability flag. A response can have several.</p>'+hbars(items,100,"%")+'</div>';
+}
+function timeCards(R){
+  var days=S.range||Math.min(60,Math.max(7,Math.ceil((Date.now()-Math.min.apply(null,R.map(function(r){return r.t.getTime()}).concat([Date.now()])))/864e5)+1));
+  days=Math.min(days,90);var start=new Date();start.setHours(0,0,0,0);start=new Date(start.getTime()-(days-1)*864e5);
+  var counts=new Array(days).fill(0),labels=[],tips=[];
+  R.forEach(function(r){var k=Math.floor((r.t.getTime()-start.getTime())/864e5);if(k>=0&&k<days)counts[k]++});
+  for(var i=0;i<days;i++){var d=new Date(start.getTime()+i*864e5);labels.push(d.toLocaleDateString(undefined,{day:"numeric",month:"short"}));tips.push(d.toLocaleDateString(undefined,{weekday:"short",day:"numeric",month:"short"})+": "+plural(counts[i],"response"))}
+  var wk={};R.forEach(function(r){var d=new Date(r.t);d.setHours(0,0,0,0);d.setDate(d.getDate()-((d.getDay()+6)%7));var k=d.getTime();(wk[k]=wk[k]||[]).push(r.idx)});
+  var keys=Object.keys(wk).map(Number).sort(),pts=keys.map(function(k){return mean(wk[k])}),wl=keys.map(function(k){return new Date(k).toLocaleDateString(undefined,{day:"numeric",month:"short"})}),wn=keys.map(function(k){return wk[k].length});
+  return '<div class="grid g2"><div class="card"><h2>Responses per day</h2><p class="sub">Last '+days+' days</p>'+columns(counts,labels,{tips:tips,maxLabels:8,aria:"Responses per day"})+'</div>'+
+  '<div class="card"><h2>Average Index by week</h2><p class="sub">Weeks starting Monday. Needs data across more than one week to show a trend.</p>'+(pts.length?linechart(pts,wl,{n:wn,aria:"Average Index by week"}):'<p class="empty">No data</p>')+'</div></div>';
+}
+function scenarioCard(SS,R){
+  var rows=SS.map(function(s){return s}),sel=SS[S.scn]||SS[0];
+  var tbl='<div class="scroll" style="max-height:300px"><table><thead><tr><th>Scenario</th><th>Dimension</th><th class="n">Answers</th><th class="n" title="0 = healthiest option, 10 = most growth needed">Avg growth need</th><th class="n">Blunt choice</th></tr></thead><tbody>'+
+  rows.map(function(s){return '<tr class="click" data-scn="'+s.i+'"'+(s.i===S.scn?' style="background:var(--grid)"':'')+'><td>'+esc(trunc(s.q.v[0].q,68))+'</td><td>'+esc(dimName(s.q.d))+'</td><td class="n">'+s.n+'</td><td class="n">'+fmt(s.avg,1)+'</td><td class="n">'+(s.blunt==null?"–":Math.round(s.blunt*100)+"%")+'</td></tr>'}).join("")+'</tbody></table></div>';
+  var det=sel.q.v.map(function(v,vi){
+    var counts=v.o.map(function(){return 0}),n=0;
+    R.forEach(function(r){if(r.variant%sel.q.v.length!==vi)return;var oi=r.a[sel.i];if(oi!=null&&oi>=0&&counts[oi]!=null){counts[oi]++;n++}});
+    return '<div style="margin-top:12px;min-width:0"><div class="mute" style="font-size:12px">Version '+(vi+1)+' · '+plural(n,"answer")+'</div><div style="margin:2px 0 6px"><b>'+esc(v.q)+'</b></div>'+
+    v.o.map(function(o,oi){var p=pct(counts[oi],n);return '<div class="opt-row"><div style="display:flex;justify-content:space-between;gap:10px"><span>'+esc(o[0])+'<span class="chip">growth need '+o[1]+(o[2]?' · blunt':'')+'</span></span><span class="mute" style="white-space:nowrap">'+counts[oi]+' · '+p+'%</span></div>'+
+      '<div class="trk" style="height:10px;background:var(--grid);border-radius:4px;overflow:hidden;margin-top:3px"><span style="display:block;height:100%;width:'+p+'%;background:'+(o[2]?"var(--s4)":"var(--s1)")+';border-radius:0 4px 4px 0"></span></div></div>'}).join("")+'</div>'}).join("");
+  return '<div class="card"><h2>Part A: scenario patterns</h2><p class="sub">Pick a scenario in the table to see how people answered each version below. Growth need runs 0 (healthiest) to 10. Blunt options are shown in pink.</p>'+tbl+'<div class="grid g2" style="margin:0">'+det+'</div></div>';
+}
+function partBCard(R){
+  var rows=META.PB.map(function(q,i){
+    var c=[0,0,0,0,0],pts=[];R.forEach(function(r){var v=r.b[i];if(v!=null&&v>=0&&v<=4){c[v]++;pts.push(q.k>0?v*2.5:(4-v)*2.5)}});
+    var n=c[0]+c[1]+c[2]+c[3]+c[4];return{i:i,q:q,c:c,n:n,avg:mean(pts)};
+  }).sort(function(a,b){return (b.avg==null?-1:b.avg)-(a.avg==null?-1:a.avg)});
+  var cols=["var(--q1)","var(--q2)","var(--q3)","var(--q4)","var(--q5)"];
+  var h='<div class="legend">'+META.LIK.map(function(l,k){return '<span><i style="background:'+cols[k]+'"></i>'+esc(l)+'</span>'}).join("")+'</div><div class="scroll" style="max-height:480px"><table><thead><tr><th>Statement</th><th>Dimension</th><th style="min-width:200px">Answers</th><th class="n" title="0 healthiest, 10 most growth needed. Reverse-scored items are flipped.">Growth need</th></tr></thead><tbody>';
+  rows.forEach(function(r){h+='<tr><td>'+esc(r.q.t)+(r.q.rig?' <span class="pill">rigidity</span>':'')+(r.q.k<0?' <span class="pill">reverse</span>':'')+'</td><td>'+esc(dimName(r.q.d))+'</td><td><div class="stk">'+
+    r.c.map(function(v,k){return v?'<span style="width:'+pct(v,r.n)+'%;background:'+cols[k]+'" data-tip="'+esc(META.LIK[k]+": "+v+" ("+pct(v,r.n)+"%)")+'"></span>':''}).join("")+'</div></td><td class="n">'+fmt(r.avg,1)+'</td></tr>'});
+  h+='</tbody></table></div>';
+  var ch=META.CH.map(function(c,j){var i=META.PB.length+j,vals=R.map(function(r){return r.b[i]}).filter(function(v){return v!=null});
+    var ok=c.chk==="att"?vals.filter(function(v){return v===c.want}).length:vals.filter(function(v){return v>=3}).length,txt=c.chk==="att"?"passed":"agreed";
+    return '<tr><td>'+esc(c.t)+'</td><td>'+(c.chk==="att"?"Attention check":"Too good to be true")+'</td><td class="n">'+ok+' of '+vals.length+' '+txt+'</td></tr>'}).join("");
+  return '<div class="card"><h2>Part B: statements</h2><p class="sub">Sorted by average growth need, highest first (where people struggle most).</p>'+h+
+  '<h3 style="margin:14px 0 4px">Check items</h3><table><tbody>'+ch+'</tbody></table></div>';
+}
+function tableCard(R){
+  var k=S.sort.k,dir=S.sort.dir,keyf={created:function(r){return r.t.getTime()},idx:function(r){return r.idx},band:function(r){return r.band},conf:function(r){return r.conf},dur:function(r){return r.dur==null?-1:r.dur},lang:function(r){return r.lang},rig:function(r){return r.rig}};
+  if(META.DIMS.some(function(m){return m.id===k}))keyf[k]=function(r){return r.d[k].p==null?-1:r.d[k].p};
+  var rows=R.slice().sort(function(a,b){var x=keyf[k](a),y=keyf[k](b);return (x>y?1:x<y?-1:0)*dir}),per=20,pages=Math.max(1,Math.ceil(rows.length/per));S.page=Math.min(S.page,pages-1);
+  var th=function(key,label,cls){return '<th class="s '+(cls||"")+'" data-sort="'+key+'">'+label+(S.sort.k===key?(S.sort.dir<0?" ↓":" ↑"):"")+'</th>'};
+  var h='<div class="scroll"><table><thead><tr>'+th("created","When")+th("lang","Lang")+th("idx","Index","n")+th("band","Tier")+th("conf","Confidence")+th("rig","Rigidity","n")+META.DIMS.map(function(m){return th(m.id,esc(m.n.slice(0,4)),"n")}).join("")+th("dur","Time","n")+'</tr></thead><tbody>';
+  rows.slice(S.page*per,S.page*per+per).forEach(function(r){h+='<tr class="click" data-id="'+r.id+'"><td>'+r.t.toLocaleString(undefined,{day:"numeric",month:"short",hour:"2-digit",minute:"2-digit"})+'</td><td>'+r.lang.toUpperCase()+'</td><td class="n"><b>'+r.idx+'</b></td><td><span class="pill">'+esc(r.band)+'</span></td><td>'+(r.conf==="Low"?'<span class="pill warn">Low</span>':esc(r.conf))+'</td><td class="n">'+r.rig+'%</td>'+
+    META.DIMS.map(function(m){return '<td class="n">'+fmt(r.d[m.id].p)+'</td>'}).join("")+'<td class="n">'+(r.dur==null?"–":r.dur>=60?Math.round(r.dur/60)+"m":r.dur+"s")+'</td></tr>'});
+  h+='</tbody></table></div><div class="top" style="margin:10px 0 0"><span class="mute">'+rows.length+' responses · page '+(S.page+1)+' of '+pages+'</span><span><button class="btn" id="pv"'+(S.page?'':' disabled')+'>Previous</button> <button class="btn" id="nx"'+(S.page<pages-1?'':' disabled')+'>Next</button> <button class="btn" id="csv">Export CSV</button></span></div>';
+  return '<div class="card"><h2>All responses</h2><p class="sub">Click a column to sort, a row to see every answer. Dimension columns show strength %.</p>'+h+'</div>';
+}
+
+/* ---------- render ---------- */
+function render(){
+  var R=filtered(),DS=dimStats(R),SS=scenarioStats(R),h='';
+  h+='<div class="top"><div class="brand"><h1>AVIRAL admin</h1><small>'+esc(session&&session.user?session.user.email:"")+'</small></div><div><button class="btn" id="rf">Refresh</button> <button class="btn" id="pr">Print</button> <button class="btn" id="so">Sign out</button></div></div>';
+  h+='<div class="filters"><span class="mute">Period</span><span class="seg" id="sgR">'+[[7,"7 days"],[30,"30 days"],[90,"90 days"],[0,"All"]].map(function(x){return '<button data-v="'+x[0]+'" aria-pressed="'+(S.range===x[0])+'">'+x[1]+'</button>'}).join("")+'</span>'+
+    '<span class="mute">Language</span><span class="seg" id="sgL">'+[["all","All"],["en","English"],["kn","Kannada"]].map(function(x){return '<button data-v="'+x[0]+'" aria-pressed="'+(S.lang===x[0])+'">'+x[1]+'</button>'}).join("")+'</span>'+
+    '<label class="chk"><input type="checkbox" id="rel"'+(S.reliable?' checked':'')+'> Reliable only (hide low confidence)</label><span class="sp"></span><span class="mute">'+plural(R.length,"response")+' of '+ALL.length+'</span></div>';
+  if(!ALL.length){h+='<div class="card empty">No responses yet. Complete the assessment once and it will appear here.</div>';$("root").innerHTML=h;wire();return}
+  if(!R.length){h+='<div class="card empty">No responses match these filters.</div>';$("root").innerHTML=h;wire();return}
+  h+=kpis(R);
+  h+='<div class="card" style="margin-bottom:12px"><h2>What stands out</h2><p class="sub">Generated from the responses in this view</p>'+insights(R,DS,SS)+'</div>';
+  h+='<div class="grid g2">'+tierCard(R)+histCard(R)+'</div>';
+  h+='<div class="grid g21">'+dimCard(DS)+gapCard(DS)+'</div>';
+  h+=timeCards(R);
+  h+='<div class="grid g2">'+corrCard(R)+scatterCard(R)+'</div>';
+  h+='<div class="grid g2">'+qualityCard(R)+'<div class="card"><h2>Languages and versions</h2><p class="sub">Which language and which question version people got</p>'+
+     hbars([["English",R.filter(function(r){return r.lang==="en"}).length],["Kannada",R.filter(function(r){return r.lang==="kn"}).length],["Version 1 questions",R.filter(function(r){return r.variant===0}).length],["Version 2 questions",R.filter(function(r){return r.variant===1}).length]].map(function(x){return{label:x[0],v:x[1],text:x[1]+" · "+pct(x[1],R.length)+"%"}}),R.length)+'</div></div>';
+  h+=scenarioCard(SS,R);
+  h+='<div style="height:12px"></div>'+partBCard(R)+'<div style="height:12px"></div>'+tableCard(R);
+  $("root").innerHTML=h;wire();
+}
+function wire(){
+  var g=function(id){return $(id)};
+  if(g("so"))g("so").onclick=signOut;
+  if(g("rf"))g("rf").onclick=function(){load()};
+  if(g("pr"))g("pr").onclick=function(){window.print()};
+  [["sgR","range",Number],["sgL","lang",String]].forEach(function(c){var e=g(c[0]);if(!e)return;e.onclick=function(ev){var b=ev.target.closest("button");if(!b)return;S[c[1]]=c[2](b.getAttribute("data-v"));S.page=0;render()}});
+  if(g("rel"))g("rel").onchange=function(){S.reliable=this.checked;S.page=0;render()};
+  document.querySelectorAll("[data-scn]").forEach(function(tr){tr.onclick=function(){S.scn=+tr.getAttribute("data-scn");var y=scrollY;render();scrollTo(0,y)}});
+  document.querySelectorAll("th[data-sort]").forEach(function(th){th.onclick=function(){var k=th.getAttribute("data-sort");S.sort=S.sort.k===k?{k:k,dir:-S.sort.dir}:{k:k,dir:-1};var y=scrollY;render();scrollTo(0,y)}});
+  if(g("pv"))g("pv").onclick=function(){S.page--;var y=scrollY;render();scrollTo(0,y)};
+  if(g("nx"))g("nx").onclick=function(){S.page++;var y=scrollY;render();scrollTo(0,y)};
+  if(g("csv"))g("csv").onclick=exportCsv;
+  document.querySelectorAll("tr[data-id]").forEach(function(tr){tr.onclick=function(){openDetail(tr.getAttribute("data-id"))}});
+}
+
+/* ---------- detail ---------- */
+function openDetail(id){
+  var r=ALL.filter(function(x){return x.id===id})[0];if(!r)return;
+  var h='<div class="top"><div><h2>Response · '+r.t.toLocaleString()+'</h2><p class="sub">'+r.lang.toUpperCase()+' · version '+(r.variant+1)+' · '+(r.dur==null?"time unknown":r.dur+" s")+' · '+esc(r.shape||"")+'</p></div><button class="btn" id="dx">Close</button></div>';
+  h+='<div class="grid g3"><div class="card kpi"><div class="v">'+r.idx+'</div><div class="l">Index · '+esc(r.band)+'</div></div><div class="card kpi"><div class="v">'+r.rig+'%</div><div class="l">Rigidity</div></div><div class="card kpi"><div class="v" style="font-size:20px">'+esc(r.conf)+'</div><div class="l">'+esc(CONF_WHY[r.why]||r.why||"")+'</div></div></div>';
+  h+='<table><thead><tr><th>Dimension</th><th class="n">Overall</th><th class="n">Situations</th><th class="n">Statements</th></tr></thead><tbody>'+META.DIMS.map(function(m){var x=r.d[m.id];return '<tr><td>'+esc(m.n)+'</td><td class="n"><b>'+fmt(x.p)+'%</b></td><td class="n">'+fmt(x.a)+'%</td><td class="n">'+fmt(x.b)+'%</td></tr>'}).join("")+'</tbody></table>';
+  h+='<h3 style="margin:14px 0 4px">Part A answers</h3>';
+  META.PA.forEach(function(q,i){var oi=r.a[i];var v=q.v[r.variant%q.v.length],o=oi!=null&&oi>=0?v.o[oi]:null;h+='<div class="qa"><div class="q">'+esc(v.q)+'</div><div class="a">'+(o?esc(o[0]):"–")+(o?'<span class="chip">growth need '+o[1]+(o[2]?' · blunt':'')+'</span>':'')+'</div></div>'});
+  h+='<h3 style="margin:14px 0 4px">Part B answers</h3>';
+  META.PB.forEach(function(q,i){var v=r.b[i];h+='<div class="qa"><div class="q">'+esc(q.t)+'</div><div class="a">'+(v==null?"–":esc(META.LIK[v]))+'</div></div>'});
+  META.CH.forEach(function(c,j){var v=r.b[META.PB.length+j];h+='<div class="qa"><div class="q">'+esc(c.t)+' <span class="pill">check</span></div><div class="a">'+(v==null?"–":esc(META.LIK[v]))+'</div></div>'});
+  h+='<div class="top" style="margin-top:14px"><span class="mute">'+esc(r.id)+'</span><button class="btn danger" id="del">Delete this response</button></div>';
+  $("panel").innerHTML=h;$("detail").classList.add("open");
+  $("dx").onclick=closeDetail;
+  var armed=false;$("del").onclick=function(){
+    if(!armed){armed=true;this.textContent="Click again to delete permanently";return}
+    sb.from("aviral_responses").delete().eq("id",id).then(function(x){if(x.error){$("del").textContent=x.error.message;return}ALL=ALL.filter(function(y){return y.id!==id});closeDetail();render()})};
+}
+function closeDetail(){$("detail").classList.remove("open")}
+$("detail").addEventListener("click",function(e){if(e.target===this)closeDetail()});
+document.addEventListener("keydown",function(e){if(e.key==="Escape")closeDetail()});
+
+/* ---------- csv ---------- */
+function exportCsv(){
+  var R=filtered(),head=["created_at","lang","version","duration_s","index","tier","rigidity","confidence","confidence_reason"].concat(META.DIMS.map(function(m){return m.id+"_overall"}),META.DIMS.map(function(m){return m.id+"_partA"}),META.DIMS.map(function(m){return m.id+"_partB"}),
+    META.PA.map(function(_,i){return "A"+(i+1)+"_option"}),META.PB.map(function(_,i){return "B"+(i+1)+"_level"}),META.CH.map(function(_,j){return "check"+(j+1)+"_level"}));
+  var rows=R.map(function(r){return [r.t.toISOString(),r.lang,r.variant+1,r.dur,r.idx,r.band,r.rig,r.conf,r.why].concat(META.DIMS.map(function(m){return r.d[m.id].p}),META.DIMS.map(function(m){return r.d[m.id].a}),META.DIMS.map(function(m){return r.d[m.id].b}),
+    META.PA.map(function(_,i){return r.a[i]==null?"":r.a[i]+1}),META.PB.map(function(_,i){return r.b[i]==null?"":r.b[i]}),META.CH.map(function(_,j){var v=r.b[META.PB.length+j];return v==null?"":v}))});
+  var csv=[head].concat(rows).map(function(row){return row.map(function(c){c=c==null?"":String(c);return /[",\n]/.test(c)?'"'+c.replace(/"/g,'""')+'"':c}).join(",")}).join("\n");
+  var a=document.createElement("a");a.href=URL.createObjectURL(new Blob([csv],{type:"text/csv"}));a.download="aviral_responses_"+new Date().toISOString().slice(0,10)+".csv";document.body.appendChild(a);a.click();a.remove();
+}
+boot();
+</script>
+</body>
+</html>

@@ -751,7 +751,7 @@ function compute(){
   "You agreed with "+sdHits+" of 3 statements that almost nobody can truly claim, such as never having been annoyed with anyone. That often means answering as you'd like to be rather than as you are, so your scores may look steadier than they really are.",
   "ಯಾರ ಮೇಲೂ ಎಂದಿಗೂ ಕಿರಿಕಿರಿಗೊಂಡಿಲ್ಲ ಎಂಬಂತಹ, ಬಹುತೇಕ ಯಾರೂ ನಿಜವಾಗಿ ಹೇಳಲಾಗದ 3 ಹೇಳಿಕೆಗಳಲ್ಲಿ "+sdHits+" ಹೇಳಿಕೆಗಳನ್ನು ನೀವು ಒಪ್ಪಿದ್ದೀರಿ. ಇದರರ್ಥ ಸಾಮಾನ್ಯವಾಗಿ ನೀವು ಇರುವಂತೆ ಅಲ್ಲ, ಇರಬಯಸುವಂತೆ ಉತ್ತರಿಸಿದ್ದೀರಿ; ಹಾಗಾಗಿ ನಿಮ್ಮ ಅಂಕಗಳು ವಾಸ್ತವಕ್ಕಿಂತ ಹೆಚ್ಚು ಸ್ಥಿರವಾಗಿ ಕಾಣಬಹುದು.")});
  var ranked=rows.slice().sort(function(x,y){return x.pct-y.pct}),
- spread=ranked[0].pct-ranked[ranked.length-1].pct,
+ spread=ranked[ranked.length-1].pct-ranked[0].pct,
  extreme=Math.round(bVals.filter(function(v){return v===0||v===4}).length/NBS*100),
  rushed=!!(st.t0&&st.t1&&st.t1-st.t0<RUSH_MS),
  shape=spread>=40?"Differentiated":spread>=20?"Moderately varied":"Flat",
@@ -784,8 +784,7 @@ function intro(){
  '<li>'+L("You can switch language at any time; your answers are kept.","ನೀವು ಯಾವಾಗ ಬೇಕಾದರೂ ಭಾಷೆ ಬದಲಿಸಬಹುದು; ನಿಮ್ಮ ಉತ್ತರಗಳು ಉಳಿಯುತ್ತವೆ.")+'</li></ul>'+
  '<p>'+L("There are no right or wrong answers. Choose what suits your mentality, not what sounds best; your first instinct is usually the most honest.",
   "ಇಲ್ಲಿ ಸರಿ ಅಥವಾ ತಪ್ಪು ಉತ್ತರಗಳಿಲ್ಲ. ಕೇಳಲು ಚೆನ್ನಾಗಿರುವುದನ್ನಲ್ಲ, ನಿಮ್ಮ ಮನಸ್ಥಿತಿಗೆ ಹೊಂದುವುದನ್ನು ಆರಿಸಿ; ಮೊದಲು ಹೊಳೆಯುವ ಉತ್ತರವೇ ಸಾಮಾನ್ಯವಾಗಿ ಅತ್ಯಂತ ಪ್ರಾಮಾಣಿಕ.")+'</p>'+
- '<p class="small mute">'+L("A self-awareness tool, not a clinical or diagnostic test. Answers stay in your browser and are not sent anywhere.",
-  "ಇದು ಸ್ವ-ಅರಿವಿನ ಸಾಧನ, ಕ್ಲಿನಿಕಲ್ ಅಥವಾ ರೋಗನಿರ್ಣಯ ಪರೀಕ್ಷೆಯಲ್ಲ. ನಿಮ್ಮ ಉತ್ತರಗಳು ನಿಮ್ಮ ಬ್ರೌಸರ್‌ನಲ್ಲೇ ಉಳಿಯುತ್ತವೆ, ಎಲ್ಲಿಗೂ ಕಳುಹಿಸಲಾಗುವುದಿಲ್ಲ.")+'</p>'+
+ '<p class="small mute">'+L("A self-awareness tool, not a clinical or diagnostic test. When you finish, your scores and answers are saved anonymously so the assessment can be improved. Your name is never sent.","ಇದು ಸ್ವ-ಅರಿವಿನ ಸಾಧನ, ಕ್ಲಿನಿಕಲ್ ಅಥವಾ ರೋಗನಿರ್ಣಯ ಪರೀಕ್ಷೆಯಲ್ಲ. ನೀವು ಮುಗಿಸಿದಾಗ, ಮೌಲ್ಯಮಾಪನವನ್ನು ಸುಧಾರಿಸಲು ನಿಮ್ಮ ಅಂಕಗಳು ಮತ್ತು ಉತ್ತರಗಳನ್ನು ಅನಾಮಧೇಯವಾಗಿ ಉಳಿಸಲಾಗುತ್ತದೆ. ನಿಮ್ಮ ಹೆಸರನ್ನು ಎಂದಿಗೂ ಕಳುಹಿಸಲಾಗುವುದಿಲ್ಲ.")+'</p>'+
  '<p class="tagline">'+'<span class="acr">'+L("<b>A</b>vabodha · <b>V</b>achana · <b>I</b>ndriyajaya · <b>R</b>anjana · <b>A</b>bha · <b>L</b>akshya","ಅವಬೋಧ · ವಚನ · ಇಂದ್ರಿಯಜಯ · ರಂಜನ · ಆಭಾ · ಲಕ್ಷ್ಯ")+'</span>'+'</p>'+
  '<label class="small mute" for="nm" style="display:block;margin-top:14px">'+L("Your name (optional, shown on your results)","ನಿಮ್ಮ ಹೆಸರು (ಐಚ್ಛಿಕ, ಫಲಿತಾಂಶದಲ್ಲಿ ತೋರಿಸಲಾಗುತ್ತದೆ)")+'</label><input id="nm" type="text" maxlength="60" value="'+esc(st.name)+'">'+
  '</div><div class="btns"><span></span><button class="pri" data-act="next">'+L("Start Part A","ಭಾಗ A ಆರಂಭಿಸಿ")+'</button></div>';
@@ -903,8 +902,33 @@ function scoring(){
  h+='<tr><td colspan="2" class="mute">'+L("Plus 2 attention checks and 3 \u201Ctoo good to be true\u201D statements (not scored).","ಜೊತೆಗೆ 2 ಗಮನ ಪರಿಶೀಲನೆಗಳು ಮತ್ತು 3 \u201Cನಂಬಲಾಗದಷ್ಟು ಒಳ್ಳೆಯ\u201D ಹೇಳಿಕೆಗಳು (ಅಂಕವಿಲ್ಲ).")+'</td></tr>';
  return h+'</table></details>';
 }
+/* ================= BACKEND (Supabase) =================
+   Anonymous insert only: row-level security allows INSERT but never SELECT for this key.
+   The key below is the project's publishable key, which is safe to ship in the page. */
+var SB_URL="https://ybomjzbrtdghqofjutor.supabase.co",SB_KEY="sb_publishable_cyNVfIVqLC8_IfV_7N2D4Q__R-_ioYX";
+function uuid4(){try{if(crypto.randomUUID)return crypto.randomUUID()}catch(e){}return"xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g,function(c){var r=Math.random()*16|0;return(c==="x"?r:(r&3|8)).toString(16)})}
+var SENDING=false;
+function submitResult(r){
+ if(!SB_URL||st.sent||SENDING)return;
+ try{
+  var a={},b={},dims={};
+  IT.A.forEach(function(it,x){var q=PA[it.src].v[st.variant%PA[it.src].v.length],txt=it.o[st.a[x]][0],oi=-1;q.o.forEach(function(o,j){if(o[0]===txt)oi=j});a[it.src]=oi});
+  IT.B.forEach(function(it,x){b[it.src]=st.b[x]});
+  r.rows.forEach(function(w){dims[w.d.id]={p:w.pct,a:w.a,b:w.b}});
+  if(!st.cid){st.cid=uuid4();save()}
+  var body={client_id:st.cid,lang:LANG,variant:st.variant,attempt:parseInt(ls(AKEY)||"0",10)||0,schema_version:SCHEMA_VERSION,
+   duration_s:(st.t0&&st.t1)?Math.max(0,Math.min(86400,Math.round((st.t1-st.t0)/1000))):null,
+   index_score:r.index,band:r.band.name,rigidity:r.rigidity,confidence:r.conf,conf_why:r.confWhy,shape:r.shape,spread:r.spread,
+   neutral_count:r.neutral,extreme_pct:r.extreme,sd_hits:r.sdHits,att_fail:r.attFail,dims:dims,answers:{a:a,b:b}};
+  SENDING=true;
+  fetch(SB_URL+"/rest/v1/aviral_responses",{method:"POST",keepalive:true,
+   headers:{"apikey":SB_KEY,"Authorization":"Bearer "+SB_KEY,"Content-Type":"application/json","Prefer":"return=minimal"},body:JSON.stringify(body)})
+  .then(function(res){SENDING=false;if(res.ok||res.status===409){st.sent=1;save()}}).catch(function(){SENDING=false});
+ }catch(e){SENDING=false}
+}
 function result(){
- var r=compute(),b=r.band,top=r.ranked[0],bot=r.ranked[r.ranked.length-1],h='',
+ var r=compute();submitResult(r);
+ var b=r.band,top=r.ranked[0],bot=r.ranked[r.ranked.length-1],h='',
  dn=function(d){return '<b style="color:'+d.c+'">'+esc(T(d.n))+' — '+esc(T(d.sub))+'</b>'};
  h+='<div class="card"><p class="small mute">'+(st.name?esc(st.name)+' · ':'')+esc(L("AVIRAL™ Assessment","AVIRAL™ ಮೌಲ್ಯಮಾಪನ"))+'</p>'+
  '<div class="score"><b>'+r.index+'</b><span class="mute">'+L("AVIRAL Index, out of 100","AVIRAL ಸೂಚ್ಯಂಕ, 100 ರಲ್ಲಿ")+' · '+L("likely range ","ಸಂಭಾವ್ಯ ವ್ಯಾಪ್ತಿ ")+rng2(r.index,IDX_SEM).replace('%','')+'</span><span class="chip" style="color:'+b.c+'">'+esc(T(b.name))+'</span></div>'+
